@@ -1,144 +1,395 @@
 <!DOCTYPE html>
 <html lang="pl">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
 <title>Hello Beauty Studio</title>
+
 <style>
 *{box-sizing:border-box}
-body{margin:0;font-family:Arial,sans-serif;background:#faf7f2;color:#2f2f2f}
-header{background:#fff;padding:22px 8%;display:flex;justify-content:space-between;align-items:center;position:sticky;top:0;z-index:10}
-.logo{font-family:Georgia,serif;font-size:34px;line-height:.8}
-.logo span{font-size:10px;letter-spacing:4px;text-transform:uppercase}
-nav{display:flex;gap:28px;font-size:13px}
-.btn{background:#c6a58f;color:#fff;padding:14px 24px;border-radius:4px;text-decoration:none;border:0}
-.hero{display:grid;grid-template-columns:1fr 1fr;min-height:560px;background:#efe4da}
-.hero-img{background:linear-gradient(135deg,#d8bfae,#fff);display:flex;align-items:center;justify-content:center;font-size:90px}
-.hero-text{padding:90px 8%;display:flex;flex-direction:column;justify-content:center}
-h1{font-family:Georgia,serif;font-size:68px;font-weight:400;margin:0 0 25px}
-h2{font-family:Georgia,serif;font-size:42px;font-weight:400;margin:0 0 25px;text-align:center}
-p{font-size:18px;line-height:1.6}
-.icons{display:grid;grid-template-columns:repeat(4,1fr);background:#fff}
-.icon{padding:35px;text-align:center;border-right:1px solid #eee}
-.icon div{font-size:34px;color:#b78f78;margin-bottom:12px}
-section{padding:80px 8%}
-.cards{display:grid;grid-template-columns:repeat(4,1fr);gap:22px}
-.card{background:#fff;border-radius:18px;padding:30px;box-shadow:0 12px 30px rgba(0,0,0,.05)}
-.photo{height:220px;border-radius:18px;background:linear-gradient(135deg,#c9a58d,#f8f1eb);margin-bottom:20px}
-.methods{display:grid;grid-template-columns:repeat(4,1fr);gap:22px}
-.price{background:#fff;border-radius:22px;padding:35px;max-width:900px;margin:auto}
-.row{display:flex;justify-content:space-between;border-bottom:1px solid #eee;padding:16px 0}
-.gallery{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}
-.form{background:#fff;border-radius:24px;padding:35px;max-width:700px;margin:auto}
-input,textarea{width:100%;padding:16px;margin:10px 0;border:1px solid #ddd;border-radius:10px;font-size:16px}
-footer{text-align:center;background:#fff;padding:35px}
-.panel-link{font-size:12px;color:#999}
-@media(max-width:800px){
-header{display:block;text-align:center}
-nav{display:none}
-.hero{grid-template-columns:1fr}
-.hero-img{height:320px}
-h1{font-size:48px}
-.icons,.cards,.methods,.gallery{grid-template-columns:1fr}
+html{scroll-behavior:smooth}
+body{
+  margin:0;
+  font-family:Arial, sans-serif;
+  background:#f7f1eb;
+  color:#2d2a27;
+}
+h1,h2,h3,.logo{
+  font-family:Georgia, serif;
+  font-weight:400;
+}
+header{
+  position:sticky;
+  top:0;
+  z-index:99;
+  background:rgba(255,255,255,.92);
+  backdrop-filter:blur(12px);
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  padding:18px 7%;
+  border-bottom:1px solid #eee4dc;
+}
+.logo{
+  font-size:34px;
+  line-height:.78;
+}
+.logo span{
+  font-family:Arial,sans-serif;
+  font-size:9px;
+  letter-spacing:4px;
+  text-transform:uppercase;
+}
+nav{
+  display:flex;
+  gap:24px;
+  font-size:12px;
+  letter-spacing:.6px;
+  text-transform:uppercase;
+}
+nav a{color:#2d2a27;text-decoration:none}
+.btn{
+  display:inline-block;
+  background:#b8937c;
+  color:white;
+  text-decoration:none;
+  border:0;
+  padding:15px 26px;
+  border-radius:3px;
+  font-size:13px;
+  letter-spacing:.8px;
+  text-transform:uppercase;
+}
+.btn.light{
+  background:white;
+  color:#2d2a27;
+  border:1px solid #c8aa98;
+}
+.hero{
+  min-height:720px;
+  display:grid;
+  grid-template-columns:1.05fr .95fr;
+  background:#f5eee7;
+}
+.hero-photo{
+  background:
+    linear-gradient(rgba(80,55,40,.08),rgba(80,55,40,.08)),
+    radial-gradient(circle at 35% 35%, #e6cdbb, #f7efe8 45%, #c6a58f 100%);
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  color:white;
+  font-size:120px;
+}
+.hero-content{
+  padding:90px 9%;
+  display:flex;
+  flex-direction:column;
+  justify-content:center;
+}
+.hero-content h1{
+  font-size:78px;
+  line-height:.95;
+  margin:0 0 28px;
+}
+.hero-content p{
+  font-size:21px;
+  line-height:1.6;
+  max-width:520px;
+  margin-bottom:34px;
+}
+.buttons{display:flex;gap:16px;flex-wrap:wrap}
+
+.strip{
+  background:white;
+  display:grid;
+  grid-template-columns:repeat(4,1fr);
+}
+.strip div{
+  padding:34px 22px;
+  text-align:center;
+  border-right:1px solid #eee4dc;
+  font-size:15px;
+}
+.strip strong{
+  display:block;
+  font-size:34px;
+  color:#b8937c;
+  margin-bottom:12px;
+  font-weight:400;
+}
+section{
+  padding:90px 7%;
+}
+section h2{
+  text-align:center;
+  font-size:48px;
+  margin:0 0 45px;
+}
+.white{background:#fff}
+.cream{background:#f7f1eb}
+.taupe{background:#c9b5a5;color:white}
+.dark{background:#8f7464;color:white}
+
+.about{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:42px;
+  align-items:center;
+}
+.photo-box{
+  min-height:420px;
+  border-radius:28px;
+  background:linear-gradient(135deg,#d7b9a4,#fff3eb);
+}
+.text-box{
+  background:rgba(255,255,255,.85);
+  padding:42px;
+  border-radius:28px;
+  box-shadow:0 20px 55px rgba(0,0,0,.06);
+}
+.text-box p{
+  font-size:18px;
+  line-height:1.75;
+}
+.cards{
+  display:grid;
+  grid-template-columns:repeat(4,1fr);
+  gap:22px;
+}
+.card{
+  background:white;
+  color:#2d2a27;
+  border-radius:26px;
+  padding:28px;
+  min-height:240px;
+  box-shadow:0 18px 45px rgba(0,0,0,.06);
+}
+.taupe .card,.dark .card{
+  background:rgba(255,255,255,.95);
+}
+.card-photo{
+  height:190px;
+  border-radius:22px;
+  margin-bottom:22px;
+  background:linear-gradient(135deg,#caa88f,#f7eae1);
+}
+.card h3{
+  font-size:28px;
+  margin:0 0 12px;
+}
+.card p{
+  line-height:1.6;
+}
+.methods{
+  display:grid;
+  grid-template-columns:repeat(4,1fr);
+  gap:22px;
+}
+.method{
+  background:white;
+  border-radius:26px;
+  padding:34px;
+  text-align:center;
+  box-shadow:0 16px 40px rgba(0,0,0,.05);
+}
+.method h3{font-size:30px;margin:0 0 12px}
+.price{
+  background:white;
+  max-width:980px;
+  margin:auto;
+  border-radius:28px;
+  padding:38px;
+  box-shadow:0 18px 45px rgba(0,0,0,.06);
+}
+.row{
+  display:flex;
+  justify-content:space-between;
+  gap:20px;
+  border-bottom:1px solid #eadfd7;
+  padding:18px 0;
+  font-size:17px;
+}
+.row:last-child{border-bottom:0}
+.gallery{
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:20px;
+}
+.gallery div{
+  height:300px;
+  border-radius:26px;
+  background:linear-gradient(135deg,#f2dfd1,#b8937c);
+}
+.training{
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:22px;
+}
+.form{
+  max-width:720px;
+  margin:auto;
+  background:white;
+  padding:42px;
+  border-radius:30px;
+  box-shadow:0 18px 45px rgba(0,0,0,.06);
+}
+input,textarea{
+  width:100%;
+  padding:17px;
+  margin-bottom:14px;
+  border:1px solid #e3d7cf;
+  border-radius:12px;
+  font-size:16px;
+  background:#fbf8f5;
+}
+button{cursor:pointer}
+footer{
+  background:#fff;
+  text-align:center;
+  padding:45px;
+  color:#5d5049;
+}
+.panel{
+  display:block;
+  margin-top:16px;
+  font-size:12px;
+  color:#9b8a7f;
+  text-decoration:none;
+}
+
+@media(max-width:850px){
+  header{display:block;text-align:center}
+  nav{display:none}
+  header .btn{display:none}
+  .hero{grid-template-columns:1fr}
+  .hero-photo{height:390px;order:1}
+  .hero-content{order:2;padding:55px 8%;text-align:center}
+  .hero-content h1{font-size:54px}
+  .hero-content p{font-size:18px}
+  .buttons{justify-content:center}
+  .strip,.cards,.methods,.gallery,.training,.about{
+    grid-template-columns:1fr;
+  }
+  section{padding:70px 6%}
+  section h2{font-size:38px}
+  .row{display:block}
 }
 </style>
 </head>
+
 <body>
 
 <header>
-<div class="logo">Hello<br><span>Beauty Studio</span></div>
-<nav>
-<a>O nas</a><a>Metody</a><a>Koloryzacje</a><a>Szkolenia</a><a>Cennik</a><a>Galeria</a><a>Kontakt</a>
-</nav>
-<a class="btn" href="#kontakt">UMÓW KONSULTACJĘ</a>
+  <div class="logo">Hello<br><span>Beauty Studio</span></div>
+  <nav>
+    <a href="#onas">O nas</a>
+    <a href="#uslugi">Usługi</a>
+    <a href="#metody">Metody</a>
+    <a href="#cennik">Cennik</a>
+    <a href="#szkolenia">Szkolenia</a>
+    <a href="#kontakt">Kontakt</a>
+  </nav>
+  <a class="btn" href="#kontakt">Umów konsultację</a>
 </header>
 
-<div class="hero">
-<div class="hero-img">♡</div>
-<div class="hero-text">
-<h1>Hello<br>Beauty Studio</h1>
-<p>Miejsce stworzone dla kobiet, które marzą o pięknych włosach.</p>
-<div>
-<a class="btn" href="#kontakt">UMÓW KONSULTACJĘ</a>
-</div>
-</div>
-</div>
+<main>
 
-<div class="icons">
-<div class="icon"><div>♡</div>Naturalne przedłużanie włosów</div>
-<div class="icon"><div>◇</div>Indywidualny dobór metody</div>
-<div class="icon"><div>✦</div>Profesjonalna koloryzacja</div>
-<div class="icon"><div>☆</div>Szkolenia dla stylistek</div>
-</div>
-
-<section>
-<h2>O nas</h2>
-<div class="card">
-<p>Specjalizujemy się w przedłużaniu włosów, korektach, koloryzacjach oraz szkoleniach. Każdą usługę dobieramy indywidualnie, aby efekt był naturalny, wygodny i dopasowany do klientki.</p>
-</div>
+<section class="hero">
+  <div class="hero-photo">✦</div>
+  <div class="hero-content">
+    <h1>Hello<br>Beauty Studio</h1>
+    <p>Miejsce stworzone dla kobiet, które marzą o pięknych włosach.</p>
+    <div class="buttons">
+      <a class="btn" href="#kontakt">Umów konsultację</a>
+      <a class="btn light" href="https://instagram.com" target="_blank">Instagram</a>
+    </div>
+  </div>
 </section>
 
-<section>
-<h2>Nasze usługi</h2>
-<div class="cards">
-<div class="card"><div class="photo"></div><h3>Przedłużanie włosów</h3><p>Naturalny efekt i indywidualny dobór metody.</p></div>
-<div class="card"><div class="photo"></div><h3>Koloryzacje</h3><p>Kolor dopasowany do włosów naturalnych i przedłużanych.</p></div>
-<div class="card"><div class="photo"></div><h3>Pielęgnacje</h3><p>Botoks, pielęgnacja włosów naturalnych i przedłużanych.</p></div>
-<div class="card"><div class="photo"></div><h3>Szkolenia</h3><p>Szkolenia online i stacjonarne dla stylistek.</p></div>
+<div class="strip">
+  <div><strong>♡</strong>Naturalne przedłużanie włosów</div>
+  <div><strong>◇</strong>Indywidualny dobór metody</div>
+  <div><strong>✦</strong>Profesjonalna koloryzacja</div>
+  <div><strong>☆</strong>Szkolenia dla stylistek</div>
 </div>
+
+<section id="onas" class="white">
+  <h2>O nas</h2>
+  <div class="about">
+    <div class="photo-box"></div>
+    <div class="text-box">
+      <p>
+        Specjalizujemy się w przedłużaniu włosów, korektach, koloryzacjach oraz szkoleniach.
+        Każdą usługę dobieramy indywidualnie, dbając o naturalny efekt, komfort noszenia
+        i bezpieczeństwo włosów.
+      </p>
+    </div>
+  </div>
 </section>
 
-<section>
-<h2>Metody przedłużania</h2>
-<div class="methods">
-<div class="card"><h3>Nano</h3><p>Dyskretne i niewidoczne łączenia.</p></div>
-<div class="card"><h3>Mini</h3><p>Komfortowe łączenia do wielu typów włosów.</p></div>
-<div class="card"><h3>Micro</h3><p>Efekt premium przy odpowiedniej gramaturze.</p></div>
-<div class="card"><h3>Standard</h3><p>Klasyczna metoda przy większej gramaturze.</p></div>
-</div>
+<section id="uslugi" class="taupe">
+  <h2>Nasze usługi</h2>
+  <div class="cards">
+    <div class="card"><div class="card-photo"></div><h3>Przedłużanie</h3><p>Naturalny efekt i metoda dobrana do włosów klientki.</p></div>
+    <div class="card"><div class="card-photo"></div><h3>Koloryzacje</h3><p>Kolor dopasowany do włosów naturalnych i przedłużanych.</p></div>
+    <div class="card"><div class="card-photo"></div><h3>Pielęgnacje</h3><p>Botoks oraz pielęgnacje włosów naturalnych i przedłużanych.</p></div>
+    <div class="card"><div class="card-photo"></div><h3>Szkolenia</h3><p>Szkolenia online i stacjonarne dla stylistek.</p></div>
+  </div>
 </section>
 
-<section>
-<h2>Cennik korekt</h2>
-<div class="price">
-<div class="row"><b>50 g</b><span>Nano 500 zł / Micro 600 zł</span></div>
-<div class="row"><b>100 g</b><span>Standard 550 zł / Mini 600 zł / Nano 650 zł / Micro 700 zł</span></div>
-<div class="row"><b>150 g</b><span>Standard 700 zł / Mini 750 zł / Nano 800 zł / Micro 900 zł</span></div>
-<div class="row"><b>200 g</b><span>Standard 800 zł / Mini 850 zł / Nano 900 zł / Micro 1200 zł</span></div>
-</div>
+<section id="metody" class="cream">
+  <h2>Metody przedłużania</h2>
+  <div class="methods">
+    <div class="method"><h3>Nano</h3><p>Dyskretne i bardzo subtelne łączenia.</p></div>
+    <div class="method"><h3>Mini</h3><p>Komfortowe rozwiązanie do wielu typów włosów.</p></div>
+    <div class="method"><h3>Micro</h3><p>Metoda premium przy odpowiednim doborze.</p></div>
+    <div class="method"><h3>Standard</h3><p>Klasyczna metoda przy większej gramaturze.</p></div>
+  </div>
 </section>
 
-<section>
-<h2>Szkolenia</h2>
-<div class="cards">
-<div class="card"><h3>Metoda koralikowa</h3><p>Szkolenie stacjonarne.</p></div>
-<div class="card"><h3>Perfect Blend</h3><p>Tonowanie i odrost w włosach przedłużanych.</p></div>
-<div class="card"><h3>Szkolenie online</h3><p>Link do platformy szkoleniowej.</p></div>
-<div class="card"><h3>Szkolenie indywidualne</h3><p>Dopasowane do poziomu stylistki.</p></div>
-</div>
+<section id="cennik" class="white">
+  <h2>Cennik korekt</h2>
+  <div class="price">
+    <div class="row"><b>50 g</b><span>Nano 500 zł / Micro 600 zł</span></div>
+    <div class="row"><b>100 g</b><span>Standard 550 zł / Mini 600 zł / Nano 650 zł / Micro 700 zł</span></div>
+    <div class="row"><b>150 g</b><span>Standard 700 zł / Mini 750 zł / Nano 800 zł / Micro 900 zł</span></div>
+    <div class="row"><b>200 g</b><span>Standard 800 zł / Mini 850 zł / Nano 900 zł / Micro 1200 zł</span></div>
+  </div>
 </section>
 
-<section>
-<h2>Metamorfozy</h2>
-<div class="gallery">
-<div class="photo"></div><div class="photo"></div><div class="photo"></div>
-<div class="photo"></div><div class="photo"></div><div class="photo"></div>
-</div>
+<section class="dark">
+  <h2>Metamorfozy</h2>
+  <div class="gallery">
+    <div></div><div></div><div></div>
+    <div></div><div></div><div></div>
+  </div>
 </section>
 
-<section id="kontakt">
-<h2>Umów konsultację</h2>
-<div class="form">
-<input placeholder="Imię i nazwisko">
-<input placeholder="Numer telefonu">
-<textarea rows="5" placeholder="Wiadomość"></textarea>
-<button class="btn">WYŚLIJ ZGŁOSZENIE</button>
-</div>
+<section id="szkolenia" class="cream">
+  <h2>Szkolenia</h2>
+  <div class="training">
+    <div class="card"><h3>Metoda koralikowa</h3><p>Szkolenie stacjonarne.</p></div>
+    <div class="card"><h3>Perfect Blend</h3><p>Tonowanie i odrost w włosach przedłużanych.</p></div>
+    <div class="card"><h3>Szkolenie online</h3><p>Link do platformy szkoleniowej.</p></div>
+  </div>
 </section>
+
+<section id="kontakt" class="white">
+  <h2>Umów konsultację</h2>
+  <div class="form">
+    <input placeholder="Imię i nazwisko">
+    <input placeholder="Numer telefonu">
+    <textarea rows="5" placeholder="Wiadomość"></textarea>
+    <button class="btn">Wyślij zgłoszenie</button>
+  </div>
+</section>
+
+</main>
 
 <footer>
-Hello Beauty Studio<br>
-<a class="panel-link" href="#">Panel salonu</a>
+  <div class="logo">Hello<br><span>Beauty Studio</span></div>
+  <a class="panel" href="#">Panel salonu</a>
 </footer>
 
 </body>
