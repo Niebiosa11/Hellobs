@@ -1,8 +1,8 @@
 <!DOCTYPE html>
 <html lang="pl">
 <head>
-<meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Hello Beauty Studio</title>
 
 <style>
@@ -12,121 +12,130 @@ body{
   margin:0;
   font-family:Arial, sans-serif;
   background:#f7f1eb;
-  color:#2d2a27;
+  color:#2b2724;
 }
 h1,h2,h3,.logo{
   font-family:Georgia, serif;
   font-weight:400;
 }
 header{
-  position:sticky;
-  top:0;
-  z-index:99;
-  background:rgba(255,255,255,.92);
-  backdrop-filter:blur(12px);
+  background:white;
   display:flex;
   justify-content:space-between;
   align-items:center;
   padding:18px 7%;
+  position:sticky;
+  top:0;
+  z-index:10;
   border-bottom:1px solid #eee4dc;
 }
 .logo{
   font-size:34px;
-  line-height:.78;
+  line-height:.8;
 }
 .logo span{
   font-family:Arial,sans-serif;
-  font-size:9px;
-  letter-spacing:4px;
+  font-size:10px;
+  letter-spacing:5px;
   text-transform:uppercase;
 }
 nav{
   display:flex;
-  gap:24px;
-  font-size:12px;
-  letter-spacing:.6px;
-  text-transform:uppercase;
-}
-nav a{color:#2d2a27;text-decoration:none}
-.btn{
-  display:inline-block;
-  background:#b8937c;
-  color:white;
-  text-decoration:none;
-  border:0;
-  padding:15px 26px;
-  border-radius:3px;
+  gap:32px;
   font-size:13px;
   letter-spacing:.8px;
   text-transform:uppercase;
 }
+nav a{
+  text-decoration:none;
+  color:#2b2724;
+}
+.btn{
+  display:inline-block;
+  background:#b89278;
+  color:white;
+  padding:16px 30px;
+  border-radius:4px;
+  text-decoration:none;
+  text-transform:uppercase;
+  font-size:13px;
+  letter-spacing:1px;
+  border:1px solid #b89278;
+}
 .btn.light{
-  background:white;
-  color:#2d2a27;
-  border:1px solid #c8aa98;
+  background:rgba(255,255,255,.45);
+  color:#2b2724;
+  border:1px solid #b89278;
 }
+
+/* HERO */
 .hero{
-  min-height:720px;
-  display:grid;
-  grid-template-columns:1.05fr .95fr;
-  background:#f5eee7;
-}
-.hero-photo{
+  min-height:820px;
   background-image:url("hero.png");
   background-size:cover;
   background-position:center;
-  min-height:720px;
-}
+  display:flex;
+  align-items:center;
+  padding:0 7%;
 }
 .hero-content{
-  padding:90px 9%;
-  display:flex;
-  flex-direction:column;
-  justify-content:center;
+  max-width:620px;
+  background:rgba(247,241,235,.35);
+  backdrop-filter:blur(2px);
+  padding:45px;
+  border-radius:24px;
 }
 .hero-content h1{
-  font-size:78px;
+  font-size:82px;
   line-height:.95;
-  margin:0 0 28px;
+  margin:0 0 25px;
 }
 .hero-content p{
-  font-size:21px;
+  font-size:22px;
   line-height:1.6;
-  max-width:520px;
-  margin-bottom:34px;
+  max-width:500px;
+  margin-bottom:32px;
 }
-.buttons{display:flex;gap:16px;flex-wrap:wrap}
+.buttons{
+  display:flex;
+  gap:16px;
+  flex-wrap:wrap;
+}
 
+/* STRIP */
 .strip{
-  background:white;
+  background:#eadbd0;
   display:grid;
   grid-template-columns:repeat(4,1fr);
 }
 .strip div{
-  padding:34px 22px;
+  padding:34px 24px;
   text-align:center;
-  border-right:1px solid #eee4dc;
+  border-right:1px solid rgba(80,60,45,.15);
   font-size:15px;
 }
 .strip strong{
   display:block;
+  color:#b89278;
   font-size:34px;
-  color:#b8937c;
   margin-bottom:12px;
   font-weight:400;
 }
+
+/* SEKCJE */
 section{
   padding:90px 7%;
 }
+.white{background:#fff}
+.cream{background:#f7f1eb}
+.taupe{background:#c9b5a5}
+.dark{background:#2a2522;color:white}
+
 section h2{
   text-align:center;
   font-size:48px;
   margin:0 0 45px;
 }
-.white{background:#fff}
-.cream{background:#f7f1eb}
-.taupe{background:#c9b5a5;color:white}
-.dark{background:#8f7464;color:white}
 
 .about{
   display:grid;
@@ -135,41 +144,39 @@ section h2{
   align-items:center;
 }
 .photo-box{
-  min-height:420px;
-  border-radius:28px;
-  background:linear-gradient(135deg,#d7b9a4,#fff3eb);
+  min-height:430px;
+  border-radius:30px;
+  background:linear-gradient(135deg,#d6b8a2,#f8eee6);
 }
 .text-box{
-  background:rgba(255,255,255,.85);
-  padding:42px;
-  border-radius:28px;
-  box-shadow:0 20px 55px rgba(0,0,0,.06);
+  background:#fff;
+  padding:44px;
+  border-radius:30px;
+  box-shadow:0 18px 45px rgba(0,0,0,.06);
 }
 .text-box p{
   font-size:18px;
-  line-height:1.75;
+  line-height:1.8;
 }
+
+/* KARTY */
 .cards{
   display:grid;
   grid-template-columns:repeat(4,1fr);
-  gap:22px;
+  gap:24px;
 }
 .card{
   background:white;
-  color:#2d2a27;
-  border-radius:26px;
-  padding:28px;
-  min-height:240px;
-  box-shadow:0 18px 45px rgba(0,0,0,.06);
-}
-.taupe .card,.dark .card{
-  background:rgba(255,255,255,.95);
+  color:#2b2724;
+  border-radius:28px;
+  padding:30px;
+  box-shadow:0 18px 45px rgba(0,0,0,.07);
 }
 .card-photo{
-  height:190px;
-  border-radius:22px;
+  height:200px;
+  border-radius:24px;
+  background:linear-gradient(135deg,#caa88f,#f7e8de);
   margin-bottom:22px;
-  background:linear-gradient(135deg,#caa88f,#f7eae1);
 }
 .card h3{
   font-size:28px;
@@ -178,57 +185,63 @@ section h2{
 .card p{
   line-height:1.6;
 }
+
+/* METODY */
 .methods{
   display:grid;
   grid-template-columns:repeat(4,1fr);
-  gap:22px;
+  gap:24px;
 }
 .method{
   background:white;
-  border-radius:26px;
-  padding:34px;
+  border-radius:28px;
+  padding:36px;
   text-align:center;
-  box-shadow:0 16px 40px rgba(0,0,0,.05);
+  box-shadow:0 18px 45px rgba(0,0,0,.06);
 }
-.method h3{font-size:30px;margin:0 0 12px}
+.method h3{
+  font-size:32px;
+  margin:0 0 14px;
+}
+
+/* CENNIK */
 .price{
-  background:white;
   max-width:980px;
   margin:auto;
-  border-radius:28px;
-  padding:38px;
+  background:white;
+  border-radius:30px;
+  padding:42px;
   box-shadow:0 18px 45px rgba(0,0,0,.06);
 }
 .row{
   display:flex;
   justify-content:space-between;
-  gap:20px;
-  border-bottom:1px solid #eadfd7;
+  gap:24px;
   padding:18px 0;
+  border-bottom:1px solid #eadfd7;
   font-size:17px;
 }
 .row:last-child{border-bottom:0}
+
+/* GALERIA */
 .gallery{
-  display:grid;
-  grid-template-columns:repeat(3,1fr);
-  gap:20px;
-}
-.gallery div{
-  height:300px;
-  border-radius:26px;
-  background:linear-gradient(135deg,#f2dfd1,#b8937c);
-}
-.training{
   display:grid;
   grid-template-columns:repeat(3,1fr);
   gap:22px;
 }
+.gallery div{
+  height:300px;
+  border-radius:28px;
+  background:linear-gradient(135deg,#f3dfd2,#b89278);
+}
+
+/* FORM */
 .form{
   max-width:720px;
   margin:auto;
   background:white;
-  padding:42px;
-  border-radius:30px;
+  padding:44px;
+  border-radius:32px;
   box-shadow:0 18px 45px rgba(0,0,0,.06);
 }
 input,textarea{
@@ -240,9 +253,13 @@ input,textarea{
   font-size:16px;
   background:#fbf8f5;
 }
-button{cursor:pointer}
+button{
+  cursor:pointer;
+}
+
+/* FOOTER */
 footer{
-  background:#fff;
+  background:white;
   text-align:center;
   padding:45px;
   color:#5d5049;
@@ -255,22 +272,48 @@ footer{
   text-decoration:none;
 }
 
+/* MOBILE */
 @media(max-width:850px){
-  header{display:block;text-align:center}
-  nav{display:none}
-  header .btn{display:none}
-  .hero{grid-template-columns:1fr}
-  .hero-photo{height:390px;order:1}
-  .hero-content{order:2;padding:55px 8%;text-align:center}
-  .hero-content h1{font-size:54px}
-  .hero-content p{font-size:18px}
-  .buttons{justify-content:center}
-  .strip,.cards,.methods,.gallery,.training,.about{
+  header{
+    display:block;
+    text-align:center;
+  }
+  nav{
+    display:none;
+  }
+  header .btn{
+    display:none;
+  }
+  .hero{
+    min-height:720px;
+    background-position:left center;
+    padding:0 6%;
+    align-items:flex-end;
+    padding-bottom:50px;
+  }
+  .hero-content{
+    max-width:100%;
+    padding:30px;
+    background:rgba(247,241,235,.72);
+  }
+  .hero-content h1{
+    font-size:48px;
+  }
+  .hero-content p{
+    font-size:18px;
+  }
+  .strip,.cards,.methods,.gallery,.about{
     grid-template-columns:1fr;
   }
-  section{padding:70px 6%}
-  section h2{font-size:38px}
-  .row{display:block}
+  section{
+    padding:70px 6%;
+  }
+  section h2{
+    font-size:38px;
+  }
+  .row{
+    display:block;
+  }
 }
 </style>
 </head>
@@ -279,6 +322,7 @@ footer{
 
 <header>
   <div class="logo">Hello<br><span>Beauty Studio</span></div>
+
   <nav>
     <a href="#onas">O nas</a>
     <a href="#uslugi">Usługi</a>
@@ -287,16 +331,17 @@ footer{
     <a href="#szkolenia">Szkolenia</a>
     <a href="#kontakt">Kontakt</a>
   </nav>
+
   <a class="btn" href="#kontakt">Umów konsultację</a>
 </header>
 
 <main>
 
 <section class="hero">
-<div class="hero-photo"></div>
   <div class="hero-content">
     <h1>Hello<br>Beauty Studio</h1>
     <p>Miejsce stworzone dla kobiet, które marzą o pięknych włosach.</p>
+
     <div class="buttons">
       <a class="btn" href="#kontakt">Umów konsultację</a>
       <a class="btn light" href="https://instagram.com" target="_blank">Instagram</a>
@@ -365,10 +410,11 @@ footer{
 
 <section id="szkolenia" class="cream">
   <h2>Szkolenia</h2>
-  <div class="training">
+  <div class="cards">
     <div class="card"><h3>Metoda koralikowa</h3><p>Szkolenie stacjonarne.</p></div>
     <div class="card"><h3>Perfect Blend</h3><p>Tonowanie i odrost w włosach przedłużanych.</p></div>
     <div class="card"><h3>Szkolenie online</h3><p>Link do platformy szkoleniowej.</p></div>
+    <div class="card"><h3>Szkolenie indywidualne</h3><p>Dopasowane do poziomu stylistki.</p></div>
   </div>
 </section>
 
