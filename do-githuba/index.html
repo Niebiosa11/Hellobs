@@ -1,0 +1,933 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Hello Beauty Studio</title>
+
+<style>
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{
+  margin:0;
+  font-family:Arial, sans-serif;
+  background:#f7f1eb;
+  color:#2b2724;
+}
+h1,h2,h3,.logo-mark{
+  font-family:Georgia, serif;
+  font-weight:400;
+}
+header{
+  background:rgba(255,255,255,.96);
+  display:grid;
+  grid-template-columns:minmax(210px,auto) 1fr auto;
+  gap:42px;
+  align-items:center;
+  padding:18px 7%;
+  position:sticky;
+  top:0;
+  z-index:10;
+  border-bottom:1px solid #efe6de;
+}
+.logo{
+  display:inline-flex;
+  flex-direction:column;
+  gap:7px;
+  color:#272320;
+  text-decoration:none;
+}
+.logo-mark{
+  font-size:58px;
+  line-height:.76;
+  letter-spacing:.2px;
+}
+.logo-sub{
+  font-size:12px;
+  letter-spacing:7px;
+  text-transform:uppercase;
+  color:#6f635c;
+  padding-left:2px;
+}
+nav{
+  display:flex;
+  justify-content:center;
+  gap:28px;
+  font-size:14px;
+  letter-spacing:1px;
+  text-transform:uppercase;
+}
+nav a{
+  text-decoration:none;
+  color:#2b2724;
+}
+.btn{
+  display:inline-flex;
+  min-height:52px;
+  align-items:center;
+  justify-content:center;
+  background:#b89278;
+  color:white;
+  padding:0 34px;
+  border-radius:4px;
+  text-decoration:none;
+  text-transform:uppercase;
+  font-size:14px;
+  font-weight:700;
+  letter-spacing:1px;
+  border:1px solid #b89278;
+  white-space:nowrap;
+}
+.btn.light{
+  background:rgba(255,255,255,.28);
+  color:#2b2724;
+  border-color:rgba(93,74,62,.38);
+}
+
+/* HERO */
+.hero{
+  min-height:560px;
+  background-image:linear-gradient(90deg,rgba(247,241,235,0) 0%,rgba(247,241,235,.04) 42%,rgba(247,241,235,.18) 100%),url("hero.png");
+  background-size:cover;
+  background-position:center;
+  display:flex;
+  align-items:center;
+  justify-content:flex-end;
+  padding:0 14% 0 7%;
+}
+.hero-content{
+  width:min(680px,100%);
+  background:transparent;
+  padding:0;
+  border:0;
+  border-radius:0;
+  box-shadow:none;
+  margin-top:10px;
+  text-shadow:0 1px 18px rgba(255,255,255,.78);
+}
+.hero-content h1{
+  font-size:104px;
+  line-height:.82;
+  margin:0 0 26px;
+  color:#28231f;
+}
+.hero-content h1 span{
+  display:block;
+  font-family:Georgia, serif;
+  font-size:54px;
+  font-weight:400;
+  letter-spacing:.2px;
+  line-height:1;
+  margin-top:16px;
+  text-transform:none;
+}
+.hero-content p{
+  font-size:23px;
+  line-height:1.55;
+  max-width:560px;
+  margin:0 0 32px;
+  color:#312b27;
+}
+.buttons{
+  display:flex;
+  gap:16px;
+  flex-wrap:wrap;
+  text-shadow:none;
+}
+
+/* STRIP */
+.strip{
+  background:#b89278;
+  display:grid;
+  grid-template-columns:repeat(4,1fr);
+  border-top:1px solid #b89278;
+  border-bottom:1px solid #b89278;
+}
+.strip div{
+  padding:24px 22px;
+  border-right:1px solid rgba(255,255,255,.12);
+  text-align:center;
+}
+.strip div:last-child{
+  border-right:0;
+}
+.strip span{
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  gap:10px;
+  color:#f8f1eb;
+  font-family:Georgia, serif;
+  font-size:20px;
+  line-height:1.25;
+  font-weight:400;
+}
+.strip span::before{
+  content:"";
+  width:7px;
+  height:7px;
+  border-radius:50%;
+  background:rgba(255,255,255,.78);
+  flex:0 0 auto;
+}
+
+section{
+  padding:90px 7%;
+}
+.compact-section{
+  padding:70px 7%;
+}
+.white{background:#fff}
+.cream{background:#f7f1eb}
+.taupe{background:#c9b5a5}
+.dark{background:#e4d4c7;color:#2b2724}
+section h2{
+  text-align:center;
+  font-size:48px;
+  margin:0 0 45px;
+}
+.cards{
+  display:grid;
+  grid-template-columns:repeat(4,1fr);
+  gap:24px;
+}
+.methods{
+  display:grid;
+  grid-template-columns:repeat(4,1fr);
+  gap:24px;
+}
+.card,.method{
+  background:white;
+  color:#2b2724;
+  border-radius:8px;
+  padding:24px;
+  box-shadow:0 18px 45px rgba(0,0,0,.07);
+}
+.card-photo{
+  height:255px;
+  border-radius:8px;
+  margin-bottom:22px;
+  overflow:hidden;
+}
+.card-photo img{
+  width:100%;
+  height:100%;
+  display:block;
+  object-fit:cover;
+}
+.method-photo{
+  height:190px;
+  border-radius:8px;
+  margin:-8px -8px 24px;
+  overflow:hidden;
+}
+.method-photo img{
+  width:100%;
+  height:100%;
+  display:block;
+  object-fit:cover;
+}
+.card h3,.method h3{
+  font-size:28px;
+  margin:0 0 12px;
+}
+.card p,.method p{
+  line-height:1.6;
+}
+.method{
+  text-align:center;
+}
+.method h3{
+  font-size:32px;
+}
+.training-group{
+  max-width:1180px;
+  margin:auto;
+}
+.training-group + .training-group{
+  margin-top:46px;
+}
+.training-heading{
+  font-family:Arial,sans-serif;
+  font-size:14px;
+  letter-spacing:2px;
+  text-transform:uppercase;
+  color:#7c6b61;
+  margin:0 0 18px;
+}
+.training-grid{
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:22px;
+}
+.training-card{
+  background:white;
+  border-radius:8px;
+  padding:28px;
+  box-shadow:0 18px 45px rgba(0,0,0,.06);
+  display:flex;
+  flex-direction:column;
+  min-height:330px;
+}
+.training-card h3{
+  font-size:28px;
+  line-height:1.08;
+  margin:0 0 14px;
+}
+.training-card p{
+  color:#62554e;
+  line-height:1.55;
+  margin:0 0 16px;
+}
+.training-price{
+  display:block;
+  font-family:Georgia,serif;
+  font-size:30px;
+  margin:auto 0 18px;
+}
+.training-card .btn{
+  width:100%;
+}
+.price{
+  max-width:1080px;
+  margin:auto;
+  background:white;
+  border-radius:8px;
+  padding:34px;
+  box-shadow:0 18px 45px rgba(0,0,0,.06);
+  overflow-x:auto;
+}
+.price + .price{
+  margin-top:28px;
+}
+.price h3{
+  font-size:34px;
+  margin:0 0 18px;
+  text-align:center;
+}
+.price-table{
+  width:100%;
+  border-collapse:collapse;
+  min-width:760px;
+}
+.price-table th,
+.price-table td{
+  border-bottom:1px solid #eadfd7;
+  padding:18px 14px;
+  text-align:center;
+}
+.price-table th{
+  color:#6b5d55;
+  font-size:12px;
+  letter-spacing:1px;
+  text-transform:uppercase;
+}
+.price-table th:first-child,
+.price-table td:first-child{
+  text-align:left;
+}
+.price-table td{
+  font-size:18px;
+}
+.price-table td strong{
+  font-family:Georgia,serif;
+  font-size:24px;
+  font-weight:400;
+}
+.price-table .empty{
+  color:#a79a93;
+  font-size:13px;
+  line-height:1.4;
+}
+.price-note{
+  color:#6f635b;
+  font-size:14px;
+  line-height:1.7;
+  margin:22px 0 0;
+}
+.gallery{
+  display:grid;
+  grid-template-columns:repeat(4,1fr);
+  gap:22px;
+}
+.gallery div{
+  height:300px;
+  border-radius:8px;
+  background:#f8f1eb;
+  overflow:hidden;
+}
+.gallery img{
+  width:100%;
+  height:100%;
+  display:block;
+  object-fit:cover;
+}
+.form{
+  max-width:720px;
+  margin:auto;
+  background:white;
+  padding:44px;
+  border-radius:8px;
+  box-shadow:0 18px 45px rgba(0,0,0,.06);
+}
+input,textarea{
+  width:100%;
+  padding:17px;
+  margin-bottom:14px;
+  border:1px solid #e3d7cf;
+  border-radius:8px;
+  font-size:16px;
+  background:#fbf8f5;
+}
+select{
+  width:100%;
+  padding:17px;
+  margin-bottom:14px;
+  border:1px solid #e3d7cf;
+  border-radius:8px;
+  font-size:16px;
+  background:#fbf8f5;
+  color:#2b2724;
+}
+.consent{
+  display:flex;
+  align-items:flex-start;
+  gap:10px;
+  color:#5b504a;
+  font-size:13px;
+  line-height:1.5;
+  margin:4px 0 18px;
+}
+.consent input{
+  width:auto;
+  margin:2px 0 0;
+}
+.consent a{
+  color:#2b2724;
+}
+.phone-row{
+  display:grid;
+  grid-template-columns:130px 1fr;
+  gap:10px;
+}
+.pathways{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:18px;
+  max-width:1040px;
+  margin:auto;
+}
+.path-card{
+  background:rgba(255,255,255,.78);
+  color:#2b2724;
+  border:1px solid #eadfd7;
+  border-radius:8px;
+  padding:32px;
+  box-shadow:0 16px 38px rgba(75,55,42,.045);
+}
+.path-card.primary{
+  background:#f1e3d8;
+  border-color:#dfc8b9;
+}
+.path-card h3{
+  font-size:32px;
+  line-height:1.05;
+  margin:0 0 14px;
+}
+.path-card p{
+  color:#62554e;
+  font-size:16px;
+  line-height:1.6;
+  margin:0 0 24px;
+}
+.path-card .btn{
+  width:100%;
+}
+button{
+  cursor:pointer;
+}
+footer{
+  background:white;
+  text-align:center;
+  padding:45px;
+  color:#5d5049;
+}
+footer .logo{
+  align-items:center;
+}
+.privacy-link{
+  display:block;
+  margin-top:16px;
+  font-size:12px;
+  color:#9b8a7f;
+  text-decoration:none;
+}
+.cookie-banner{
+  position:fixed;
+  left:18px;
+  right:18px;
+  bottom:18px;
+  z-index:30;
+  background:#fff;
+  border:1px solid #e5d9d0;
+  border-radius:8px;
+  box-shadow:0 18px 45px rgba(0,0,0,.14);
+  padding:18px;
+  display:none;
+  gap:18px;
+  align-items:center;
+  justify-content:space-between;
+}
+.cookie-banner.show{display:flex}
+.cookie-banner p{
+  margin:0;
+  color:#5b504a;
+  line-height:1.55;
+}
+.cookie-actions{
+  display:flex;
+  gap:10px;
+  flex-wrap:wrap;
+}
+.cookie-actions button{
+  min-height:40px;
+  border-radius:4px;
+  border:1px solid #b89278;
+  padding:0 14px;
+  background:#b89278;
+  color:#fff;
+  font-weight:700;
+  text-transform:uppercase;
+  font-size:11px;
+  letter-spacing:.7px;
+}
+.cookie-actions button.secondary{
+  background:#fff;
+  color:#2b2724;
+}
+
+@media(max-width:1050px){
+  header{
+    grid-template-columns:1fr auto;
+    gap:24px;
+  }
+  nav{
+    grid-column:1/-1;
+    order:3;
+  }
+}
+@media(max-width:850px){
+  header{
+    display:flex;
+    justify-content:center;
+    text-align:center;
+    padding:12px 6%;
+  }
+  .logo{
+    align-items:center;
+  }
+  .logo-mark{
+    font-size:40px;
+    line-height:.8;
+  }
+  .logo-sub{
+    font-size:9px;
+    letter-spacing:5px;
+  }
+  nav,header .btn{
+    display:none;
+  }
+  .hero{
+    position:relative;
+    min-height:430px;
+    overflow:hidden;
+    background-image:url("hero.png");
+    background-size:cover;
+    background-position:15% center;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    padding:0 5%;
+  }
+  .hero::after{
+    display:none;
+  }
+  .hero-content{
+    position:relative;
+    z-index:1;
+    width:62%;
+    margin-left:36%;
+    min-height:0;
+    padding:0;
+    background:transparent;
+    backdrop-filter:none;
+    -webkit-backdrop-filter:none;
+    border-radius:0;
+    margin-top:0;
+    text-align:center;
+    text-shadow:0 1px 16px rgba(255,255,255,.9);
+    display:flex;
+    flex-direction:column;
+  }
+  .hero-content h1{
+    font-size:56px;
+    line-height:.84;
+    margin-bottom:14px;
+  }
+  .hero-content h1 span{
+    font-size:30px;
+    letter-spacing:.2px;
+    margin-top:7px;
+  }
+  .hero-content p{
+    font-size:15px;
+    line-height:1.4;
+    max-width:245px;
+    margin:0;
+  }
+  .buttons{
+    gap:10px;
+    margin-top:34px;
+    text-shadow:none;
+  }
+  .buttons .btn{
+    width:auto;
+    flex:1 1 100%;
+    min-height:40px;
+    padding:0 12px;
+    font-size:11px;
+    letter-spacing:.7px;
+  }
+  .cards,.methods,.gallery,.pathways,.training-grid{
+    grid-template-columns:1fr;
+  }
+  .card-photo{
+    height:320px;
+  }
+  .gallery div{
+    height:320px;
+  }
+  .path-card{
+    padding:26px;
+  }
+  .path-card h3{
+    font-size:28px;
+  }
+  .strip{
+    grid-template-columns:1fr 1fr;
+    overflow:visible;
+  }
+  .strip div{
+    min-height:48px;
+    padding:10px 10px;
+    border-right:1px solid rgba(255,255,255,.12);
+    border-bottom:1px solid rgba(255,255,255,.12);
+    display:flex;
+    align-items:center;
+    justify-content:center;
+  }
+  .strip div:nth-child(2n){
+    border-right:0;
+  }
+  .strip span{
+    gap:0;
+    font-size:15px;
+    line-height:1.2;
+  }
+  .strip span::before{
+    display:none;
+  }
+  .strip div:last-child{
+    border-bottom:0;
+  }
+  section{
+    padding:70px 6%;
+  }
+  section h2{
+    font-size:38px;
+  }
+  .form,.price{
+    padding:28px;
+  }
+  .cookie-banner{
+    flex-direction:column;
+    align-items:flex-start;
+  }
+}
+@media(max-width:430px){
+  .hero{
+    min-height:410px;
+    background-position:13% center;
+    padding:0 5%;
+  }
+  .hero-content{
+    width:62%;
+    margin-left:34%;
+    min-height:0;
+  }
+  .hero-content h1{
+    font-size:46px;
+  }
+  .hero-content h1 span{
+    font-size:25px;
+  }
+  .hero-content p{
+    font-size:14px;
+  }
+  .buttons{
+    margin-top:30px;
+  }
+  .buttons .btn{
+    flex-basis:100%;
+    max-width:220px;
+    margin:0;
+  }
+  .strip span{
+    font-size:14px;
+  }
+}
+</style>
+</head>
+
+<body>
+
+<header>
+  <a class="logo" href="#top" aria-label="Hello Beauty Studio">
+    <span class="logo-mark">Hello</span>
+    <span class="logo-sub">Beauty Studio</span>
+  </a>
+
+  <nav>
+    <a href="#uslugi">Usługi</a>
+    <a href="#metody">Metody</a>
+    <a href="cennik.html">Cennik</a>
+    <a href="rezerwacje.html">Rezerwacja</a>
+    <a href="konsultacja.html">Konsultacja</a>
+    <a href="#szkolenia">Szkolenia</a>
+    <a href="#kontakt">Kontakt</a>
+  </nav>
+
+  <a class="btn" href="rezerwacje.html">Umów wizytę</a>
+</header>
+
+<main id="top">
+
+<section class="hero">
+  <div class="hero-content">
+    <h1>Hello<span>Beauty Studio</span></h1>
+    <p>Miejsce stworzone dla kobiet, które marzą o pięknych włosach.</p>
+
+    <div class="buttons">
+      <a class="btn" href="rezerwacje.html">Umów wizytę</a>
+      <a class="btn light" href="konsultacja.html">Konsultacja online</a>
+    </div>
+  </div>
+</section>
+
+<div class="strip">
+  <div><span>Naturalne przedłużanie włosów</span></div>
+  <div><span>Indywidualny dobór metody</span></div>
+  <div><span>Profesjonalna koloryzacja</span></div>
+  <div><span>Szkolenia dla stylistek</span></div>
+</div>
+
+<section class="cream compact-section" id="zapisy">
+  <h2>Zapisy i konsultacja</h2>
+  <div class="pathways">
+    <div class="path-card primary">
+      <h3>Chcę umówić wizytę</h3>
+      <p>Sprawdź wolne terminy i wyślij zgłoszenie do akceptacji salonu.</p>
+      <a class="btn" href="rezerwacje.html">Zobacz wolne terminy</a>
+    </div>
+    <div class="path-card">
+      <h3>Chcę konsultację online</h3>
+      <p>Opisz swoje włosy, oczekiwania, długość, kolor i budżet przed wizytą.</p>
+      <a class="btn light" href="konsultacja.html">Wypełnij konsultację</a>
+    </div>
+  </div>
+</section>
+
+<section id="uslugi" class="taupe">
+  <h2>Nasze usługi</h2>
+  <div class="cards">
+    <div class="card"><div class="card-photo"><img src="assets/metamorfoza-blond-2.jpg" alt="Przedłużanie włosów"></div><h3>Przedłużanie</h3><p>Naturalny efekt i metoda dobrana do włosów klientki.</p></div>
+    <div class="card"><div class="card-photo"><img src="assets/koloryzacja.jpg" alt="Koloryzacja włosów"></div><h3>Koloryzacje</h3><p>Kolor dopasowany do włosów naturalnych i przedłużanych.</p></div>
+    <div class="card"><div class="card-photo"><img src="assets/pielegnacja.jpg" alt="Pielęgnacja włosów"></div><h3>Pielęgnacje</h3><p>Botoks oraz pielęgnacje włosów naturalnych i przedłużanych.</p></div>
+    <div class="card"><div class="card-photo"><img src="assets/szkolenie.jpg" alt="Szkolenia ze stylizacji włosów"></div><h3>Szkolenia</h3><p>Szkolenia online i stacjonarne dla stylistek.</p></div>
+  </div>
+</section>
+
+<section id="metody" class="cream">
+  <h2>Metody przedłużania</h2>
+  <div class="methods">
+    <div class="method"><h3>Metoda keratynowa</h3><p>Łączenia Micro, Nano, Mini lub Standard dobierane do włosów, gramatury i sposobu noszenia fryzury.</p></div>
+    <div class="method"><h3>Tape On</h3><p>Metoda taśmowa dla klientek, które potrzebują szybkiego zagęszczenia lub przedłużenia przy odpowiednim typie włosa.</p></div>
+    <div class="method"><h3>Bio taśmy</h3><p>Delikatna metoda taśmowa z bardziej naturalnym, lekkim efektem i komfortem noszenia.</p></div>
+    <div class="method"><h3>Dobór metody</h3><p>Metodę wybieramy po konsultacji, analizie włosów, oczekiwań i stylu noszenia fryzury.</p></div>
+  </div>
+</section>
+
+<section id="cennik" class="white compact-section">
+  <h2>Cennik</h2>
+  <div class="pathways">
+    <div class="path-card primary">
+      <h3>Pełny cennik usług</h3>
+      <p>Włosy, korekty, koloryzacja, tape on i bio taśmy są teraz na osobnej, czytelnej stronie.</p>
+      <a class="btn" href="cennik.html">Zobacz cennik</a>
+    </div>
+    <div class="path-card">
+      <h3>Dobór ceny</h3>
+      <p>Końcowa cena zależy od długości, gramatury, metody i stanu włosów klientki.</p>
+      <a class="btn light" href="konsultacja.html">Wyślij konsultację</a>
+    </div>
+  </div>
+</section>
+
+<section class="dark">
+  <h2>Metamorfozy</h2>
+  <div class="gallery">
+    <div><img src="assets/metamorfoza-blond-1.jpg" alt="Metamorfoza włosów przed i po"></div>
+    <div><img src="assets/metamorfoza-blond-2.jpg" alt="Metamorfoza włosów przed i po"></div>
+    <div><img src="assets/metamorfoza-blond-3.jpg" alt="Metamorfoza włosów przed i po"></div>
+    <div><img src="assets/metamorfoza-blond-4.jpg" alt="Metamorfoza włosów przed i po"></div>
+  </div>
+</section>
+
+<section id="szkolenia" class="cream">
+  <h2>Szkolenia</h2>
+
+  <div class="training-group">
+    <h3 class="training-heading">Szkolenia stacjonarne</h3>
+    <div class="training-grid">
+      <div class="training-card">
+        <h3>Metoda kanapkowa / Tape On</h3>
+        <p>Naucz się jednej z najszybszych i najbardziej dochodowych metod przedłużania włosów. Poznasz prawidłową aplikację, zdejmowanie oraz ponowne zakładanie taśm, tworząc naturalne i komfortowe przedłużenia.</p>
+        <strong class="training-price">1200 zł</strong>
+        <a class="btn" href="#kontakt">Kup szkolenie</a>
+      </div>
+      <div class="training-card">
+        <h3>Metoda Bio Taśmy</h3>
+        <p>Kompleksowe szkolenie obejmujące aplikację Bio Taśm oraz ich samodzielne wykonywanie od podstaw. Idealne dla stylistek, które chcą wyróżnić się na rynku i oferować klientkom unikalne rozwiązania. Cena 3500 zł dotyczy wykonywania podstawowych bio taśm oraz taśm z porostem włosów.</p>
+        <strong class="training-price">2800 zł / 3500 zł</strong>
+        <a class="btn" href="#kontakt">Kup szkolenie</a>
+      </div>
+      <div class="training-card">
+        <h3>Metoda keratynowa</h3>
+        <p>Poznaj najpopularniejszą metodę przedłużania włosów. Nauczysz się wykonywania łączeń mini i nano, tworząc lekkie, trwałe oraz niemal niewidoczne aplikacje.</p>
+        <strong class="training-price">2500 zł</strong>
+        <a class="btn" href="#kontakt">Kup szkolenie</a>
+      </div>
+      <div class="training-card">
+        <h3>Doszkolenie: metoda ukryta</h3>
+        <p>Szkolenie dla stylistek posiadających podstawową wiedzę z zakresu przedłużania włosów. Poznasz technikę ukrytej aplikacji, metody koralikowej, pracę przy cienkich włosach oraz sposoby uzyskania maksymalnie naturalnego efektu.</p>
+        <strong class="training-price">1500 zł</strong>
+        <a class="btn light" href="#kontakt">Zapytaj o termin</a>
+      </div>
+      <div class="training-card">
+        <h3>Metoda keratynowa 3 dni</h3>
+        <p>Najbardziej rozbudowane szkolenie w naszej ofercie. W ciągu 3 intensywnych dni poznasz techniki wykonywania łączeń mini, nano, micro, metodę ukrytą oraz koralikową. Nauczysz się również profesjonalnego mieszania kolorów, tworzenia idealnych przejść i dopasowywania aplikacji do potrzeb klientki.</p>
+        <strong class="training-price">4500 zł</strong>
+        <a class="btn light" href="#kontakt">Zapytaj o termin</a>
+      </div>
+    </div>
+  </div>
+
+  <div class="training-group">
+    <h3 class="training-heading">Szkolenia online</h3>
+    <div class="training-grid">
+      <div class="training-card">
+        <h3>Koloryzowanie włosów przedłużanych</h3>
+        <p>Kompleksowe szkolenie z pracy na włosach przedłużanych. Nauczysz się wykonywania odrostu, tonowania oraz neutralizacji niechcianych odcieni bez uszkadzania włosów. Poznasz sprawdzone receptury, które pozwolą Ci osiągać przewidywalne efekty kolorystyczne.</p>
+        <strong class="training-price">600 zł</strong>
+        <a class="btn light" href="#kontakt">Kup online</a>
+      </div>
+      <div class="training-card">
+        <h3>Mieszanie włosów i praca na kartaczu</h3>
+        <p>Poznaj techniki profesjonalnego mieszania kolorów włosów oraz przerabiania włosów na kartaczu. Dzięki temu stworzysz idealne przejścia kolorystyczne i naturalne blendy dopasowane do każdej klientki.</p>
+        <strong class="training-price">250 zł</strong>
+        <a class="btn light" href="#kontakt">Kup online</a>
+      </div>
+      <div class="training-card">
+        <h3>Metoda keratynowa online</h3>
+        <p>Kompletne szkolenie online z najpopularniejszej metody przedłużania włosów. Krok po kroku nauczysz się wykonywania trwałych i estetycznych łączeń oraz prawidłowej pracy z włosami przedłużanymi.</p>
+        <strong class="training-price">2000 zł</strong>
+        <a class="btn light" href="#kontakt">Kup online</a>
+      </div>
+      <div class="training-card">
+        <h3>Metoda keratynowa rozszerzona</h3>
+        <p>Rozbudowana wersja szkolenia online dla stylistek, które chcą wejść na wyższy poziom. Oprócz podstaw poznasz zaawansowane techniki pracy, rozwiązywanie problemów podczas aplikacji oraz sposoby na tworzenie perfekcyjnych metamorfoz.</p>
+        <strong class="training-price">3000 zł</strong>
+        <a class="btn light" href="#kontakt">Kup online</a>
+      </div>
+      <div class="training-card">
+        <h3>Doszkolenie online</h3>
+        <p>Szkolenie stworzone dla osób, które znają już podstawy i chcą udoskonalić swoją technikę. Nauczysz się wykonywania nanołączeń, metody koralikowej oraz dopracowywania aplikacji tak, aby były jeszcze bardziej trwałe i niewidoczne.</p>
+        <strong class="training-price">1500 zł</strong>
+        <a class="btn light" href="#kontakt">Kup online</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="kontakt" class="white">
+  <h2>Umów konsultację</h2>
+  <div class="form">
+    <input placeholder="Imię i nazwisko">
+    <div class="phone-row">
+      <select id="contactPhoneCountry">
+        <option value="PL" data-prefix="+48" data-digits="9">+48 PL</option>
+        <option value="GB" data-prefix="+44" data-digits="10">+44 UK</option>
+        <option value="DE" data-prefix="+49" data-digits="11">+49 DE</option>
+      </select>
+      <input id="contactPhone" inputmode="numeric" placeholder="Numer telefonu">
+    </div>
+    <textarea rows="5" placeholder="Wiadomość"></textarea>
+    <label class="consent"><input type="checkbox" required> Akceptuję <a href="polityka-prywatnosci.html">Politykę Prywatności</a> i zgodę na kontakt w sprawie zgłoszenia.</label>
+    <button class="btn">Wyślij zgłoszenie</button>
+  </div>
+</section>
+
+</main>
+
+<footer>
+  <a class="logo" href="#top" aria-label="Hello Beauty Studio">
+    <span class="logo-mark">Hello</span>
+    <span class="logo-sub">Beauty Studio</span>
+  </a>
+  <a class="privacy-link" href="polityka-prywatnosci.html">Polityka Prywatności</a>
+</footer>
+
+<div class="cookie-banner" id="cookieBanner">
+  <p>Wykorzystujemy pliki cookie, które są niezbędne do poprawnego funkcjonowania naszej strony. W przypadku wyrażenia zgody używamy innych plików cookie w celu analizy danych dotyczących odwiedzających, ulepszenia strony internetowej, pokazania spersonalizowanych treści i zapewnienia dobrego doświadczenia na stronie. Dane są gromadzone w celu personalizacji reklam i pomiaru skuteczności kampanii reklamowych. Aby uzyskać więcej informacji lub udzielić zgody na poszczególne pliki cookie, wybierz „Dostosuj”.</p>
+  <div class="cookie-actions">
+    <button data-cookie="accept">Akceptuję</button>
+    <button class="secondary" data-cookie="reject">Odrzuć opcjonalne</button>
+    <button class="secondary" data-cookie="settings">Dostosuj</button>
+  </div>
+</div>
+<script>
+const cookieBanner = document.getElementById("cookieBanner");
+if(!localStorage.getItem("hbsCookieChoice")) cookieBanner.classList.add("show");
+document.querySelectorAll("[data-cookie]").forEach(button => {
+  button.addEventListener("click", () => {
+    localStorage.setItem("hbsCookieChoice", button.dataset.cookie);
+    cookieBanner.classList.remove("show");
+  });
+});
+function setupPhone(countryId, phoneId){
+  const country = document.getElementById(countryId);
+  const phone = document.getElementById(phoneId);
+  if(!country || !phone) return;
+  const limit = () => Number(country.selectedOptions[0].dataset.digits);
+  const sync = () => {
+    phone.value = phone.value.replace(/\D/g, "").slice(0, limit());
+    phone.placeholder = country.selectedOptions[0].dataset.prefix + " " + "0".repeat(limit());
+  };
+  country.addEventListener("change", sync);
+  phone.addEventListener("input", sync);
+  sync();
+}
+setupPhone("contactPhoneCountry", "contactPhone");
+</script>
+</body>
+</html>
