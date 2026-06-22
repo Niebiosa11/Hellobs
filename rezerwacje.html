@@ -1,0 +1,680 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Rezerwacje | Hello Beauty Studio</title>
+<style>
+*{box-sizing:border-box}
+body{
+  margin:0;
+  font-family:Arial,sans-serif;
+  background:#f7f1eb;
+  color:#2b2724;
+}
+h1,h2,h3,.brand{
+  font-family:Georgia,serif;
+  font-weight:400;
+}
+header{
+  background:white;
+  border-bottom:1px solid #eee4dc;
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:24px;
+  padding:18px 7%;
+}
+.brand{
+  color:#2b2724;
+  font-size:42px;
+  line-height:.8;
+  text-decoration:none;
+}
+.brand span{
+  display:block;
+  font-family:Arial,sans-serif;
+  font-size:10px;
+  letter-spacing:5px;
+  margin-top:9px;
+  text-transform:uppercase;
+}
+.top-actions{
+  display:flex;
+  gap:10px;
+  flex-wrap:wrap;
+}
+.btn{
+  border:1px solid #b89278;
+  border-radius:4px;
+  background:#b89278;
+  color:white;
+  cursor:pointer;
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  min-height:46px;
+  padding:0 22px;
+  text-decoration:none;
+  text-transform:uppercase;
+  font-size:12px;
+  font-weight:700;
+  letter-spacing:.9px;
+}
+.btn.secondary{
+  background:white;
+  color:#2b2724;
+}
+.btn.dark{
+  background:#2b2724;
+  border-color:#2b2724;
+}
+[data-open-panel],
+.tabs,
+#admin{
+  display:none!important;
+}
+main{
+  padding:54px 7% 80px;
+}
+.intro{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:42px;
+  align-items:end;
+  max-width:1180px;
+  margin:0 auto 34px;
+}
+.intro h1{
+  font-size:58px;
+  line-height:.95;
+  margin:0;
+}
+.intro p{
+  font-size:18px;
+  line-height:1.7;
+  margin:0;
+}
+.tabs{
+  background:white;
+  border:1px solid #eee4dc;
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  max-width:1180px;
+  margin:0 auto 28px;
+}
+.tab{
+  background:transparent;
+  border:0;
+  border-right:1px solid #eee4dc;
+  color:#6b5d55;
+  cursor:pointer;
+  font-size:13px;
+  font-weight:700;
+  letter-spacing:1px;
+  min-height:54px;
+  text-transform:uppercase;
+}
+.tab:last-child{border-right:0}
+.tab.active{
+  background:#b89278;
+  color:white;
+}
+.panel{
+  display:block;
+  max-width:1180px;
+  margin:auto;
+}
+.panel.active{display:block}
+.layout{
+  display:grid;
+  grid-template-columns:1.05fr .95fr;
+  gap:24px;
+}
+.box{
+  background:white;
+  border:1px solid #eee4dc;
+  border-radius:8px;
+  padding:28px;
+  box-shadow:0 18px 45px rgba(0,0,0,.04);
+}
+.box h2{
+  font-size:34px;
+  margin:0 0 18px;
+}
+.slots{
+  display:grid;
+  grid-template-columns:repeat(2,1fr);
+  gap:12px;
+}
+.slot{
+  border:1px solid #eadfd7;
+  border-radius:8px;
+  background:#fbf8f5;
+  cursor:pointer;
+  padding:16px;
+  text-align:left;
+}
+.slot strong{
+  display:block;
+  font-family:Georgia,serif;
+  font-size:24px;
+  font-weight:400;
+  margin-bottom:6px;
+}
+.slot small{
+  color:#75675f;
+  font-size:13px;
+}
+.slot.selected{
+  border-color:#b89278;
+  box-shadow:0 0 0 2px rgba(184,146,120,.18);
+}
+.empty{
+  background:#fbf8f5;
+  border:1px dashed #d9c8bd;
+  border-radius:8px;
+  color:#75675f;
+  padding:18px;
+}
+label{
+  color:#5b504a;
+  display:block;
+  font-size:13px;
+  font-weight:700;
+  letter-spacing:.4px;
+  margin:14px 0 7px;
+  text-transform:uppercase;
+}
+input,select,textarea{
+  width:100%;
+  border:1px solid #e3d7cf;
+  border-radius:8px;
+  background:#fbf8f5;
+  color:#2b2724;
+  font-size:16px;
+  padding:14px;
+}
+textarea{resize:vertical}
+.form-grid{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:0 12px;
+}
+.phone-row{
+  display:grid;
+  grid-template-columns:120px 1fr;
+  gap:10px;
+}
+.hint{
+  color:#75675f;
+  font-size:13px;
+  line-height:1.6;
+  margin:14px 0 0;
+}
+.consent{
+  display:flex;
+  align-items:flex-start;
+  gap:10px;
+  font-size:13px;
+  line-height:1.5;
+  text-transform:none;
+  letter-spacing:0;
+  margin:14px 0;
+}
+.consent input{
+  width:auto;
+  margin:2px 0 0;
+}
+.consent a{
+  color:#2b2724;
+}
+.cookie-banner{
+  position:fixed;
+  left:18px;
+  right:18px;
+  bottom:18px;
+  z-index:30;
+  background:#fff;
+  border:1px solid #e5d9d0;
+  border-radius:8px;
+  box-shadow:0 18px 45px rgba(0,0,0,.14);
+  padding:18px;
+  display:none;
+  gap:18px;
+  align-items:center;
+  justify-content:space-between;
+}
+.cookie-banner.show{display:flex}
+.cookie-banner p{
+  margin:0;
+  color:#5b504a;
+  line-height:1.55;
+}
+.cookie-actions{
+  display:flex;
+  gap:10px;
+  flex-wrap:wrap;
+}
+.cookie-actions button{
+  min-height:40px;
+  border-radius:4px;
+  border:1px solid #b89278;
+  padding:0 14px;
+  background:#b89278;
+  color:#fff;
+  font-weight:700;
+  text-transform:uppercase;
+  font-size:11px;
+  letter-spacing:.7px;
+}
+.cookie-actions button.secondary{
+  background:#fff;
+  color:#2b2724;
+}
+.admin-grid{
+  display:grid;
+  grid-template-columns:.9fr 1.1fr;
+  gap:24px;
+}
+.request{
+  border:1px solid #eadfd7;
+  border-radius:8px;
+  padding:16px;
+  margin-bottom:12px;
+}
+.request.pending{background:#fffaf6}
+.request.accepted{background:#f4faf4}
+.request.rejected{background:#faf4f4}
+.request-top{
+  display:flex;
+  justify-content:space-between;
+  gap:12px;
+  margin-bottom:10px;
+}
+.pill{
+  border-radius:999px;
+  background:#eadbd0;
+  color:#4c403a;
+  display:inline-flex;
+  align-items:center;
+  height:26px;
+  padding:0 10px;
+  font-size:11px;
+  font-weight:700;
+  letter-spacing:.5px;
+  text-transform:uppercase;
+  white-space:nowrap;
+}
+.pill.accepted{background:#dceedd}
+.pill.rejected{background:#efd8d8}
+.request-actions{
+  display:flex;
+  gap:8px;
+  flex-wrap:wrap;
+  margin-top:12px;
+}
+.mini{
+  min-height:36px;
+  padding:0 13px;
+  font-size:11px;
+}
+.slot-list{
+  display:grid;
+  gap:10px;
+  margin-top:16px;
+}
+.admin-slot{
+  align-items:center;
+  background:#fbf8f5;
+  border:1px solid #eadfd7;
+  border-radius:8px;
+  display:flex;
+  justify-content:space-between;
+  gap:12px;
+  padding:12px;
+}
+.sms-preview{
+  background:#2b2724;
+  border-radius:8px;
+  color:#fff;
+  line-height:1.6;
+  margin-top:16px;
+  padding:16px;
+}
+@media(max-width:850px){
+  header{
+    display:block;
+    text-align:center;
+    position:static;
+  }
+  .top-actions{
+    justify-content:center;
+    margin-top:18px;
+  }
+  main{
+    padding:38px 5% 60px;
+  }
+  .intro,.layout,.admin-grid{
+    grid-template-columns:1fr;
+  }
+  .intro h1{
+    font-size:42px;
+  }
+  .slots,.form-grid{
+    grid-template-columns:1fr;
+  }
+  .box{
+    padding:22px;
+  }
+  .cookie-banner{
+    flex-direction:column;
+    align-items:flex-start;
+  }
+}
+</style>
+</head>
+<body>
+<header>
+  <a class="brand" href="index.html">Hello<span>Beauty Studio</span></a>
+  <div class="top-actions">
+    <a class="btn secondary" href="index.html">Wróć na stronę</a>
+  </div>
+</header>
+
+<main>
+  <section class="intro">
+    <h1>Rezerwacja terminu</h1>
+    <p>Wybierz dostępny termin, uzupełnij dane i wyślij zgłoszenie. Skontaktujemy się z Tobą, aby potwierdzić wizytę.</p>
+  </section>
+
+  <section class="panel active" id="client">
+    <div class="layout">
+      <div class="box">
+        <h2>Dostępne terminy</h2>
+        <div class="slots" id="availableSlots"></div>
+      </div>
+      <form class="box" id="requestForm">
+        <h2>Dane do zapisu</h2>
+        <input type="hidden" id="selectedSlot">
+        <label>Wybrany termin</label>
+        <input id="selectedSlotLabel" placeholder="Wybierz termin po lewej" readonly>
+        <label>Usługa</label>
+        <select id="service" required>
+          <option value="">Wybierz usługę</option>
+          <option>Przedłużanie włosów</option>
+          <option>Korekta włosów</option>
+          <option>Koloryzacja</option>
+          <option>Konsultacja</option>
+          <option>Szkolenie</option>
+        </select>
+        <div class="form-grid">
+          <div>
+            <label>Imię i nazwisko</label>
+            <input id="clientName" required>
+          </div>
+          <div>
+            <label>Telefon</label>
+            <div class="phone-row">
+              <select id="clientPhoneCountry">
+                <option value="PL" data-prefix="+48" data-digits="9">+48 PL</option>
+                <option value="GB" data-prefix="+44" data-digits="10">+44 UK</option>
+                <option value="DE" data-prefix="+49" data-digits="11">+49 DE</option>
+              </select>
+              <input id="clientPhone" required inputmode="numeric" placeholder="Numer telefonu">
+            </div>
+          </div>
+        </div>
+        <label>Wiadomość</label>
+        <textarea id="clientMessage" rows="4" placeholder="Napisz krótko, czego dotyczy wizyta"></textarea>
+
+        <button class="btn" type="submit">Wyślij zgłoszenie</button>
+        <label class="consent"><input type="checkbox" required> Akceptuję <a href="polityka-prywatnosci.html">Politykę Prywatności</a> i zgodę na kontakt w sprawie rezerwacji.</label>
+        <p class="hint">Wysłanie formularza nie oznacza automatycznego potwierdzenia wizyty. Odezwę się do Ciebie z potwierdzeniem.</p>
+      </form>
+    </div>
+  </section>
+
+  <section class="panel" id="admin">
+    <div class="admin-grid">
+      <div class="box">
+        <h2>Dodaj dostępny termin</h2>
+        <form id="slotForm">
+          <label>Data</label>
+          <input type="date" id="slotDate" required>
+          <label>Godzina</label>
+          <input type="time" id="slotTime" required>
+          <label>Opis</label>
+          <input id="slotNote" placeholder="np. konsultacja / przedłużanie">
+          <button class="btn" type="submit">Dodaj termin</button>
+        </form>
+        <div class="slot-list" id="adminSlots"></div>
+      </div>
+
+      <div class="box">
+        <h2>Zgłoszenia klientek</h2>
+        <div id="requests"></div>
+        <div class="sms-preview">
+          <b>Po podłączeniu SMS:</b><br>
+          po kliknięciu „Akceptuj” klientka dostanie wiadomość z potwierdzeniem terminu i informacją o zadatku.
+        </div>
+      </div>
+    </div>
+  </section>
+</main>
+
+<script>
+const storageKey = "helloBeautyBookingsDemo";
+const seedSlots = [
+  { id:"s1", date:"2026-06-24", time:"12:00", note:"konsultacja", status:"free" },
+  { id:"s2", date:"2026-06-25", time:"16:30", note:"przedłużanie", status:"free" },
+  { id:"s3", date:"2026-06-27", time:"10:00", note:"koloryzacja", status:"free" }
+];
+const state = loadState();
+
+function loadState(){
+  const saved = localStorage.getItem(storageKey);
+  if(saved) return JSON.parse(saved);
+  return { slots: seedSlots, requests: [] };
+}
+function save(){
+  localStorage.setItem(storageKey, JSON.stringify(state));
+}
+function formatDate(date){
+  return new Date(date + "T12:00:00").toLocaleDateString("pl-PL", { weekday:"long", day:"2-digit", month:"long" });
+}
+function slotLabel(slot){
+  return `${formatDate(slot.date)}, ${slot.time}`;
+}
+function setupPhone(countryId, phoneId){
+  const country = document.getElementById(countryId);
+  const phone = document.getElementById(phoneId);
+  const limit = () => Number(country.selectedOptions[0].dataset.digits);
+  const sync = () => {
+    phone.value = phone.value.replace(/\D/g, "").slice(0, limit());
+    phone.placeholder = country.selectedOptions[0].dataset.prefix + " " + "0".repeat(limit());
+  };
+  country.addEventListener("change", sync);
+  phone.addEventListener("input", sync);
+  sync();
+}
+function fullPhone(countryId, phoneId){
+  const country = document.getElementById(countryId);
+  return `${country.selectedOptions[0].dataset.prefix} ${document.getElementById(phoneId).value}`;
+}
+function validPhone(countryId, phoneId){
+  const country = document.getElementById(countryId);
+  return document.getElementById(phoneId).value.length === Number(country.selectedOptions[0].dataset.digits);
+}
+setupPhone("clientPhoneCountry", "clientPhone");
+function openTab(name){
+  document.querySelectorAll(".tab").forEach(tab => tab.classList.toggle("active", tab.dataset.tab === name));
+  document.querySelectorAll(".panel").forEach(panel => panel.classList.toggle("active", panel.id === name));
+}
+document.querySelectorAll(".tab").forEach(tab => tab.addEventListener("click", () => openTab(tab.dataset.tab)));
+document.querySelector("[data-open-panel]")?.addEventListener("click", () => openTab("admin"));
+
+function renderSlots(){
+  const container = document.getElementById("availableSlots");
+  const free = state.slots.filter(slot => slot.status === "free").sort((a,b) => (a.date + a.time).localeCompare(b.date + b.time));
+  if(!free.length){
+    container.innerHTML = '<div class="empty">Brak wolnych terminów. Dodaj termin w panelu salonu.</div>';
+    return;
+  }
+  container.innerHTML = free.map(slot => `
+    <button class="slot" data-slot="${slot.id}">
+      <strong>${slot.time}</strong>
+      <small>${formatDate(slot.date)}<br>${slot.note || "wolny termin"}</small>
+    </button>
+  `).join("");
+  container.querySelectorAll(".slot").forEach(button => {
+    button.addEventListener("click", () => {
+      const slot = state.slots.find(item => item.id === button.dataset.slot);
+      document.querySelectorAll(".slot").forEach(item => item.classList.remove("selected"));
+      button.classList.add("selected");
+      document.getElementById("selectedSlot").value = slot.id;
+      document.getElementById("selectedSlotLabel").value = slotLabel(slot);
+    });
+  });
+}
+
+function renderAdminSlots(){
+  const container = document.getElementById("adminSlots");
+  const slots = [...state.slots].sort((a,b) => (a.date + a.time).localeCompare(b.date + b.time));
+  container.innerHTML = slots.map(slot => `
+    <div class="admin-slot">
+      <div><b>${slotLabel(slot)}</b><br><small>${slot.note || "wolny termin"} · ${slot.status === "free" ? "wolny" : "zablokowany"}</small></div>
+      <button class="btn secondary mini" data-remove-slot="${slot.id}">Usuń</button>
+    </div>
+  `).join("") || '<div class="empty">Nie ma jeszcze terminów.</div>';
+  container.querySelectorAll("[data-remove-slot]").forEach(button => {
+    button.addEventListener("click", () => {
+      const id = button.dataset.removeSlot;
+      state.slots = state.slots.filter(slot => slot.id !== id);
+      state.requests = state.requests.filter(request => request.slotId !== id);
+      save();
+      render();
+    });
+  });
+}
+
+function renderRequests(){
+  const container = document.getElementById("requests");
+  if(!state.requests.length){
+    container.innerHTML = '<div class="empty">Nie ma jeszcze zgłoszeń.</div>';
+    return;
+  }
+  container.innerHTML = state.requests.map(request => {
+    const slot = state.slots.find(item => item.id === request.slotId);
+    const statusText = request.status === "pending" ? "oczekuje" : request.status === "accepted" ? "zaakceptowana" : "odrzucona";
+    return `
+      <div class="request ${request.status}">
+        <div class="request-top">
+          <div><b>${request.name}</b><br><small>${request.phone}</small></div>
+          <span class="pill ${request.status}">${statusText}</span>
+        </div>
+        <div>${request.service}</div>
+        <div><small>${slot ? slotLabel(slot) : "termin usunięty"}</small></div>
+        ${request.message ? `<p>${request.message}</p>` : ""}
+        <div class="request-actions">
+          <button class="btn mini" data-accept="${request.id}">Akceptuj</button>
+          <button class="btn secondary mini" data-reject="${request.id}">Odrzuć</button>
+        </div>
+      </div>
+    `;
+  }).join("");
+  container.querySelectorAll("[data-accept]").forEach(button => button.addEventListener("click", () => updateRequest(button.dataset.accept, "accepted")));
+  container.querySelectorAll("[data-reject]").forEach(button => button.addEventListener("click", () => updateRequest(button.dataset.reject, "rejected")));
+}
+
+function updateRequest(id, status){
+  const request = state.requests.find(item => item.id === id);
+  if(!request) return;
+  request.status = status;
+  if(status === "rejected"){
+    const slot = state.slots.find(item => item.id === request.slotId);
+    if(slot) slot.status = "free";
+  }
+  if(status === "accepted"){
+    request.smsText = `Hello Beauty Studio: potwierdzamy wizytę. Prosimy o wpłatę zadatku, aby utrzymać termin.`;
+  }
+  save();
+  render();
+}
+
+document.getElementById("slotForm").addEventListener("submit", event => {
+  event.preventDefault();
+  state.slots.push({
+    id: "s" + Date.now(),
+    date: document.getElementById("slotDate").value,
+    time: document.getElementById("slotTime").value,
+    note: document.getElementById("slotNote").value,
+    status: "free"
+  });
+  event.target.reset();
+  save();
+  render();
+});
+
+document.getElementById("requestForm").addEventListener("submit", event => {
+  event.preventDefault();
+  if(!validPhone("clientPhoneCountry", "clientPhone")){
+    alert("Sprawdź numer telefonu - liczba cyfr musi pasować do wybranego kraju.");
+    return;
+  }
+  const slotId = document.getElementById("selectedSlot").value;
+  if(!slotId){
+    alert("Wybierz termin.");
+    return;
+  }
+  const slot = state.slots.find(item => item.id === slotId);
+  if(!slot || slot.status !== "free"){
+    alert("Ten termin nie jest już dostępny.");
+    render();
+    return;
+  }
+  slot.status = "pending";
+  state.requests.push({
+    id: "r" + Date.now(),
+    slotId,
+    service: document.getElementById("service").value,
+    name: document.getElementById("clientName").value,
+    phone: fullPhone("clientPhoneCountry", "clientPhone"),
+    message: document.getElementById("clientMessage").value,
+    status: "pending"
+  });
+  event.target.reset();
+  document.getElementById("selectedSlot").value = "";
+  document.getElementById("selectedSlotLabel").value = "";
+  save();
+  render();
+  alert("Dziękujemy. Zgłoszenie zostało wysłane, odezwiemy się z potwierdzeniem terminu.");
+});
+
+function render(){
+  renderSlots();
+  renderAdminSlots();
+  renderRequests();
+}
+render();
+</script>
+<div class="cookie-banner" id="cookieBanner">
+  <p>Wykorzystujemy pliki cookie, które są niezbędne do poprawnego funkcjonowania naszej strony. W przypadku wyrażenia zgody używamy innych plików cookie w celu analizy danych dotyczących odwiedzających, ulepszenia strony internetowej, pokazania spersonalizowanych treści i zapewnienia dobrego doświadczenia na stronie. Dane są gromadzone w celu personalizacji reklam i pomiaru skuteczności kampanii reklamowych. Aby uzyskać więcej informacji lub udzielić zgody na poszczególne pliki cookie, wybierz „Dostosuj”.</p>
+  <div class="cookie-actions">
+    <button data-cookie="accept">Akceptuję</button>
+    <button class="secondary" data-cookie="reject">Odrzuć opcjonalne</button>
+    <button class="secondary" data-cookie="settings">Dostosuj</button>
+  </div>
+</div>
+<script>
+const cookieBanner = document.getElementById("cookieBanner");
+if(!localStorage.getItem("hbsCookieChoice")) cookieBanner.classList.add("show");
+document.querySelectorAll("[data-cookie]").forEach(button => {
+  button.addEventListener("click", () => {
+    localStorage.setItem("hbsCookieChoice", button.dataset.cookie);
+    cookieBanner.classList.remove("show");
+  });
+});
+</script>
+</body>
+</html>
