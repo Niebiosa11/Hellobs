@@ -1,2 +1,2 @@
 # Hellobs
-Strona Hello Beauty Studio w budowie.
+Strona Hello Beauty Studio.
