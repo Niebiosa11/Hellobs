@@ -1,0 +1,817 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Cennik | Hello Beauty Studio</title>
+
+<style>
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{
+  margin:0;
+  font-family:Arial,sans-serif;
+  background:#f7f1eb;
+  color:#2b2724;
+}
+h1,h2,h3,.logo-mark{
+  font-family:Georgia,serif;
+  font-weight:400;
+}
+header{
+  background:rgba(255,255,255,.96);
+  display:grid;
+  grid-template-columns:minmax(210px,auto) 1fr auto;
+  gap:42px;
+  align-items:center;
+  padding:18px 7%;
+  position:sticky;
+  top:0;
+  z-index:10;
+  border-bottom:1px solid #efe6de;
+}
+.logo{
+  display:inline-flex;
+  flex-direction:column;
+  gap:7px;
+  color:#272320;
+  text-decoration:none;
+}
+.logo-mark{
+  font-size:58px;
+  line-height:.76;
+  letter-spacing:.2px;
+}
+.logo-sub{
+  font-size:12px;
+  letter-spacing:7px;
+  text-transform:uppercase;
+  color:#6f635c;
+  padding-left:2px;
+}
+nav{
+  display:flex;
+  justify-content:center;
+  gap:28px;
+  font-size:14px;
+  letter-spacing:1px;
+  text-transform:uppercase;
+}
+nav a{
+  color:#2b2724;
+  text-decoration:none;
+}
+.btn{
+  display:inline-flex;
+  min-height:52px;
+  align-items:center;
+  justify-content:center;
+  background:#b89278;
+  color:white;
+  padding:0 34px;
+  border-radius:4px;
+  text-decoration:none;
+  text-transform:uppercase;
+  font-size:14px;
+  font-weight:700;
+  letter-spacing:1px;
+  border:1px solid #b89278;
+  white-space:nowrap;
+}
+.btn.light{
+  background:rgba(255,255,255,.35);
+  color:#2b2724;
+  border-color:rgba(93,74,62,.34);
+}
+.hero{
+  padding:78px 7% 58px;
+  background:
+    linear-gradient(90deg,rgba(247,241,235,.97) 0%,rgba(247,241,235,.9) 45%,rgba(247,241,235,.58) 100%),
+    url("hero.png");
+  background-size:cover;
+  background-position:center;
+}
+.hero-inner{
+  max-width:980px;
+}
+.eyebrow{
+  color:#8a7464;
+  text-transform:uppercase;
+  letter-spacing:3px;
+  font-size:13px;
+  font-weight:700;
+  margin:0 0 18px;
+}
+h1{
+  font-size:72px;
+  line-height:.95;
+  margin:0 0 22px;
+}
+.lead{
+  max-width:680px;
+  font-size:20px;
+  line-height:1.65;
+  color:#4f443e;
+  margin:0 0 28px;
+}
+.quick-nav{
+  display:grid;
+  grid-template-columns:repeat(3,minmax(0,1fr));
+  gap:12px;
+  max-width:900px;
+}
+.quick-nav button{
+  appearance:none;
+  cursor:pointer;
+  color:#2b2724;
+  background:rgba(255,255,255,.62);
+  border:1px solid #e7d9cf;
+  border-radius:8px;
+  padding:16px 18px;
+  font-size:13px;
+  font-weight:700;
+  letter-spacing:.8px;
+  text-transform:uppercase;
+  transition:.18s ease;
+}
+.quick-nav button:hover,
+.quick-nav button.active{
+  background:#b89278;
+  border-color:#b89278;
+  color:white;
+}
+.price-section[hidden]{
+  display:none;
+}
+section{
+  padding:64px 7%;
+}
+.white{background:white}
+.cream{background:#f7f1eb}
+.taupe{background:#c9b5a5}
+section h2{
+  text-align:center;
+  font-size:46px;
+  margin:0 0 12px;
+}
+.section-note{
+  max-width:760px;
+  margin:0 auto 34px;
+  text-align:center;
+  color:#6f635b;
+  line-height:1.7;
+}
+.price{
+  max-width:1120px;
+  margin:auto;
+  background:white;
+  border-radius:8px;
+  padding:34px;
+  box-shadow:0 18px 45px rgba(0,0,0,.06);
+  overflow-x:auto;
+}
+.taupe .price{
+  background:#fffaf6;
+}
+.price + .price{
+  margin-top:28px;
+}
+.price h3{
+  font-size:34px;
+  margin:0 0 18px;
+  text-align:center;
+}
+.price-table{
+  width:100%;
+  border-collapse:collapse;
+  min-width:760px;
+}
+.price-table th,
+.price-table td{
+  border-bottom:1px solid #eadfd7;
+  padding:18px 14px;
+  text-align:center;
+}
+.price-table th{
+  color:#6b5d55;
+  font-size:12px;
+  letter-spacing:1px;
+  text-transform:uppercase;
+}
+.price-table th:first-child,
+.price-table td:first-child{
+  text-align:left;
+}
+.price-table td{
+  font-size:18px;
+}
+.price-table td strong{
+  font-family:Georgia,serif;
+  font-size:24px;
+  font-weight:400;
+}
+.empty{
+  color:#a79a93;
+  font-size:13px;
+  line-height:1.4;
+}
+.price-note{
+  color:#6f635b;
+  font-size:14px;
+  line-height:1.7;
+  margin:22px 0 0;
+}
+.price-grid{
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:18px;
+  max-width:1120px;
+  margin:auto;
+}
+.service-price{
+  background:white;
+  border:1px solid #eadfd7;
+  border-radius:8px;
+  padding:28px;
+  box-shadow:0 16px 38px rgba(75,55,42,.045);
+}
+.service-price h3{
+  font-size:30px;
+  margin:0 0 12px;
+}
+.service-price p{
+  color:#62554e;
+  line-height:1.65;
+  margin:0 0 18px;
+}
+.service-price b{
+  display:block;
+  color:#2b2724;
+  font-size:18px;
+}
+.cta{
+  text-align:center;
+  padding:70px 7%;
+}
+.cta h2{
+  margin-bottom:18px;
+}
+.cta p{
+  max-width:680px;
+  margin:0 auto 28px;
+  color:#62554e;
+  line-height:1.7;
+}
+footer{
+  background:white;
+  text-align:center;
+  padding:45px;
+  color:#5d5049;
+}
+footer .logo{
+  align-items:center;
+}
+.privacy-link{
+  display:block;
+  margin-top:16px;
+  font-size:12px;
+  color:#9b8a7f;
+  text-decoration:none;
+}
+@media(max-width:1050px){
+  header{
+    grid-template-columns:1fr auto;
+    gap:24px;
+  }
+  nav{
+    grid-column:1/-1;
+    order:3;
+  }
+  .price-grid{
+    grid-template-columns:1fr;
+  }
+}
+@media(max-width:850px){
+  header{
+    display:flex;
+    justify-content:center;
+    text-align:center;
+    padding:12px 6%;
+    position:static;
+  }
+  .logo{
+    align-items:center;
+  }
+  .logo-mark{
+    font-size:40px;
+    line-height:.8;
+  }
+  .logo-sub{
+    font-size:9px;
+    letter-spacing:5px;
+  }
+  nav,header .btn{
+    display:none;
+  }
+  .hero{
+    padding:48px 6% 42px;
+    background-position:20% center;
+  }
+  h1{
+    font-size:52px;
+  }
+  .lead{
+    font-size:17px;
+  }
+  section{
+    padding:54px 6%;
+  }
+  section h2{
+    font-size:38px;
+  }
+  .price{
+    padding:22px;
+  }
+  .price h3{
+    font-size:29px;
+  }
+  .quick-nav{
+    grid-template-columns:1fr;
+    max-width:none;
+  }
+  .quick-nav button{
+    width:100%;
+    text-align:center;
+  }
+}
+</style>
+</head>
+
+<body>
+
+<header>
+  <a class="logo" href="index.html" aria-label="Hello Beauty Studio">
+    <span class="logo-mark">Hello</span>
+    <span class="logo-sub">Beauty Studio</span>
+  </a>
+
+  <nav>
+    <a href="index.html#uslugi">Usługi</a>
+    <a href="index.html#metody">Metody</a>
+    <a href="cennik.html">Cennik</a>
+    <a href="rezerwacje.html">Rezerwacja</a>
+    <a href="konsultacja.html">Konsultacja</a>
+    <a href="index.html#kontakt">Kontakt</a>
+  </nav>
+
+  <a class="btn" href="konsultacja.html">Konsultacja</a>
+</header>
+
+<main>
+
+<section class="hero">
+  <div class="hero-inner">
+    <p class="eyebrow">Hello Beauty Studio</p>
+    <h1>Cennik usług</h1>
+    <p class="lead">Ceny zależą od długości, gramatury, rodzaju włosów, metody oraz stanu włosów naturalnych. Finalną wycenę potwierdzamy po konsultacji. Możliwa jest płatność ratalna.</p>
+    <div class="quick-nav" aria-label="Wybierz kategorię cennika">
+      <button type="button" class="active" data-price-tab="keratyna">Metoda keratynowa</button>
+      <button type="button" data-price-tab="tape">Tape On</button>
+      <button type="button" data-price-tab="bio">Bio taśmy</button>
+      <button type="button" data-price-tab="dodatkowe">Dopłaty</button>
+      <button type="button" data-price-tab="koloryzacja">Koloryzacja</button>
+      <button type="button" data-price-tab="zabiegi">Zabiegi</button>
+    </div>
+  </div>
+</section>
+
+<section id="keratyna" class="white price-section" data-price-section="keratyna">
+  <h2>Metoda keratynowa</h2>
+  <p class="section-note">Do ceny usługi doliczana jest cena włosów. Ostateczna ilość gramów i metoda łączeń są dobierane po konsultacji.</p>
+
+  <div class="price">
+    <h3>Cena założenia</h3>
+    <table class="price-table">
+      <thead>
+        <tr>
+          <th>Gramatura</th>
+          <th>Standard</th>
+          <th>Mini</th>
+          <th>Nano</th>
+          <th>Micro</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr><td><strong>50 g</strong></td><td class="empty">niedostępne</td><td class="empty">niedostępne</td><td>450 zł</td><td>550 zł</td></tr>
+        <tr><td><strong>100 g</strong></td><td>500 zł</td><td>550 zł</td><td>600 zł</td><td>650 zł</td></tr>
+        <tr><td><strong>150 g</strong></td><td>650 zł</td><td>700 zł</td><td>750 zł</td><td>850 zł</td></tr>
+        <tr><td><strong>200 g</strong></td><td>750 zł</td><td>800 zł</td><td>850 zł</td><td>1150 zł</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="price">
+    <h3>Cena korekty</h3>
+    <table class="price-table">
+      <thead>
+        <tr>
+          <th>Gramatura</th>
+          <th>Standard</th>
+          <th>Mini</th>
+          <th>Nano</th>
+          <th>Micro</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr><td><strong>50 g</strong></td><td class="empty">niedostępne</td><td class="empty">niedostępne</td><td>500 zł</td><td>600 zł</td></tr>
+        <tr><td><strong>100 g</strong></td><td>550 zł</td><td>600 zł</td><td>650 zł</td><td>700 zł</td></tr>
+        <tr><td><strong>150 g</strong></td><td>700 zł</td><td>750 zł</td><td>800 zł</td><td>900 zł</td></tr>
+        <tr><td><strong>200 g</strong></td><td>800 zł</td><td>850 zł</td><td>900 zł</td><td>1200 zł</td></tr>
+      </tbody>
+    </table>
+    <p class="price-note">Przy wysokich upięciach możliwa jest indywidualna mieszanka metod, np. 3 rzędy Micro lub Nano i reszta Mini.</p>
+  </div>
+
+  <div class="price">
+    <h3>Cena włosów za 1 g</h3>
+    <table class="price-table">
+      <thead>
+        <tr>
+          <th>Długość</th>
+          <th>Włosy rosyjskie / 1 g</th>
+          <th>Włosy słowiańskie Lux / 1 g</th>
+          <th>Włosy słowiańskie Premium / 1 g</th>
+          <th>Włosy dziewicze polskie / 1 g</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr><td><strong>40 cm</strong></td><td class="empty">-</td><td class="empty">-</td><td class="empty">-</td><td>20-28 zł</td></tr>
+        <tr><td><strong>45 cm</strong></td><td>12 zł</td><td>14 zł</td><td>16 zł</td><td>30-35 zł</td></tr>
+        <tr><td><strong>50 cm</strong></td><td>13 zł</td><td>14,50 zł</td><td>17 zł</td><td>35-45 zł</td></tr>
+        <tr><td><strong>55 cm</strong></td><td>13,50 zł</td><td>15,50 zł</td><td>17,50 zł</td><td>od 45 zł</td></tr>
+        <tr><td><strong>60 cm</strong></td><td>14 zł</td><td>16 zł</td><td>18 zł</td><td>od 45 zł</td></tr>
+        <tr><td><strong>65 cm</strong></td><td>14,50 zł</td><td>17 zł</td><td>19 zł</td><td>od 45 zł</td></tr>
+        <tr><td><strong>70 cm</strong></td><td>15 zł</td><td>18 zł</td><td>20 zł</td><td>od 45 zł</td></tr>
+      </tbody>
+    </table>
+    <p class="price-note">Włosy dziewicze polskie mają ceny w widełkach, zależnie od dostępności i jakości włosów. Cena końcowa zależy od dobranej gramatury, długości i rodzaju włosów.</p>
+  </div>
+</section>
+
+<section id="tape" class="cream price-section" data-price-section="tape" hidden>
+  <h2>Tape On</h2>
+  <p class="section-note">Cena końcowa zależy od ilości kanapek, długości i rodzaju włosów.</p>
+
+  <div class="price">
+    <h3>Cena założenia</h3>
+    <table class="price-table">
+      <thead>
+        <tr>
+          <th>Gramatura</th>
+          <th>Cena</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr><td><strong>Do 100 g</strong></td><td>450 zł</td></tr>
+        <tr><td><strong>Do 150 g</strong></td><td>500 zł</td></tr>
+        <tr><td><strong>Do 200 g</strong></td><td>600 zł</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="price">
+    <h3>Cena korekty</h3>
+    <table class="price-table">
+      <thead>
+        <tr>
+          <th>Usługa</th>
+          <th>Cena</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr><td><strong>Do 100 g</strong></td><td>500 zł</td></tr>
+        <tr><td><strong>Do 150 g</strong></td><td>550 zł</td></tr>
+        <tr><td><strong>Do 200 g</strong></td><td>650 zł</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="price">
+    <h3>Cena włosów</h3>
+    <table class="price-table">
+      <thead>
+        <tr>
+          <th>Rodzaj włosów</th>
+          <th>Długość</th>
+          <th>Ilość</th>
+          <th>Cena</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr><td><strong>Taśmy mikro</strong></td><td>45 cm</td><td>10 kanapek</td><td>420 zł</td></tr>
+        <tr><td><strong>Taśmy mikro</strong></td><td>45 cm</td><td>20 kanapek</td><td>840 zł</td></tr>
+        <tr><td><strong>Taśmy mikro</strong></td><td>55 cm</td><td>5 kanapek</td><td>620 zł</td></tr>
+        <tr><td><strong>Taśmy mikro</strong></td><td>55 cm</td><td>20 kanapek</td><td>1240 zł</td></tr>
+        <tr><td><strong>Włosy słowiańskie imitacja skóry</strong></td><td>50 cm</td><td>5 kanapek</td><td>380 zł</td></tr>
+        <tr><td><strong>Włosy słowiańskie imitacja skóry</strong></td><td>50 cm</td><td>20 kanapek</td><td>1520 zł</td></tr>
+        <tr><td><strong>Włosy słowiańskie imitacja skóry</strong></td><td>60 cm</td><td>5 kanapek</td><td>580 zł</td></tr>
+        <tr><td><strong>Włosy słowiańskie imitacja skóry</strong></td><td>60 cm</td><td>20 kanapek</td><td>2320 zł</td></tr>
+        <tr><td><strong>Włosy słowiańskie</strong></td><td>40 cm</td><td>5 kanapek</td><td>300 zł</td></tr>
+        <tr><td><strong>Włosy słowiańskie</strong></td><td>40 cm</td><td>20 kanapek</td><td>1200 zł</td></tr>
+        <tr><td><strong>Włosy słowiańskie</strong></td><td>50 cm</td><td>5 kanapek</td><td>380 zł</td></tr>
+        <tr><td><strong>Włosy słowiańskie</strong></td><td>50 cm</td><td>20 kanapek</td><td>1520 zł</td></tr>
+        <tr><td><strong>Włosy słowiańskie</strong></td><td>60 cm</td><td>5 kanapek</td><td>500 zł</td></tr>
+        <tr><td><strong>Włosy słowiańskie</strong></td><td>60 cm</td><td>20 kanapek</td><td>2000 zł</td></tr>
+      </tbody>
+    </table>
+  </div>
+</section>
+
+<section id="bio" class="white price-section" data-price-section="bio" hidden>
+  <h2>Bio taśmy</h2>
+  <p class="section-note">Ceny obejmują przygotowanie spersonalizowanego zestawu Bio Taśma. Wybór wersji KLASIC lub MAGIC dobieramy do oczekiwanego efektu.</p>
+
+  <div class="price">
+    <h3>Cena założenia i włosów - Bio taśma klasyczna</h3>
+    <table class="price-table">
+      <thead>
+        <tr>
+          <th>Usługa</th>
+          <th>Cena</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr><td><strong>Zestaw podstawowy - zagęszczenie 3x Bio Taśma</strong></td><td>490 zł</td></tr>
+        <tr><td><strong>Zestaw podstawowy - zagęszczenie 4x Bio Taśma</strong></td><td>590 zł</td></tr>
+        <tr><td><strong>Zestaw królewski - od 200 g włosów 8x Bio Taśma</strong></td><td>890 zł</td></tr>
+        <tr><td><strong>1 taśma krótka (6-8 cm)</strong></td><td>150 zł</td></tr>
+        <tr><td><strong>1 taśma długa (24-26 cm)</strong></td><td>390 zł</td></tr>
+        <tr><td><strong>Wykonanie Bio Taśm z włosów od klienta</strong></td><td>dodatkowo +250 zł</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="price">
+    <h3>Cena założenia i włosów - Magic Tape</h3>
+    <table class="price-table">
+      <thead>
+        <tr>
+          <th>Usługa</th>
+          <th>Cena</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr><td><strong>Zestaw podstawowy - zagęszczenie 3x Bio Taśma</strong></td><td>590 zł</td></tr>
+        <tr><td><strong>Zestaw podstawowy - zagęszczenie 4x Bio Taśma</strong></td><td>690 zł</td></tr>
+        <tr><td><strong>Zestaw królewski - od 200 g włosów 8x Bio Taśma</strong></td><td>1000 zł</td></tr>
+        <tr><td><strong>1 taśma krótka (6-8 cm)</strong></td><td>200 zł</td></tr>
+        <tr><td><strong>1 taśma długa (24-26 cm)</strong></td><td>490 zł</td></tr>
+        <tr><td><strong>Wykonanie Bio Taśm z włosów od klienta</strong></td><td>dodatkowo +250 zł</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="price">
+    <h3>Cena korekty Bio Taśmy</h3>
+    <table class="price-table">
+      <thead>
+        <tr>
+          <th>Usługa</th>
+          <th>Cena KLASIC</th>
+          <th>Cena MAGIC</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr><td><strong>Zestaw podstawowy - zagęszczenie 3x Bio Taśma</strong></td><td>490 zł</td><td>590 zł</td></tr>
+        <tr><td><strong>Zestaw podstawowy - zagęszczenie 4x Bio Taśma</strong></td><td>590 zł</td><td>690 zł</td></tr>
+        <tr><td><strong>Zestaw królewski - od 200 g włosów 8x Bio Taśma</strong></td><td>890 zł</td><td>1000 zł</td></tr>
+        <tr><td><strong>1 taśma krótka (6-8 cm)</strong></td><td>150 zł</td><td>200 zł</td></tr>
+        <tr><td><strong>1 taśma długa (24-26 cm)</strong></td><td>390 zł</td><td>490 zł</td></tr>
+        <tr><td><strong>Włosy przenoszone (kołtuny)</strong></td><td>dodatkowo +200 zł</td><td>dodatkowo +300 zł</td></tr>
+      </tbody>
+    </table>
+    <p class="price-note">Korekta Bio Taśmy obejmuje podciągnięcie włosów wykonywane raz na 4-16 tygodni i ponowne założenie.</p>
+  </div>
+</section>
+
+<section id="dodatkowe" class="cream price-section" data-price-section="dodatkowe" hidden>
+  <h2>Informacje dodatkowe</h2>
+  <p class="section-note">Dopłaty dotyczą wszystkich metod przedłużania włosów. Płatność ratalna jest możliwa przy wszystkich usługach.</p>
+  <div class="price">
+    <table class="price-table">
+      <thead>
+        <tr>
+          <th>Informacja</th>
+          <th>Cena</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr><td><strong>Korekta po innym salonie</strong></td><td>+100 zł</td></tr>
+        <tr><td><strong>Rozczesywanie kołtunów</strong></td><td>+50 zł / 30 minut</td></tr>
+        <tr><td><strong>Regeneracja włosów przy korekcie</strong></td><td>100 zł</td></tr>
+        <tr><td><strong>Płatność ratalna przy wszystkich usługach</strong></td><td>możliwa</td></tr>
+      </tbody>
+    </table>
+  </div>
+</section>
+
+<section id="koloryzacja" class="taupe price-section" data-price-section="koloryzacja" hidden>
+  <h2>Koloryzacja</h2>
+
+  <div class="price">
+    <h3>Air Touch</h3>
+    <table class="price-table">
+      <thead>
+        <tr>
+          <th>Usługa</th>
+          <th>Czas</th>
+          <th>Cena</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr><td><strong>Air Touch koloryzacja zaawansowana - włosy średnie</strong></td><td>300 min</td><td>650 zł</td></tr>
+        <tr><td><strong>Air Touch koloryzacja zaawansowana - włosy średnie gęste</strong></td><td>360 min</td><td>800 zł</td></tr>
+        <tr><td><strong>Air Touch koloryzacja zaawansowana - włosy długie</strong></td><td>360 min</td><td>800 zł</td></tr>
+        <tr><td><strong>Air Touch koloryzacja zaawansowana - włosy długie gęste</strong></td><td>420 min</td><td>940 zł</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="price">
+    <h3>Balejaż / refleksy / sombre / ombre</h3>
+    <table class="price-table">
+      <thead>
+        <tr>
+          <th>Usługa</th>
+          <th>Czas</th>
+          <th>Cena</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr><td><strong>Włosy krótkie</strong></td><td>180 min</td><td>390 zł</td></tr>
+        <tr><td><strong>Włosy średnie</strong></td><td>240 min</td><td>490 zł</td></tr>
+        <tr><td><strong>Włosy długie</strong></td><td>240 min</td><td>590 zł</td></tr>
+        <tr><td><strong>Włosy długie gęste</strong></td><td>300 min</td><td>640 zł</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="price">
+    <h3>Dekoloryzacja</h3>
+    <table class="price-table">
+      <thead>
+        <tr>
+          <th>Usługa</th>
+          <th>Czas</th>
+          <th>Cena</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr><td><strong>Dekoloryzacja całości - włosy krótkie + kolor/toner</strong></td><td>210 min</td><td>420 zł</td></tr>
+        <tr><td><strong>Dekoloryzacja całości - włosy średnie + kolor/toner</strong></td><td>240 min</td><td>550 zł</td></tr>
+        <tr><td><strong>Dekoloryzacja całości - włosy długie + kolor/toner</strong></td><td>360 min</td><td>700 zł</td></tr>
+        <tr><td><strong>Dekoloryzacja dodatkowa miarka</strong></td><td>30 min</td><td>od 90 zł</td></tr>
+        <tr><td><strong>Dekoloryzacja odrostu + koloryzacja - włosy krótkie</strong></td><td>165 min</td><td>370 zł</td></tr>
+        <tr><td><strong>Dekoloryzacja odrostu + koloryzacja - włosy średnie</strong></td><td>240 min</td><td>400 zł</td></tr>
+        <tr><td><strong>Dekoloryzacja odrostu + koloryzacja - włosy długie</strong></td><td>240 min</td><td>440 zł</td></tr>
+      </tbody>
+    </table>
+    <p class="price-note">Cena dekoloryzacji może zależeć od ilości włosów i historii koloryzacji.</p>
+  </div>
+
+  <div class="price">
+    <h3>Kolor z refleksem i koloryzacja globalna</h3>
+    <table class="price-table">
+      <thead>
+        <tr>
+          <th>Usługa</th>
+          <th>Czas</th>
+          <th>Cena</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr><td><strong>Kolor z refleksem - włosy krótkie</strong></td><td>165 min</td><td>320 zł</td></tr>
+        <tr><td><strong>Kolor z refleksem - włosy średnie</strong></td><td>180 min</td><td>420 zł</td></tr>
+        <tr><td><strong>Kolor z refleksem - włosy długie</strong></td><td>210 min</td><td>500 zł</td></tr>
+        <tr><td><strong>Koloryzacja globalna - włosy krótkie</strong></td><td>120 min</td><td>260 zł</td></tr>
+        <tr><td><strong>Koloryzacja globalna - włosy średnie</strong></td><td>135 min</td><td>330 zł</td></tr>
+        <tr><td><strong>Koloryzacja globalna - włosy długie</strong></td><td>150 min</td><td>390 zł</td></tr>
+      </tbody>
+    </table>
+    <p class="price-note">Włosy krótkie: do ucha. Włosy średnie: do ramion. Włosy długie: za łopatki.</p>
+  </div>
+</section>
+
+<section id="zabiegi" class="white price-section" data-price-section="zabiegi" hidden>
+  <h2>Zabiegi</h2>
+  <p class="section-note">Ceny zabiegów pielęgnacyjnych zależą od długości i gęstości włosów.</p>
+
+  <div class="price">
+    <h3>Keratynowe prostowanie</h3>
+    <table class="price-table">
+      <thead>
+        <tr>
+          <th>Długość</th>
+          <th>Cena</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr><td><strong>Włosy krótkie</strong></td><td>300 zł</td></tr>
+        <tr><td><strong>Włosy średnie</strong></td><td>350 zł</td></tr>
+        <tr><td><strong>Włosy długie</strong></td><td>400 zł</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="price">
+    <h3>Nanoplastia</h3>
+    <table class="price-table">
+      <thead>
+        <tr>
+          <th>Długość</th>
+          <th>Cena</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr><td><strong>Włosy krótkie</strong></td><td>550 zł</td></tr>
+        <tr><td><strong>Włosy średnie</strong></td><td>650 zł</td></tr>
+        <tr><td><strong>Włosy długie</strong></td><td>700 zł</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="price">
+    <h3>Botox</h3>
+    <table class="price-table">
+      <thead>
+        <tr>
+          <th>Długość</th>
+          <th>Cena</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr><td><strong>Włosy krótkie</strong></td><td>220 zł</td></tr>
+        <tr><td><strong>Włosy średnie</strong></td><td>300 zł</td></tr>
+        <tr><td><strong>Włosy długie</strong></td><td>360 zł</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="price">
+    <h3>Nanokeratyna</h3>
+    <table class="price-table">
+      <thead>
+        <tr>
+          <th>Długość</th>
+          <th>Cena</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr><td><strong>Włosy krótkie</strong></td><td>400 zł</td></tr>
+        <tr><td><strong>Włosy średnie</strong></td><td>500 zł</td></tr>
+        <tr><td><strong>Włosy długie</strong></td><td>600 zł</td></tr>
+      </tbody>
+    </table>
+    <p class="price-note">Włosy przedłużane lub ponadprzeciętnie gęste +50 zł.</p>
+  </div>
+</section>
+
+<section class="cta cream">
+  <h2>Nie wiesz, którą metodę wybrać?</h2>
+  <p>Wyślij konsultację online, a dobierzemy długość, kolor, gramaturę i metodę do Twoich włosów.</p>
+  <a class="btn" href="konsultacja.html">Wypełnij konsultację</a>
+</section>
+
+</main>
+
+<footer>
+  <a class="logo" href="index.html" aria-label="Hello Beauty Studio">
+    <span class="logo-mark">Hello</span>
+    <span class="logo-sub">Beauty Studio</span>
+  </a>
+  <a class="privacy-link" href="polityka-prywatnosci.html">Polityka Prywatności</a>
+</footer>
+
+<script>
+const priceTabs = document.querySelectorAll("[data-price-tab]");
+const priceSections = document.querySelectorAll("[data-price-section]");
+
+priceTabs.forEach((tab) => {
+  tab.addEventListener("click", () => {
+    const target = tab.dataset.priceTab;
+
+    priceTabs.forEach((button) => {
+      button.classList.toggle("active", button === tab);
+    });
+
+    priceSections.forEach((section) => {
+      section.hidden = section.dataset.priceSection !== target;
+    });
+
+    document.querySelector(".hero").scrollIntoView({ behavior: "smooth", block: "start" });
+  });
+});
+</script>
+
+</body>
+</html>
