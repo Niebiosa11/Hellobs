@@ -318,7 +318,8 @@ textarea{
       <textarea id="expectations"></textarea>
 
       <label>Dodaj zdjęcia swoich włosów</label>
-      <input type="file" id="hairPhotos" accept="image/*" multiple>
+      <input type="file" id="hairPhotos" accept="image/jpeg,image/png,image/webp" multiple>
+      <small>Do 5 zdjęć JPG, PNG lub WebP, maksymalnie 5 MB każde.</small>
 
       <label class="consent"><input type="checkbox" required> Akceptuję <a href="polityka-prywatnosci.html">Politykę Prywatności</a> i zgodę na kontakt w sprawie konsultacji.</label>
       <button type="submit">Wyślij konsultację</button>
@@ -362,6 +363,11 @@ document.getElementById("consultationForm").addEventListener("submit", async eve
     return;
   }
 
+  const photoFiles = Array.from(document.getElementById("hairPhotos").files);
+  if(photoFiles.length > 5 || photoFiles.some(file => !["image/jpeg","image/png","image/webp"].includes(file.type) || file.size > 5 * 1024 * 1024)){
+    alert("Dodaj maksymalnie 5 zdjęć JPG, PNG lub WebP, do 5 MB każde.");
+    return;
+  }
   const submitButton = event.target.querySelector('button[type="submit"]');
   submitButton.disabled = true;
   submitButton.textContent = "Wysyłanie...";
@@ -383,24 +389,32 @@ document.getElementById("consultationForm").addEventListener("submit", async eve
     return;
   }
 
-  const { error } = await hbsDb.rpc("create_contact_consultation", {
-    p_client_name: document.getElementById("name").value,
-    p_phone: fullPhone("phoneCountry", "phone"),
-    p_email: "",
-    p_message: message
-  });
+  try {
+    const photos = [];
+    const submissionId = crypto.randomUUID();
+    for(const file of photoFiles){
+      const extension = {"image/jpeg":"jpg","image/png":"png","image/webp":"webp"}[file.type];
+      const path = `consultations/${submissionId}/${crypto.randomUUID()}.${extension}`;
+      const { error: uploadError } = await hbsDb.storage.from("consultation-photos").upload(path, file, { contentType:file.type, upsert:false });
+      if(uploadError) throw new Error("Nie udało się przesłać zdjęć. Spróbuj ponownie później lub wyślij formularz bez zdjęć.");
+      photos.push({path, name:file.name});
+    }
+    const { error } = await hbsDb.rpc("create_contact_consultation", {
+      p_client_name: document.getElementById("name").value,
+      p_phone: fullPhone("phoneCountry", "phone"),
+      p_email: "",
+      p_message: message + (photos.length ? "\n[HBS_PHOTOS_V1]" + JSON.stringify(photos) : "")
+    });
 
-  if(error){
+    if(error) throw new Error(error.message || "Nie udało się wysłać konsultacji. Spróbuj ponownie później.");
+    event.target.reset();
+    document.getElementById("success").classList.add("show");
+  } catch(error){
     alert(error.message || "Nie udało się wysłać konsultacji. Spróbuj ponownie później.");
+  } finally {
     submitButton.disabled = false;
     submitButton.textContent = "Wyślij konsultację";
-    return;
   }
-
-  event.target.reset();
-  document.getElementById("success").classList.add("show");
-  submitButton.disabled = false;
-  submitButton.textContent = "Wyślij konsultację";
 });
 </script>
 <div class="cookie-banner" id="cookieBanner">
