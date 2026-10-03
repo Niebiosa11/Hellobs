@@ -903,6 +903,17 @@ section{padding:65px 6%}.white,.taupe,.dark{background:var(--paper);color:var(--
 @media(max-width:760px){header nav{display:flex;font-size:12px}header .btn{display:inline-flex}.hero-content{display:block;text-align:left;text-shadow:none}.strip span{font-size:25px}.text-link{width:auto}.logo-sub{letter-spacing:3px}}
 @media(prefers-reduced-motion:reduce){*,*:before,*:after{scroll-behavior:auto!important;transition:none!important;animation:none!important}}
 
+
+/* Korekta zgodna z makietą: pełne zdjęcie i wyłącznie główne sekcje. */
+.hero{min-height:0;height:auto;aspect-ratio:1.56;padding:130px 6% 45px}.hero-photo{inset:0 0 0 auto;width:48.08%;height:100%;background:var(--paper)}.hero-photo img{object-fit:contain;object-position:right center}.hero-photo:after{background:linear-gradient(90deg,var(--paper) 0%,rgba(252,250,247,.94) 10%,rgba(252,250,247,.55) 25%,transparent 44%)}.hero-content{width:62%;max-width:760px}.hero-content h1{font-size:clamp(40px,4.3vw,69px)}.effects-grid img{aspect-ratio:auto;height:auto;object-fit:contain}.extra-content{width:88%;margin:0 auto;color:var(--muted);border-top:1px solid var(--line);font-size:13px}.extra-content summary{cursor:pointer;padding:14px 0}.extra-content section{padding:30px 0}.extra-content:not([open]){display:none}.extra-content:target{display:block}footer{gap:30px;flex-wrap:wrap}.footer-conversation{border-left:1px solid var(--line);padding-left:35px}.footer-conversation h3{font-size:26px;line-height:1.3;margin:0 0 8px}.footer-tagline{border-left:1px solid var(--line);padding-left:35px;font-size:9px;letter-spacing:2px;color:#a8776a;text-transform:uppercase}.privacy-link{font-size:12px}.home-footnote{text-align:center;font-size:8px;letter-spacing:2px;color:#867d77;padding:12px 5% 22px;border-top:1px solid var(--line);margin:0 6%}.hero-signature{max-width:none!important}
+@media(min-width:1600px){.hero{min-height:0}.hero-content h1{font-size:76px}}
+@media(max-width:1050px) and (min-width:761px){.hero{aspect-ratio:1.35;padding-top:125px}.hero-photo{width:55.56%}.hero-content h1{font-size:46px}.hero-content .hero-signature{margin-top:26px}.hero-content p{font-size:16px}}
+@media(max-width:760px){.hero{aspect-ratio:auto;min-height:0;padding:30px 5% 0}.hero-content{width:100%}.hero-photo{position:relative;inset:auto;width:auto;height:auto;margin:0 -5.56%}.hero-photo img{width:100%;height:auto;object-fit:contain}.hero-photo:after{background:linear-gradient(180deg,var(--paper),rgba(252,250,247,.55) 8%,transparent 24%)}.hero-content h1{font-size:clamp(38px,7.6vw,54px)}.effects-grid{grid-template-columns:1fr;gap:22px}.effects-grid img{width:100%;height:auto;aspect-ratio:auto}.footer-conversation{padding-left:0;border:0}.footer-tagline{display:none}.extra-content{width:90%}}
+
+
+.hero-photo:after{left:-1px}.effects-grid a{display:flex;align-items:center;justify-content:center;aspect-ratio:3/4}.effects-grid img{height:100%;width:100%;object-fit:contain}
+footer{display:grid;grid-template-columns:auto 1fr auto 1fr;align-items:center;text-align:left;gap:30px}footer .logo{align-items:flex-start}.privacy-link{grid-column:1/-1;text-align:center;margin:0}.footer-tagline{justify-self:end}
+@media(max-width:760px){footer{grid-template-columns:1fr;gap:24px}footer .footer-conversation{justify-self:start}.footer-conversation{justify-self:end}.privacy-link{grid-column:1/-1}.effects-grid a{aspect-ratio:auto}.effects-grid img{width:100%;height:auto}.hero-photo:after{left:0}}
 </style>
 </head>
 
@@ -917,10 +928,7 @@ section{padding:65px 6%}.white,.taupe,.dark{background:var(--paper);color:var(--
   <nav>
     <a href="#uslugi">Usługi</a>
     <a href="#efekty">Efekty</a>
-    <a href="#metody">Metody</a>
     <a href="cennik.html">Cennik</a>
-    <a href="rezerwacje.html">Rezerwacja</a>
-    <a href="konsultacja.html">Konsultacja</a>
     <a href="szkolenia.html">Szkolenia</a>
     <a href="#kontakt">Kontakt</a>
   </nav>
@@ -935,16 +943,16 @@ section{padding:65px 6%}.white,.taupe,.dark{background:var(--paper);color:var(--
     <p class="eyebrow">Hello Beauty Studio</p>
     <h1>Piękne włosy.<br>Twoja pewność siebie.</h1>
     <p>Przedłużanie, koloryzacja i pielęgnacja<br>dopasowane do Ciebie.</p>
-    <div class="buttons"><a class="btn" href="rezerwacje.html">Zobacz dostępne terminy</a><a class="btn light" href="cennik.html">Cennik</a></div>
+    <div class="buttons"><a class="btn" href="rezerwacje.html">Zobacz dostępne terminy</a><a class="btn light" id="cennik" href="cennik.html">Cennik</a></div>
     <a class="text-link" href="konsultacja.html">Konsultacja online <span aria-hidden="true">→</span></a>
     <p class="hero-signature">Piękno zaczyna się od dobrych włosów</p>
   </div>
   <div class="hero-photo"><img src="assets/hbs-hero-blond.jpg" alt="Efekt przedłużania — długie, gładkie blond włosy" fetchpriority="high"></div>
 </section>
-<div class="strip" id="uslugi-skrot">
-  <a href="#uslugi"><span>Przedłużanie</span><small>Długość, która zachwyca</small></a>
-  <a href="#uslugi"><span>Koloryzacja</span><small>Kolory, które podkreślają Ciebie</small></a>
-  <a href="#uslugi"><span>Pielęgnacja</span><small>Zdrowe i piękne włosy na dłużej</small></a>
+<div class="strip" id="uslugi">
+  <a href="#metody"><span>Przedłużanie</span><small>Długość, która zachwyca</small></a>
+  <a href="cennik.html"><span>Koloryzacja</span><small>Kolory, które podkreślają Ciebie</small></a>
+  <a href="cennik.html"><span>Pielęgnacja</span><small>Zdrowe i piękne włosy na dłużej</small></a>
 </div>
 <section id="efekty" class="effects">
   <p class="eyebrow">Nasze realizacje</p>
@@ -962,9 +970,9 @@ section{padding:65px 6%}.white,.taupe,.dark{background:var(--paper);color:var(--
 <section id="metody" class="cream">
   <p class="eyebrow">Metody przedłużania</p><h2>Dobierzemy metodę do Twoich włosów</h2>
   <div class="methods">
-    <div class="method"><h3>Metoda keratynowa</h3><p>Łączenia Micro, Nano, Mini lub Standard dobierane do włosów, gramatury i sposobu noszenia fryzury.</p></div>
-    <div class="method"><h3>Tape On</h3><p>Metoda taśmowa dla klientek, które potrzebują szybkiego zagęszczenia lub przedłużenia przy odpowiednim typie włosa.</p></div>
-    <div class="method"><h3>Bio taśmy</h3><p>Delikatna metoda taśmowa z bardziej naturalnym, lekkim efektem i komfortem noszenia.</p></div>
+    <div class="method"><h3>Metoda keratynowa</h3><p>Łączenia Micro, Nano, Mini lub Standard dobierane do Twoich włosów.</p></div>
+    <div class="method"><h3>Tape On</h3><p>Przedłużanie i zagęszczanie metodą taśmową.</p></div>
+    <div class="method"><h3>Bio taśmy</h3><p>Lekki efekt i komfort noszenia.</p></div>
     
   </div>
 <div class="method-cta"><a class="btn" href="konsultacja.html">Wyślij konsultację</a><p>Metodę dobieramy po konsultacji, analizie włosów i Twoich oczekiwań.</p></div></section>
@@ -973,47 +981,17 @@ section{padding:65px 6%}.white,.taupe,.dark{background:var(--paper);color:var(--
 
 
 
-<section class="academy"><div><p class="eyebrow">Rozwijaj się z nami</p><h2>Akademia HBS</h2><p>Szkolenia online i stacjonarne.</p></div><p>Praktyczna wiedza, realne umiejętności i indywidualne podejście. Rozwijaj swoją pasję razem z nami.</p><a class="btn" href="szkolenia.html">Poznaj szkolenia</a></section>
-<section id="uslugi" class="taupe">
-  <h2>Nasze usługi</h2>
-  <div class="cards">
-    <div class="card"><div class="card-photo"><img src="assets/metamorfoza-blond-2.jpg" alt="Przedłużanie włosów"></div><h3>Przedłużanie</h3><p>Naturalny efekt i metoda dobrana do włosów klientki.</p></div>
-    <div class="card"><div class="card-photo"><img src="assets/koloryzacja.jpg" alt="Koloryzacja włosów"></div><h3>Koloryzacje</h3><p>Kolor dopasowany do włosów naturalnych i przedłużanych.</p></div>
-    <div class="card"><div class="card-photo"><img src="assets/pielegnacja.jpg" alt="Pielęgnacja włosów"></div><h3>Pielęgnacje</h3><p>Botoks oraz pielęgnacje włosów naturalnych i przedłużanych.</p></div>
-    <div class="card"><div class="card-photo"><img src="assets/szkolenie.jpg" alt="Szkolenia ze stylizacji włosów"></div><h3>Szkolenia</h3><p>Szkolenia online i stacjonarne dla stylistek.</p></div>
-  </div>
-</section>
-<section class="cream compact-section" id="zapisy">
-  <h2>Zapisy i konsultacja</h2>
-  <div class="pathways">
-    <div class="path-card primary">
-      <h3>Chcę umówić wizytę</h3>
-      <p>Sprawdź wolne terminy i wyślij zgłoszenie do akceptacji salonu.</p>
-      <a class="btn" href="rezerwacje.html">Zobacz wolne terminy</a>
-    </div>
-    <div class="path-card">
-      <h3>Chcę konsultację online</h3>
-      <p>Opisz swoje włosy, oczekiwania, długość, kolor i budżet przed wizytą.</p>
-      <a class="btn light" href="konsultacja.html">Wypełnij konsultację</a>
-    </div>
-  </div>
-</section>
-<section id="cennik" class="white compact-section">
-  <h2>Cennik</h2>
-  <div class="pathways">
-    <div class="path-card primary">
-      <h3>Pełny cennik usług</h3>
-      <p>Włosy, korekty, koloryzacja, tape on i bio taśmy są teraz na osobnej, czytelnej stronie.</p>
-      <a class="btn" href="cennik.html">Zobacz cennik</a>
-    </div>
-    <div class="path-card">
-      <h3>Dobór ceny</h3>
-      <p>Końcowa cena zależy od długości, gramatury, metody i stanu włosów klientki.</p>
-      <a class="btn light" href="konsultacja.html">Wyślij konsultację</a>
-    </div>
-  </div>
-</section>
-<section class="dark" id="galeria">
+<section class="academy" id="szkolenia"><div><p class="eyebrow">Rozwijaj się z nami</p><h2>Akademia HBS</h2><p>Szkolenia online i stacjonarne.</p></div><p>Praktyczna wiedza, realne umiejętności i indywidualne podejście. Rozwijaj swoją pasję razem z nami.</p><a class="btn" href="szkolenia.html">Poznaj szkolenia</a></section>
+
+
+
+
+
+
+
+
+</main>
+<details class="extra-content" id="galeria"><summary>Więcej naszych realizacji</summary><section class="dark">
   <p class="eyebrow">Przed i po</p><h2>Więcej naszych realizacji</h2>
   <div class="gallery">
     <div><img src="assets/metamorfoza-blond-1.jpg" alt="Metamorfoza włosów przed i po"></div>
@@ -1021,105 +999,8 @@ section{padding:65px 6%}.white,.taupe,.dark{background:var(--paper);color:var(--
     <div><img src="assets/metamorfoza-blond-3.jpg" alt="Metamorfoza włosów przed i po"></div>
     <div><img src="assets/metamorfoza-blond-4.jpg" alt="Metamorfoza włosów przed i po"></div>
   </div>
-</section>
-<section id="szkolenia" class="cream">
-  <h2>Szkolenia</h2>
-
-  <div class="training-options">
-    <div class="training-panel">
-      <button class="training-summary" type="button" aria-expanded="false">
-        <div>
-          <h3>Szkolenia stacjonarne</h3>
-          <p>Praktyczne szkolenia dla stylistek, które chcą nauczyć się pracy z metodami przedłużania, koloryzacją i dopracowaną aplikacją włosów.</p>
-        </div>
-        <span class="training-toggle" aria-hidden="true"></span>
-      </button>
-      <div class="training-grid">
-        <div class="training-card">
-          <h3>Koloryzacja włosów przedłużanych</h3>
-          <p>Szkolenie stacjonarne z koloryzacji włosów przedłużanych oraz podstaw koloryzacji włosów klientki. Nauczysz się doboru koloru, tonowania, neutralizacji odcieni i bezpiecznej pracy z włosami przedłużanymi.</p>
-          <strong class="training-price">3500 zł</strong>
-          <a class="btn" href="#kontakt">Kup teraz</a>
-        </div>
-        <div class="training-card">
-          <h3>Metoda keratynowa od podstaw</h3>
-          <p>Kompletne szkolenie stacjonarne dla początkujących. Obejmuje teorię, dobór włosów, gramatury i długości, podział głowy, łączenia klasyczne, mini i nano, mieszanie włosów oraz pracę na modelce.</p>
-          <strong class="training-price">3500 zł</strong>
-          <a class="btn" href="#kontakt">Kup teraz</a>
-        </div>
-        <div class="training-card">
-          <h3>Doszkolenie: metoda ukryta i koralikowa</h3>
-          <p>Szkolenie dla stylistek, które chcą wejść na wyższy poziom. Poznasz metodę ukrytą i koralikową krok po kroku, pracę przy cienkich włosach, rozmieszczenie łączeń oraz sposoby na maksymalnie naturalny efekt.</p>
-          <strong class="training-price">1800 zł</strong>
-          <a class="btn" href="#kontakt">Kup teraz</a>
-        </div>
-        <div class="training-card">
-          <h3>Metoda kanapkowa / Tape On</h3>
-          <p>Naucz się jednej z najszybszych i najbardziej dochodowych metod przedłużania włosów. Poznasz prawidłową aplikację, zdejmowanie oraz ponowne zakładanie taśm, tworząc naturalne i komfortowe przedłużenia.</p>
-          <strong class="training-price">1200 zł</strong>
-          <a class="btn" href="#kontakt">Kup teraz</a>
-        </div>
-        <div class="training-card">
-          <h3>Metoda Bio Taśmy</h3>
-          <p>Kompleksowe szkolenie obejmujące aplikację Bio Taśm oraz ich samodzielne wykonywanie od podstaw. Cena 3500 zł dotyczy wykonywania podstawowych bio taśm oraz taśm z porostem włosów.</p>
-          <strong class="training-price">2800 zł / 3500 zł</strong>
-          <a class="btn" href="#kontakt">Kup teraz</a>
-        </div>
-        <div class="training-card">
-          <h3>Metoda keratynowa 3 dni</h3>
-          <p>Najbardziej rozbudowane szkolenie w naszej ofercie. W ciągu 3 dni poznasz łączenia mini, nano, micro, metodę ukrytą, koralikową oraz profesjonalne mieszanie kolorów.</p>
-          <strong class="training-price">4500 zł</strong>
-          <a class="btn" href="#kontakt">Kup teraz</a>
-        </div>
-      </div>
-    </div>
-
-    <div class="training-panel">
-      <button class="training-summary" type="button" aria-expanded="false">
-        <div>
-          <h3>Szkolenia online</h3>
-          <p>Materiały dla stylistek, które chcą uczyć się zdalnie i wracać do lekcji we własnym tempie.</p>
-        </div>
-        <span class="training-toggle" aria-hidden="true"></span>
-      </button>
-      <div class="training-grid">
-        <div class="training-card">
-          <h3>Koloryzowanie włosów przedłużanych</h3>
-          <p>Kompleksowe szkolenie z pracy na włosach przedłużanych. Nauczysz się wykonywania odrostu, tonowania oraz neutralizacji niechcianych odcieni bez uszkadzania włosów.</p>
-          <strong class="training-price">600 zł</strong>
-          <span class="btn light disabled">Niedługo dostępne</span>
-        </div>
-        <div class="training-card">
-          <h3>Mieszanie włosów i praca na kartaczu</h3>
-          <p>Poznaj techniki profesjonalnego mieszania kolorów włosów oraz przerabiania włosów na kartaczu, aby tworzyć naturalne blendy dopasowane do klientki.</p>
-          <strong class="training-price">250 zł</strong>
-          <span class="btn light disabled">Niedługo dostępne</span>
-        </div>
-        <div class="training-card">
-          <h3>Metoda keratynowa online</h3>
-          <p>Kompletne szkolenie online z najpopularniejszej metody przedłużania włosów. Krok po kroku nauczysz się wykonywania trwałych i estetycznych łączeń.</p>
-          <strong class="training-price">2000 zł</strong>
-          <span class="btn light disabled">Niedługo dostępne</span>
-        </div>
-        <div class="training-card">
-          <h3>Metoda keratynowa rozszerzona</h3>
-          <p>Rozbudowana wersja szkolenia online dla stylistek, które chcą wejść na wyższy poziom i poznać zaawansowane techniki pracy oraz rozwiązywanie problemów podczas aplikacji.</p>
-          <strong class="training-price">3000 zł</strong>
-          <span class="btn light disabled">Niedługo dostępne</span>
-        </div>
-        <div class="training-card">
-          <h3>Doszkolenie online</h3>
-          <p>Szkolenie dla osób, które znają już podstawy i chcą udoskonalić technikę. Nauczysz się nanołączeń, metody koralikowej oraz dopracowywania aplikacji.</p>
-          <strong class="training-price">1500 zł</strong>
-          <span class="btn light disabled">Niedługo dostępne</span>
-        </div>
-      </div>
-    </div>
-  </div>
-  <div class="training-drawer" id="trainingDrawer" aria-live="polite"></div>
-</section>
-
-<section id="kontakt" class="white">
+</section></details>
+<details class="extra-content" id="kontakt"><summary>Kontakt z salonem</summary><section id="kontakt-form" class="white">
   <h2>Umów konsultację</h2>
   <form class="form" id="contactForm">
     <input id="contactName" placeholder="Imię i nazwisko" required>
@@ -1158,17 +1039,15 @@ section{padding:65px 6%}.white,.taupe,.dark{background:var(--paper);color:var(--
       </iframe>
     </div>
   </div>
-</section>
-
-</main>
+</section></details>
 
 <footer>
   <a class="logo" href="#top" aria-label="Hello Beauty Studio">
     <span class="logo-mark">Hello</span>
     <span class="logo-sub">Beauty Studio</span>
   </a>
-  <a class="privacy-link" href="polityka-prywatnosci.html">Polityka Prywatności</a>
-</footer>
+  <div class="footer-conversation"><h3>Porozmawiajmy<br>o Twoich włosach.</h3><a class="text-link" href="#kontakt">Kontakt</a></div><a class="btn" href="konsultacja.html">Wyślij konsultację</a><p class="footer-tagline">Piękne włosy.<br>Lepsze jutro.</p><a class="privacy-link" href="polityka-prywatnosci.html">Polityka prywatności</a>
+</footer><p class="home-footnote">HELLO BEAUTY STUDIO — PIĘKNO ZACZYNA SIĘ OD CIEBIE</p>
 
 <div class="cookie-banner" id="cookieBanner">
   <p>Wykorzystujemy pliki cookie, które są niezbędne do poprawnego funkcjonowania naszej strony. W przypadku wyrażenia zgody używamy innych plików cookie w celu analizy danych dotyczących odwiedzających, ulepszenia strony internetowej, pokazania spersonalizowanych treści i zapewnienia dobrego doświadczenia na stronie. Dane są gromadzone w celu personalizacji reklam i pomiaru skuteczności kampanii reklamowych. Aby uzyskać więcej informacji lub udzielić zgody na poszczególne pliki cookie, wybierz „Dostosuj”.</p>
@@ -1287,6 +1166,16 @@ document.getElementById("contactForm")?.addEventListener("submit", async event =
   submitButton.disabled = false;
   submitButton.textContent = "Wyślij zgłoszenie";
 });
+</script>
+<script>
+// Umożliwia dostęp do zachowanej galerii i kontaktu bez dodatkowych bloków w głównym układzie.
+function revealHomeDetails(){
+ const target=document.getElementById(location.hash.slice(1));
+ const details=target?.closest('details');
+ if(details){details.open=true;details.scrollIntoView({block:'start'});}
+}
+window.addEventListener('hashchange',revealHomeDetails);
+revealHomeDetails();
 </script>
 </body>
 </html>
