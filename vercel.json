@@ -55,10 +55,7 @@
       "maxDuration": 30
     }
   },
-  "rewrites": [
-    {
-      "source": "/server/:path*",
-      "destination": "/404.html"
-    }
-  ]
+  "buildCommand": "node build.cjs",
+  "outputDirectory": "public",
+  "framework": null
 }
