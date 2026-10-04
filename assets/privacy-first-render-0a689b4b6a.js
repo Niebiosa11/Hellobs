@@ -1,0 +1,1 @@
+(()=>{'use strict';let saved=null;try{saved=JSON.parse(localStorage.getItem('hbsPrivacyV1'));}catch(_){}if(!(saved?.version===1&&typeof saved.maps==='boolean'))document.documentElement.setAttribute('data-hbs-consent-needed','');})();
