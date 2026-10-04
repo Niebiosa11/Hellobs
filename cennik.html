@@ -3,29 +3,25 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Cennik | Hello Beauty Studio</title>
+<title>Cennik przedłużania, koloryzacji i pielęgnacji | Hello Beauty Studio</title>
 <link rel="icon" type="image/svg+xml" href="assets/favicon.svg">
 <link rel="apple-touch-icon" href="assets/favicon.svg">
 
-<style>
-:root{--paper:#fcfaf7;--sand:#f1ebe3;--wine:#750d24;--ink:#302722;--muted:#665c56;--line:#e4d6cb}
-*{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;background:var(--paper);color:var(--ink);font:16px/1.6 Arial,sans-serif}
-h1,h2,h3,.logo-mark{font-family:Georgia,serif;font-weight:400}a{color:inherit}a:focus-visible,button:focus-visible{outline:3px solid var(--wine);outline-offset:4px}
-header{display:flex;align-items:center;justify-content:space-between;gap:24px;width:min(1260px,86%);margin:auto;padding:24px 0}
-.logo{display:inline-flex;flex-direction:column;text-decoration:none;flex-shrink:0}.logo-mark{font-size:53px;line-height:.9}.logo-sub{font-size:9px;letter-spacing:5px;margin-top:8px;text-transform:uppercase}
-nav{display:flex;justify-content:center;gap:22px;font:15px Georgia,serif;flex-wrap:wrap}nav a{text-decoration:none}nav a[aria-current]{color:var(--wine);padding-bottom:7px;border-bottom:1px solid var(--wine)}
-.btn{display:inline-flex;align-items:center;justify-content:center;min-height:47px;padding:10px 24px;background:var(--wine);border:1px solid var(--wine);border-radius:3px;color:white;text-decoration:none;font:14px/1.4 Arial,sans-serif;text-align:center}.btn:hover{background:#5c091c}.btn.light{background:transparent;color:var(--wine)}.btn.light:hover{background:#750d2409}
-.hero{padding:40px 7% 35px;background:var(--paper)}.hero-inner{max-width:1260px;margin:auto}.hero-summary{display:grid;grid-template-columns:2fr 1fr;gap:60px;align-items:center}.eyebrow{font-size:10px;letter-spacing:3px;text-transform:uppercase;color:#a8776a;margin:0 0 18px}.eyebrow:after{content:"";display:inline-block;vertical-align:middle;width:90px;height:1px;background:#d9b9b0;margin-left:18px}
-h1{font-size:clamp(44px,5vw,68px);line-height:1.08;letter-spacing:-1.7px;margin:0 0 18px}.lead{font-size:18px;line-height:1.6;color:var(--muted);margin:0;max-width:710px}.instalments{border-left:1px solid var(--line);padding:25px 0 25px 46px;color:var(--muted);font-size:15px}.instalments svg{display:block;width:34px;height:28px;color:#bf9b8d;margin-bottom:12px}.instalments p{margin:0}
-.quick-nav{display:grid;grid-template-columns:repeat(6,minmax(0,1fr));background:var(--sand);padding:16px max(7%,calc((100% - 1260px)/2));gap:0}.quick-nav button{cursor:pointer;border:0;border-right:1px solid #dac4b7;border-radius:0;background:transparent;color:var(--ink);font:17px/1.4 Georgia,serif;padding:10px 8px;position:relative}.quick-nav button:last-child{border-right:0}.quick-nav button:hover{color:var(--wine)}.quick-nav button.active{color:var(--wine)}.quick-nav button.active:after{content:"";position:absolute;bottom:-9px;left:12%;right:12%;height:2px;background:var(--wine)}
-.price-section[hidden]{display:none}.price-section{padding:44px 7% 30px;background:var(--paper)}.price-section>h2,.price-section>.section-note,.price{max-width:1260px;margin-left:auto;margin-right:auto}
-section h2{font-size:clamp(34px,3.8vw,46px);line-height:1.2;margin-top:0;margin-bottom:12px;letter-spacing:-.7px}.section-note{color:var(--wine);line-height:1.65;margin-top:0;margin-bottom:28px}.price{background:transparent;padding:0;overflow-x:auto;margin-bottom:30px}.price+.price{margin-top:30px}.price h3{font-size:29px;line-height:1.2;margin:0 0 12px}.price-table{width:100%;border-collapse:collapse;min-width:680px}.price-table th,.price-table td{border-bottom:1px solid var(--line);border-right:1px solid var(--line);padding:10px 14px;text-align:center}.price-table th:last-child,.price-table td:last-child{border-right:0}.price-table th{background:var(--sand);font:17px/1.4 Georgia,serif;color:var(--ink)}.price-table td{font-size:15px;color:#454b50}.price-table td strong{font:600 15px Arial,sans-serif}.empty{color:#8b837b!important}.price-note{font-size:13px;line-height:1.7;color:var(--muted);margin:12px 0 0}
-.cta{display:grid;grid-template-columns:2fr 1fr;align-items:center;gap:50px;max-width:1320px;width:94%;margin:12px auto 0;padding:32px 6%;background:var(--sand);border-radius:3px}.cta h2{font-size:34px}.cta p{color:var(--muted);margin:10px 0 0;max-width:570px}.cta-actions{border-left:1px solid #dac4b7;padding-left:36px;display:flex;flex-direction:column;gap:12px}
-footer{display:flex;align-items:center;justify-content:space-between;gap:30px;width:min(1260px,86%);margin:0 auto;padding:35px 0 25px;border-bottom:1px solid var(--line)}footer .logo-mark{font-size:42px}footer .logo-sub{font-size:8px;letter-spacing:4px}.footer-links{display:flex;gap:25px;font-size:13px;color:var(--muted)}.footer-links a{text-decoration:none}.footer-tagline{border-left:1px solid var(--line);padding-left:30px;font-size:9px;letter-spacing:2px;line-height:2;color:#a8776a;text-transform:uppercase}.footnote{text-align:center;font-size:9px;letter-spacing:2px;color:var(--muted);padding:22px 7%}
-@media(max-width:1050px){header{flex-wrap:wrap}nav{order:3;width:100%;padding-top:10px}.hero-summary{gap:30px}.instalments{padding-left:25px}.quick-nav button{font-size:15px}.cta{gap:25px;padding:30px 5%}}
-@media(max-width:760px){header{width:90%;gap:15px;padding:20px 0}.logo-mark{font-size:40px}.logo-sub{font-size:8px;letter-spacing:4px}header .btn{font-size:12px;padding:10px 14px}nav{font-size:13px;gap:14px}.hero{padding:30px 5%}.hero-summary{grid-template-columns:1fr;gap:20px}h1{font-size:44px}.lead{font-size:16px}.instalments{border-left:0;border-top:1px solid var(--line);padding:18px 0 0;display:flex;gap:15px;align-items:center}.instalments svg{margin:0;flex-shrink:0}.quick-nav{grid-template-columns:repeat(3,minmax(0,1fr));padding:12px 5%;row-gap:14px}.quick-nav button{font-size:14px;padding:8px 5px}.quick-nav button:nth-child(3){border-right:0}.quick-nav button.active:after{bottom:0}.price-section{padding:32px 5% 15px}section h2{font-size:34px}.section-note{font-size:14px}.price h3{font-size:26px}.price-table{min-width:620px}.price-table td,.price-table th{padding:9px 12px}.cta{grid-template-columns:1fr;gap:24px;width:90%;padding:28px 22px}.cta h2{font-size:29px}.cta p{font-size:15px}.cta-actions{border-left:0;padding-left:0}footer{width:90%;flex-wrap:wrap;gap:25px}.footer-links{gap:20px}.footer-tagline{display:none}.footnote{font-size:8px}}
-@media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
-</style>
+<link rel="stylesheet" href="assets/cennik-ebaee0f6e7.css">
+
+<meta name="description" content="Sprawdź ceny przedłużania włosów metodą keratynową, Tape On i Bio taśm, koloryzacji oraz pielęgnacji w Hello Beauty Studio w Wojkowicach.">
+<link rel="canonical" href="https://hbhair.pl/cennik.html">
+<meta name="robots" content="index,follow">
+<meta property="og:type" content="website">
+<meta property="og:locale" content="pl_PL">
+<meta property="og:site_name" content="Hello Beauty Studio">
+<meta property="og:title" content="Cennik przedłużania, koloryzacji i pielęgnacji | Hello Beauty Studio">
+<meta property="og:description" content="Sprawdź ceny przedłużania włosów metodą keratynową, Tape On i Bio taśm, koloryzacji oraz pielęgnacji w Hello Beauty Studio w Wojkowicach.">
+<meta property="og:url" content="https://hbhair.pl/cennik.html">
+<meta property="og:image" content="https://hbhair.pl/assets/hbs-grid-1.jpg">
+<meta property="og:image:alt" content="Realizacja przedłużania włosów w Hello Beauty Studio">
+<meta name="twitter:card" content="summary_large_image">
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"HairSalon","@id":"https://hbhair.pl/#salon","name":"Hello Beauty Studio","url":"https://hbhair.pl/","telephone":"+48573312722","email":"hbs.kursy@gmail.com","address":{"@type":"PostalAddress","streetAddress":"ul. Pułaskiego 1e","postalCode":"42-580","addressLocality":"Wojkowice","addressCountry":"PL"},"sameAs":["https://www.instagram.com/hello.beauty.studio/"],"image":"https://hbhair.pl/assets/hbs-grid-1.jpg"}</script>
 </head>
 
 <body>
@@ -38,7 +34,7 @@ footer{display:flex;align-items:center;justify-content:space-between;gap:30px;wi
 
   <nav>
     <a href="index.html#uslugi">Usługi</a>
-    <a href="index.html#metody">Metody</a>
+    <a href="index.html#uslugi">Metody</a>
     <a href="cennik.html" aria-current="page">Cennik</a>
     <a href="szkolenia.html">Szkolenia</a>
     <a href="rezerwacje.html">Rezerwacja</a>
@@ -475,26 +471,8 @@ footer{display:flex;align-items:center;justify-content:space-between;gap:30px;wi
   <div class="footer-links"><a href="polityka-prywatnosci.html">Polityka prywatności</a><a href="index.html#kontakt">Kontakt</a></div><div class="footer-tagline">Piękne włosy.<br>Lepsze jutro.</div>
 </footer><div class="footnote">HELLO BEAUTY STUDIO — PIĘKNO ZACZYNA SIĘ OD CIEBIE</div>
 
-<script>
-const priceTabs = document.querySelectorAll("[data-price-tab]");
-const priceSections = document.querySelectorAll("[data-price-section]");
+<script defer src="assets/cennik-1-072ba96d23.js"></script>
 
-priceTabs.forEach((tab) => {
-  tab.addEventListener("click", () => {
-    const target = tab.dataset.priceTab;
-
-    priceTabs.forEach((button) => {
-      button.classList.toggle("active", button === tab);
-    });
-
-    priceSections.forEach((section) => {
-      section.hidden = section.dataset.priceSection !== target;
-    });
-
-    document.querySelector(".hero").scrollIntoView({ behavior: "smooth", block: "start" });
-  });
-});
-</script>
-
+<script defer src="assets/site-runtime-1ad5e35914.js"></script>
 </body>
 </html>

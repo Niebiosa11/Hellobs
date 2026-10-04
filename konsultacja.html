@@ -3,259 +3,27 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Konsultacja | Hello Beauty Studio</title>
+<title>Konsultacja włosów online | Hello Beauty Studio</title>
 <link rel="icon" type="image/svg+xml" href="assets/favicon.svg">
 <link rel="apple-touch-icon" href="assets/favicon.svg">
 
-<style>
-*{box-sizing:border-box}
-body{
-  margin:0;
-  background:#f7f1eb;
-  font-family:Arial,sans-serif;
-  color:#2b2724;
-}
-h1,.brand{
-  font-family:Georgia,serif;
-  font-weight:400;
-}
-header{
-  background:white;
-  border-bottom:1px solid #eee4dc;
-  display:flex;
-  align-items:center;
-  justify-content:space-between;
-  gap:24px;
-  padding:18px 7%;
-}
-.brand{
-  color:#2b2724;
-  font-size:42px;
-  line-height:.8;
-  text-decoration:none;
-}
-.brand span{
-  display:block;
-  font-family:Arial,sans-serif;
-  font-size:10px;
-  letter-spacing:5px;
-  margin-top:9px;
-  text-transform:uppercase;
-}
-.top-actions{
-  display:flex;
-  gap:10px;
-  flex-wrap:wrap;
-}
-.btn,button{
-  background:#b89278;
-  color:white;
-  border:1px solid #b89278;
-  min-height:48px;
-  padding:0 28px;
-  border-radius:4px;
-  font-size:13px;
-  cursor:pointer;
-  text-transform:uppercase;
-  letter-spacing:1px;
-  font-weight:700;
-  text-decoration:none;
-  display:inline-flex;
-  align-items:center;
-  justify-content:center;
-}
-.btn.secondary{
-  background:white;
-  color:#2b2724;
-}
-.container{
-  max-width:980px;
-  margin:58px auto 80px;
-  padding:0 6%;
-}
-.card{
-  background:white;
-  border:1px solid #eee4dc;
-  border-radius:8px;
-  padding:46px;
-  box-shadow:0 18px 45px rgba(0,0,0,.06);
-}
-h1{
-  font-size:56px;
-  line-height:.95;
-  margin:0 0 16px;
-}
-.subtitle{
-  color:#6f635b;
-  margin:0 0 38px;
-  line-height:1.7;
-  font-size:18px;
-  max-width:720px;
-}
-label{
-  display:block;
-  margin:14px 0 8px;
-  color:#5b504a;
-  font-size:13px;
-  font-weight:700;
-  letter-spacing:.4px;
-  text-transform:uppercase;
-}
-input,select,textarea{
-  width:100%;
-  padding:15px;
-  border:1px solid #e4d9d1;
-  border-radius:8px;
-  margin-bottom:4px;
-  font-size:16px;
-  background:#fbf8f5;
-  color:#2b2724;
-}
-textarea{
-  min-height:140px;
-  resize:vertical;
-}
-.row{
-  display:grid;
-  grid-template-columns:1fr 1fr;
-  gap:16px;
-}
-.phone-row{
-  display:grid;
-  grid-template-columns:130px 1fr;
-  gap:10px;
-}
-.phone-row select,
-.phone-row input{
-  margin-bottom:4px;
-}
-.note{
-  color:#746760;
-  font-size:13px;
-  line-height:1.6;
-  margin:16px 0 0;
-}
-.consent{
-  display:flex;
-  align-items:flex-start;
-  gap:10px;
-  color:#5b504a;
-  font-size:13px;
-  line-height:1.5;
-  text-transform:none;
-  letter-spacing:0;
-  margin:16px 0;
-}
-.consent input{
-  width:auto;
-  margin:2px 0 0;
-}
-.consent a{
-  color:#2b2724;
-}
-.cookie-banner{
-  position:fixed;
-  left:18px;
-  right:18px;
-  bottom:18px;
-  z-index:30;
-  background:#fff;
-  border:1px solid #e5d9d0;
-  border-radius:8px;
-  box-shadow:0 18px 45px rgba(0,0,0,.14);
-  padding:18px;
-  display:none;
-  gap:18px;
-  align-items:center;
-  justify-content:space-between;
-}
-.cookie-banner.show{display:flex}
-.cookie-banner p{
-  margin:0;
-  color:#5b504a;
-  line-height:1.55;
-}
-.cookie-actions{
-  display:flex;
-  gap:10px;
-  flex-wrap:wrap;
-}
-.cookie-actions button{
-  min-height:40px;
-  border-radius:4px;
-  border:1px solid #b89278;
-  padding:0 14px;
-  background:#b89278;
-  color:#fff;
-  font-weight:700;
-  text-transform:uppercase;
-  font-size:11px;
-  letter-spacing:.7px;
-}
-.cookie-actions button.secondary{
-  background:#fff;
-  color:#2b2724;
-}
-.success{
-  display:none;
-  background:#f4faf4;
-  border:1px solid #dceedd;
-  border-radius:8px;
-  line-height:1.6;
-  margin-top:18px;
-  padding:16px;
-}
-.success.show{
-  display:block;
-}
-@media(max-width:700px){
-  header{
-    display:block;
-    text-align:center;
-    position:static;
-  }
-  .top-actions{
-    justify-content:center;
-    margin-top:18px;
-  }
-  .container{
-    margin:34px auto 60px;
-  }
-  .row{
-    grid-template-columns:1fr;
-    gap:0;
-  }
-  .card{
-    padding:28px;
-  }
-  h1{
-    font-size:42px;
-  }
-  .cookie-banner{
-    flex-direction:column;
-    align-items:flex-start;
-  }
-}
+<link rel="stylesheet" href="assets/konsultacja-250554efcf.css">
 
-body{background:#fff;color:#28221e}
-h1,.brand{font-family:"Bodoni 72",Didot,Georgia,serif}
-header{padding:28px 6%;border-bottom:1px solid #eee8e3}
-.container{max-width:1220px;margin:65px auto 90px;padding:0 5%}
-.card{padding:0;border:0;border-radius:0;box-shadow:none}
-h1{font-size:76px;text-align:center;line-height:1.05;margin-bottom:22px;letter-spacing:-1.5px}
-.subtitle{font-size:20px;text-align:center;max-width:760px;margin:0 auto 48px;color:#81756d}
-#consultationForm{padding:42px 48px;background:#faf8f6;border:1px solid #eee5df;border-radius:24px}
-.row{gap:28px}label{font-size:12px;letter-spacing:1px;margin-top:20px;color:#74645b}
-input,select,textarea{background:#fff;border-color:#e6dad2;min-height:56px;padding:17px;border-radius:10px;font-size:17px}
-input:focus-visible,select:focus-visible,textarea:focus-visible{outline:2px solid #780c29;outline-offset:2px}
-textarea{min-height:155px}
-.btn,button{background:#780c29;border-color:#780c29;min-height:56px;padding:16px 30px;border-radius:10px;font:20px/1.2 "Bodoni 72",Didot,Georgia,serif;text-transform:none;letter-spacing:0;font-weight:400}
-.btn.secondary{color:#780c29;border-color:#d9b9c0;background:#fff}
-button[type=submit]{min-width:260px;margin-top:18px;font-size:24px;padding:19px 36px}
-input[type=checkbox]{min-height:0;padding:0}
-input[type=file]::file-selector-button{background:#fff;border:1px solid #d4b7bc;color:#780c29;border-radius:6px;padding:10px 18px;margin-right:15px;font-size:15px;cursor:pointer}
-@media(max-width:700px){header{padding:24px 6%;gap:20px;flex-wrap:wrap}.brand{font-size:42px}.top-actions{gap:8px}.top-actions .btn{font-size:16px;padding:12px 18px;min-height:46px}.container{margin:38px auto 60px;padding:0 6%}h1{font-size:54px}.subtitle{font-size:17px;margin-bottom:30px}#consultationForm{padding:22px 20px;border-radius:18px}.row{gap:0}.phone-row{grid-template-columns:110px minmax(0,1fr)}input,select,textarea{min-width:0;font-size:16px}button[type=submit]{width:100%;min-width:0}}
-</style>
+<meta name="description" content="Opisz swoje włosy i oczekiwania. Wyślij konsultację do Hello Beauty Studio, aby dobrać metodę przedłużania i zaplanować swoją metamorfozę.">
+<link rel="canonical" href="https://hbhair.pl/konsultacja.html">
+<meta name="robots" content="index,follow">
+<meta property="og:type" content="website">
+<meta property="og:locale" content="pl_PL">
+<meta property="og:site_name" content="Hello Beauty Studio">
+<meta property="og:title" content="Konsultacja włosów online | Hello Beauty Studio">
+<meta property="og:description" content="Opisz swoje włosy i oczekiwania. Wyślij konsultację do Hello Beauty Studio, aby dobrać metodę przedłużania i zaplanować swoją metamorfozę.">
+<meta property="og:url" content="https://hbhair.pl/konsultacja.html">
+<meta property="og:image" content="https://hbhair.pl/assets/hbs-grid-1.jpg">
+<meta property="og:image:alt" content="Realizacja przedłużania włosów w Hello Beauty Studio">
+<meta name="twitter:card" content="summary_large_image">
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"HairSalon","@id":"https://hbhair.pl/#salon","name":"Hello Beauty Studio","url":"https://hbhair.pl/","telephone":"+48573312722","email":"hbs.kursy@gmail.com","address":{"@type":"PostalAddress","streetAddress":"ul. Pułaskiego 1e","postalCode":"42-580","addressLocality":"Wojkowice","addressCountry":"PL"},"sameAs":["https://www.instagram.com/hello.beauty.studio/"],"image":"https://hbhair.pl/assets/hbs-grid-1.jpg"}</script>
+<link rel="stylesheet" href="assets/hbs-submit-2f31deb002.css">
+<script defer src="assets/hbs-submit-406e0fdfab.js"></script>
 </head>
 
 <body>
@@ -277,28 +45,28 @@ input[type=file]::file-selector-button{background:#fff;border:1px solid #d4b7bc;
     <form id="consultationForm">
       <div class="row">
         <div>
-          <label>Imię i nazwisko</label>
-          <input type="text" id="name" required>
+          <label for="name">Imię i nazwisko</label>
+          <input type="text" id="name" required aria-label="Imię i nazwisko" maxlength="160">
         </div>
         <div>
           <label>Telefon</label>
           <div class="phone-row">
-            <select id="phoneCountry">
+            <select id="phoneCountry" aria-label="Numer kierunkowy kraju">
               <option value="PL" data-prefix="+48" data-digits="9">+48 PL</option>
               <option value="GB" data-prefix="+44" data-digits="10">+44 UK</option>
               <option value="DE" data-prefix="+49" data-digits="11">+49 DE</option>
             </select>
-            <input type="tel" id="phone" required inputmode="numeric" placeholder="Numer telefonu">
+            <input type="tel" id="phone" required inputmode="numeric" placeholder="Numer telefonu" aria-label="Numer telefonu" maxlength="160">
           </div>
         </div>
       </div>
 
-      <label>Instagram / Facebook</label>
-      <input type="text" id="social">
+      <label for="social">Instagram / Facebook</label>
+      <input type="text" id="social" aria-label="Instagram / Facebook" maxlength="160">
 
       <div class="row">
         <div>
-          <label>Jaką długość włosów masz obecnie?</label>
+          <label for="currentLength">Jaką długość włosów masz obecnie?</label>
           <select id="currentLength">
             <option>Do ramion</option>
             <option>Za ramiona</option>
@@ -307,7 +75,7 @@ input[type=file]::file-selector-button{background:#fff;border:1px solid #d4b7bc;
           </select>
         </div>
         <div>
-          <label>Jaką długość chcesz uzyskać?</label>
+          <label for="targetLength">Jaką długość chcesz uzyskać?</label>
           <select id="targetLength">
             <option>40 cm</option>
             <option>50 cm</option>
@@ -319,11 +87,11 @@ input[type=file]::file-selector-button{background:#fff;border:1px solid #d4b7bc;
 
       <div class="row">
         <div>
-          <label>Kolor włosów</label>
-          <input type="text" id="hairColor">
+          <label for="hairColor">Kolor włosów</label>
+          <input type="text" id="hairColor" aria-label="Kolor włosów" maxlength="160">
         </div>
         <div>
-          <label>Budżet</label>
+          <label for="budget">Budżet</label>
           <select id="budget">
             <option>Do 1000 zł</option>
             <option>1000-1500 zł</option>
@@ -333,126 +101,33 @@ input[type=file]::file-selector-button{background:#fff;border:1px solid #d4b7bc;
         </div>
       </div>
 
-      <label>Opisz swoje oczekiwania</label>
-      <textarea id="expectations"></textarea>
+      <label for="expectations">Opisz swoje oczekiwania</label>
+      <textarea id="expectations" aria-label="Opisz swoje oczekiwania" maxlength="3000"></textarea>
 
-      <label>Dodaj zdjęcia swoich włosów</label>
+      <label for="hairPhotos">Dodaj zdjęcia swoich włosów</label>
       <input type="file" id="hairPhotos" accept="image/jpeg,image/png,image/webp" multiple>
       <small>Do 5 zdjęć JPG, PNG lub WebP, maksymalnie 5 MB każde.</small>
 
       <label class="consent"><input type="checkbox" required> Akceptuję <a href="polityka-prywatnosci.html">Politykę Prywatności</a> i zgodę na kontakt w sprawie konsultacji.</label>
       <button type="submit">Wyślij konsultację</button>
       <p class="note">To osobny formularz konsultacyjny. Nie rezerwuje automatycznie terminu.</p>
-      <div class="success" id="success">Dziękujemy. Prośba o konsultację została wysłana do salonu.</div>
+      <div class="success" id="success" role="status" aria-live="polite">Dziękujemy. Prośba o konsultację została wysłana do salonu.</div>
     </form>
   </div>
 </main>
 
-<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
-<script src="assets/supabase-config.js"></script>
-<script>
-const supabaseReady = window.supabase && window.HBS_SUPABASE?.url && window.HBS_SUPABASE?.anonKey;
-const hbsDb = supabaseReady ? window.supabase.createClient(window.HBS_SUPABASE.url, window.HBS_SUPABASE.anonKey) : null;
-
-function setupPhone(countryId, phoneId){
-  const country = document.getElementById(countryId);
-  const phone = document.getElementById(phoneId);
-  const limit = () => Number(country.selectedOptions[0].dataset.digits);
-  const sync = () => {
-    phone.value = phone.value.replace(/\D/g, "").slice(0, limit());
-    phone.placeholder = country.selectedOptions[0].dataset.prefix + " " + "0".repeat(limit());
-  };
-  country.addEventListener("change", sync);
-  phone.addEventListener("input", sync);
-  sync();
-}
-function fullPhone(countryId, phoneId){
-  const country = document.getElementById(countryId);
-  return `${country.selectedOptions[0].dataset.prefix} ${document.getElementById(phoneId).value}`;
-}
-function validPhone(countryId, phoneId){
-  const country = document.getElementById(countryId);
-  return document.getElementById(phoneId).value.length === Number(country.selectedOptions[0].dataset.digits);
-}
-setupPhone("phoneCountry", "phone");
-document.getElementById("consultationForm").addEventListener("submit", async event => {
-  event.preventDefault();
-  if(!validPhone("phoneCountry", "phone")){
-    alert("Sprawdź numer telefonu - liczba cyfr musi pasować do wybranego kraju.");
-    return;
-  }
-
-  const photoFiles = Array.from(document.getElementById("hairPhotos").files);
-  if(photoFiles.length > 5 || photoFiles.some(file => !["image/jpeg","image/png","image/webp"].includes(file.type) || file.size > 5 * 1024 * 1024)){
-    alert("Dodaj maksymalnie 5 zdjęć JPG, PNG lub WebP, do 5 MB każde.");
-    return;
-  }
-  const submitButton = event.target.querySelector('button[type="submit"]');
-  submitButton.disabled = true;
-  submitButton.textContent = "Wysyłanie...";
-
-  const message = [
-    `Instagram / Facebook: ${document.getElementById("social").value || "brak"}`,
-    `Obecna długość: ${document.getElementById("currentLength").value}`,
-    `Docelowa długość: ${document.getElementById("targetLength").value}`,
-    `Kolor włosów: ${document.getElementById("hairColor").value || "brak"}`,
-    `Budżet: ${document.getElementById("budget").value}`,
-    `Oczekiwania: ${document.getElementById("expectations").value || "brak"}`,
-    `Zdjęcia dodane w formularzu: ${Array.from(document.getElementById("hairPhotos").files).map(file => file.name).join(", ") || "brak"}`
-  ].join("\n");
-
-  if(!hbsDb){
-    alert("Formularz nie ma połączenia z panelem. Spróbuj ponownie później.");
-    submitButton.disabled = false;
-    submitButton.textContent = "Wyślij konsultację";
-    return;
-  }
-
-  try {
-    const photos = [];
-    const submissionId = crypto.randomUUID();
-    for(const file of photoFiles){
-      const extension = {"image/jpeg":"jpg","image/png":"png","image/webp":"webp"}[file.type];
-      const path = `consultations/${submissionId}/${crypto.randomUUID()}.${extension}`;
-      const { error: uploadError } = await hbsDb.storage.from("consultation-photos").upload(path, file, { contentType:file.type, upsert:false });
-      if(uploadError) throw new Error("Nie udało się przesłać zdjęć. Spróbuj ponownie później lub wyślij formularz bez zdjęć.");
-      photos.push({path, name:file.name});
-    }
-    const { error } = await hbsDb.rpc("create_contact_consultation", {
-      p_client_name: document.getElementById("name").value,
-      p_phone: fullPhone("phoneCountry", "phone"),
-      p_email: "",
-      p_message: message + (photos.length ? "\n[HBS_PHOTOS_V1]" + JSON.stringify(photos) : "")
-    });
-
-    if(error) throw new Error(error.message || "Nie udało się wysłać konsultacji. Spróbuj ponownie później.");
-    event.target.reset();
-    document.getElementById("success").classList.add("show");
-  } catch(error){
-    alert(error.message || "Nie udało się wysłać konsultacji. Spróbuj ponownie później.");
-  } finally {
-    submitButton.disabled = false;
-    submitButton.textContent = "Wyślij konsultację";
-  }
-});
-</script>
+<script defer src="assets/supabase-js-2.117.2.min-59d39487c3.js"></script>
+<script defer src="assets/supabase-config-61064fc1f3.js"></script>
+<script defer src="assets/konsultacja-1-a81749a22e.js"></script>
 <div class="cookie-banner" id="cookieBanner">
-  <p>Wykorzystujemy pliki cookie, które są niezbędne do poprawnego funkcjonowania naszej strony. W przypadku wyrażenia zgody używamy innych plików cookie w celu analizy danych dotyczących odwiedzających, ulepszenia strony internetowej, pokazania spersonalizowanych treści i zapewnienia dobrego doświadczenia na stronie. Dane są gromadzone w celu personalizacji reklam i pomiaru skuteczności kampanii reklamowych. Aby uzyskać więcej informacji lub udzielić zgody na poszczególne pliki cookie, wybierz „Dostosuj”.</p>
+  <p>Strona nie używa analityki ani reklamowych plików cookie. Opcjonalna mapa Google zostanie wczytana wyłącznie po Twojej zgodzie. Ustawienia możesz zmienić w dowolnej chwili. <a href="polityka-prywatnosci.html">Polityka prywatności</a>.</p>
   <div class="cookie-actions">
     <button data-cookie="accept">Akceptuję</button>
     <button class="secondary" data-cookie="reject">Odrzuć opcjonalne</button>
     <button class="secondary" data-cookie="settings">Dostosuj</button>
   </div>
 </div>
-<script>
-const cookieBanner = document.getElementById("cookieBanner");
-if(!localStorage.getItem("hbsCookieChoice")) cookieBanner.classList.add("show");
-document.querySelectorAll("[data-cookie]").forEach(button => {
-  button.addEventListener("click", () => {
-    localStorage.setItem("hbsCookieChoice", button.dataset.cookie);
-    cookieBanner.classList.remove("show");
-  });
-});
-</script>
+
+<script defer src="assets/site-runtime-1ad5e35914.js"></script>
 </body>
 </html>
