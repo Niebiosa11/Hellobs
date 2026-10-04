@@ -571,6 +571,18 @@ textarea{resize:vertical}
     align-items:flex-start;
   }
 }
+
+body{background:#fff;color:#28221e}h1,h2,h3,.brand{font-family:"Bodoni 72",Didot,Georgia,serif}
+header{padding:28px 6%;border-bottom:1px solid #eee8e3}
+main{padding:65px 5% 90px}.intro{display:block;text-align:center;max-width:950px;margin:0 auto 50px}.intro h1{font-size:76px;line-height:1.05;letter-spacing:-1.5px;margin-bottom:24px}.intro p{font-size:20px;line-height:1.7;color:#81756d;max-width:780px;margin:auto}
+.panel{max-width:1320px}.layout{gap:30px;align-items:start}.box{background:#faf8f6;border:1px solid #eee5df;border-radius:24px;padding:38px;box-shadow:none}.box h2{font-size:42px;margin-bottom:26px}
+.btn{background:#780c29;border-color:#780c29;border-radius:10px;font:20px/1.2 "Bodoni 72",Didot,Georgia,serif;text-transform:none;letter-spacing:0;font-weight:400;min-height:56px;padding:16px 30px}.btn.secondary{color:#780c29;background:#fff;border-color:#d9b9c0}.btn.dark{background:#780c29;border-color:#780c29}.btn.mini{font-size:16px;min-height:40px;padding:10px 16px}
+label{font-size:12px;letter-spacing:1px;color:#74645b}input,select,textarea{background:#fff;border-color:#e6dad2;border-radius:10px;font-size:17px;padding:17px;min-height:56px}input[type=checkbox]{min-height:0;padding:0}textarea{min-height:140px}input:focus-visible,select:focus-visible,textarea:focus-visible{outline:2px solid #780c29;outline-offset:2px}
+.calendar-day{background:#eee7e2;border-color:#e5d9d1;border-radius:10px}.calendar-day.one,.calendar-day.many{background:#780c29;border-color:#780c29}.calendar-day.selected{outline:2px solid #780c29;box-shadow:0 0 0 3px #ead4da}.legend-none{background:#eee7e2}.legend-one{background:#780c29}.slot-time{background:#fff;border-color:#e5d9d1;border-radius:10px;padding:18px}.calendar-nav button{color:#780c29;border-color:#d9b9c0;border-radius:8px}.service-prompt{background:#fff;border-radius:14px;padding:30px;font-size:18px;line-height:1.7}
+#client button[type=submit]{font-size:24px;padding:20px 36px;margin-top:15px}.hint{line-height:1.7}.calendar-head h3{font-size:30px}
+@media(max-width:760px){header{padding:24px 6%;gap:18px;flex-wrap:wrap}.top-actions .btn{font-size:17px;padding:12px 20px;min-height:46px}main{padding:38px 6% 60px}.intro h1{font-size:52px}.intro p{font-size:17px}.intro{margin-bottom:32px}.layout{grid-template-columns:1fr;gap:22px}.box{padding:24px 20px;border-radius:18px}.box h2{font-size:36px}input,select,textarea{min-width:0;font-size:16px}.calendar-head{flex-wrap:wrap}.calendar-head h3{font-size:25px}.calendar-grid,.calendar-week{gap:4px}.calendar-day{padding:5px}.calendar-day strong{font-size:20px}.calendar-day span{font-size:8px}#client button[type=submit]{width:100%;font-size:23px}}
+.service-first{margin-bottom:30px}.service-first .service-grid{grid-template-columns:repeat(3,minmax(0,1fr));gap:16px}.service-first .service-grid label{font-size:16px;padding:20px;letter-spacing:0;text-transform:none;margin:0;background:#fff}.service-first .service-grid label:has(input:checked){border-color:#780c29;background:#f6eaf0;color:#780c29}.service-first input[type=checkbox]{accent-color:#780c29}.service-first .slot-duration-note{margin-top:20px;font-size:16px}#bookingSteps.hidden{display:none!important}@media(max-width:760px){.service-first .service-grid{grid-template-columns:1fr}.service-first .service-grid label{padding:17px}}
+.correction-method{max-width:620px;margin-top:26px}.correction-method label{font-size:17px;text-transform:none;letter-spacing:0;margin-bottom:12px}.correction-method.hidden{display:none!important}
 </style>
 </head>
 <body>
@@ -588,7 +600,19 @@ textarea{resize:vertical}
   </section>
 
   <section class="panel active" id="client">
-    <div class="layout">
+    <div class="box service-first">        <h2>Wybierz usługę</h2>
+        <div class="service-grid" id="serviceChoices">
+          <label><input type="checkbox" form="requestForm" name="service" value="Przedłużanie włosów"> Nowe założenie</label>
+          <label><input type="checkbox" form="requestForm" name="service" value="Korekta włosów"> Korekta</label>
+          <label><input type="checkbox" form="requestForm" name="service" value="Koloryzacja"> Koloryzacja</label>
+          <label><input type="checkbox" form="requestForm" name="service" value="Pielęgnacja / zabieg"> Pielęgnacja / zabieg</label>
+          <label><input type="checkbox" form="requestForm" name="service" value="Ściąganie włosów"> Ściąganie włosów - 150 zł</label>
+          <label><input type="checkbox" form="requestForm" name="service" value="Konsultacja"> Konsultacja darmowa</label>
+        </div>
+        <div id="correctionMethodQuestion" class="hidden correction-method"><label for="correctionMethod">Jaką metodą masz założone włosy?</label><select id="correctionMethod" form="requestForm" disabled><option value="">Wybierz metodę</option><option>Metoda keratynowa — Micro</option><option>Metoda keratynowa — Mini</option><option>Metoda keratynowa — Nano</option><option>Metoda keratynowa — nie znam rodzaju łączeń</option><option>Tape On</option><option>Bio taśmy</option><option>Inna metoda</option><option>Nie wiem</option></select></div>
+<div class="slot-duration-note" id="durationHint">Wybierz usługę, aby zobaczyć dostępne terminy.</div>
+</div>
+    <div class="layout hidden" id="bookingSteps">
       <div class="box">
         <h2>Dostępne terminy</h2>
         <div class="empty service-prompt" id="servicePrompt">Wybierz usługę, aby zobaczyć dostępne terminy.</div>
@@ -617,16 +641,6 @@ textarea{resize:vertical}
         <input type="hidden" id="selectedSlot">
         <label>Wybrany termin</label>
         <input id="selectedSlotLabel" placeholder="Wybierz termin po lewej" readonly>
-        <label>Usługi</label>
-        <div class="service-grid" id="serviceChoices">
-          <label><input type="checkbox" name="service" value="Przedłużanie włosów"> Nowe założenie</label>
-          <label><input type="checkbox" name="service" value="Korekta włosów"> Korekta</label>
-          <label><input type="checkbox" name="service" value="Koloryzacja"> Koloryzacja</label>
-          <label><input type="checkbox" name="service" value="Pielęgnacja / zabieg"> Pielęgnacja / zabieg</label>
-          <label><input type="checkbox" name="service" value="Ściąganie włosów"> Ściąganie włosów - 150 zł</label>
-          <label><input type="checkbox" name="service" value="Konsultacja"> Konsultacja darmowa</label>
-        </div>
-        <div class="slot-duration-note" id="durationHint">Wybierz usługę, aby zobaczyć dostępne terminy.</div>
         <div class="form-grid">
           <div>
             <label>Imię i nazwisko</label>
@@ -908,8 +922,25 @@ document.getElementById("calendarToday").addEventListener("click", () => {
   renderSlots();
 });
 
+function syncCorrectionMethod(){
+  const active = selectedServices().includes("Korekta włosów");
+  const field = document.getElementById("correctionMethod");
+  document.getElementById("correctionMethodQuestion").classList.toggle("hidden", !active);
+  field.disabled = !active;
+  field.required = active;
+  if(!active) field.value = "";
+}
+function bookingMessage(){
+  const message = document.getElementById("clientMessage").value;
+  const method = document.getElementById("correctionMethod").value;
+  return selectedServices().includes("Korekta włosów") && method
+    ? ["Metoda obecnego założenia: " + method, message].filter(Boolean).join("\n\n")
+    : message;
+}
 function renderSlots(){
+  syncCorrectionMethod();
   const services = selectedServices();
+  document.getElementById("bookingSteps").classList.toggle("hidden", !services.length);
   const prompt = document.getElementById("servicePrompt");
   const content = document.getElementById("calendarContent");
   if(!services.length){
@@ -1118,7 +1149,7 @@ document.getElementById("requestForm").addEventListener("submit", async event =>
     const params = {
       p_client_name: document.getElementById("clientName").value,
       p_phone: fullPhone("clientPhoneCountry", "clientPhone"),
-      p_message: document.getElementById("clientMessage").value
+      p_message: bookingMessage()
     };
     const { error } = slot.generatedConsultation
       ? await hbsDb.rpc("create_consultation_booking", {
@@ -1153,7 +1184,7 @@ document.getElementById("requestForm").addEventListener("submit", async event =>
     service: selectedServiceText(),
     name: document.getElementById("clientName").value,
     phone: fullPhone("clientPhoneCountry", "clientPhone"),
-    message: document.getElementById("clientMessage").value,
+    message: bookingMessage(),
     status: "pending"
   });
   event.target.reset();
