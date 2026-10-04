@@ -53,9 +53,18 @@
   "functions": {
     "api/hbs-public.js": {
       "maxDuration": 30
+    },
+    "api/hbs-cleanup.js": {
+      "maxDuration": 60
     }
   },
   "buildCommand": "node build.cjs",
   "outputDirectory": "public",
-  "framework": null
+  "framework": null,
+  "crons": [
+    {
+      "path": "/api/hbs-cleanup",
+      "schedule": "15 5 * * *"
+    }
+  ]
 }
