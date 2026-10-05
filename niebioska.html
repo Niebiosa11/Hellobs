@@ -1,0 +1,303 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+<meta charset="UTF-8">
+<meta name="robots" content="noindex,nofollow,noarchive">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Panel | Hello Beauty Studio</title>
+<link rel="stylesheet" href="/admin-assets/panel.css">
+</head>
+<body>
+<section class="login" id="login">
+  <div class="login-card">
+    <h1 class="brand">Hello<span>Beauty Studio</span></h1>
+    <label>E-mail</label>
+    <input id="loginEmail" type="email" placeholder="Twój e-mail do panelu" autocomplete="username">
+    <label>Hasło</label>
+    <input id="loginPass" type="password" placeholder="Hasło" autocomplete="current-password">
+    <p>Sesja jest przechowywana wyłącznie w pamięci tej karty.</p><div id="authStatus" role="status" aria-live="polite"></div><div id="mfaArea"></div>
+    <button class="btn" id="loginBtn">Zaloguj</button>
+    <p class="meta" id="loginHint">Panel prywatny. Logowanie działa przez Supabase Auth.</p>
+  </div>
+</section>
+
+<section class="app" id="app">
+  <aside class="sidebar">
+    <h1 class="brand">Hello<span>Beauty Studio</span></h1>
+    <div class="user" id="userBox"></div><div id="syncStatus" role="status"></div><button class="btn secondary" id="exportDraft">Zachowaj kopię roboczą</button>
+    <nav class="nav" id="nav"></nav>
+    <button class="btn secondary" id="logoutBtn" style="width:100%;margin-top:18px">Wyloguj</button>
+  </aside>
+
+  <main class="main dashboard-mode">
+    <div class="topbar">
+      <h1 id="viewTitle">Panel Główny</h1>
+      <div class="actions">
+      </div>
+    </div>
+
+    <section class="view active" id="dashboard">
+        <div class="dashboard-shell">
+        <div class="dashboard-hero" aria-label="Dzień dobry, Sandra!">
+        <div class="dashboard-hero-greeting">Dzień dobry, Sandra!</div>
+        </div>
+        <div class="dashboard-search-wrap">
+          <input class="search" id="globalSearch" placeholder="Szukaj klientki po nazwisku, telefonie, usłudze albo notatce">
+          <div class="dashboard-search-actions">
+            <a class="btn secondary" href="../index.html" target="_blank" rel="noopener">Strona</a>
+            <button class="btn primary-action" data-action="new-client">Nowa klientka</button>
+          </div>
+        </div>
+        <div class="dashboard-stats" id="dashboardStats"></div>
+        <div class="dashboard-workflow" aria-label="Karty pracy">
+          <button class="workflow-card" type="button" data-action="dashboard-new-visit">
+            <span class="workflow-card-icon" aria-hidden="true">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M8 2v4M16 2v4M3 10h18"/><rect x="3" y="4" width="18" height="18" rx="3"/><path d="M8 15h8M12 11v8"/></svg>
+            </span>
+            <span><strong>Nowa wizyta</strong><small>termin, usługa i notatka</small></span>
+          </button>
+          <button class="workflow-card" type="button" data-action="new-client">
+            <span class="workflow-card-icon" aria-hidden="true">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M19 8v6M22 11h-6"/></svg>
+            </span>
+            <span><strong>Nowa klientka</strong><small>karta klientki i historia</small></span>
+          </button>
+          <button class="workflow-card" type="button" data-action="free-consult">
+            <span class="workflow-card-icon" aria-hidden="true">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M21 15a4 4 0 0 1-4 4H8l-5 3V7a4 4 0 0 1 4-4h10a4 4 0 0 1 4 4z"/><path d="M8 9h8M8 13h5"/></svg>
+            </span>
+            <span><strong>Konsultacja</strong><small>nowa osoba bez historii</small></span>
+          </button>
+          <button class="workflow-card" type="button" data-action="tablet-consult">
+            <span class="workflow-card-icon" aria-hidden="true">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><rect x="4" y="3" width="16" height="18" rx="2"/><path d="M8 8h8M8 12h8M8 16h5"/></svg>
+            </span>
+            <span><strong>Dobór łączeń</strong><small>ankieta i propozycja salonu</small></span>
+          </button>
+        </div>
+        <div class="dashboard-main">
+          <div class="card quick-entry-card">
+            <div class="panel-head">
+              <h2>Szybki wpis</h2>
+              <span class="status-pill">Termin zajęty</span>
+            </div>
+            <form class="quick-busy-form" id="quickBusyForm">
+              <div class="quick-busy-grid">
+                <div class="wide">
+                  <label>Klientka</label>
+                  <input name="client" placeholder="Imię i nazwisko">
+                </div>
+                <div class="wide">
+                  <label>Usługa</label>
+                  <select name="service">
+                    <option>Korekta</option>
+                    <option>Nowe założenie</option>
+                    <option>Koloryzacja</option>
+                    <option>Korekta + koloryzacja</option>
+                    <option>Nowe założenie + koloryzacja</option>
+                    <option>Pielęgnacja</option>
+                    <option>Ściąganie włosów</option>
+                    <option>Konsultacja</option>
+                    <option>Inna wizyta</option>
+                  </select>
+                </div>
+                <div class="wide">
+                  <label>Data</label>
+                  <input type="date" name="date">
+                </div>
+                <div>
+                  <label>Od</label>
+                  <input type="time" name="start">
+                </div>
+                <div>
+                  <label>Do</label>
+                  <input type="time" name="end">
+                </div>
+                <div class="wide">
+                  <label>Notatka (opcjonalnie)</label>
+                  <textarea name="note" placeholder="Dodaj notatkę..."></textarea>
+                </div>
+              </div>
+              <button class="btn quick-submit" type="submit"><span>+</span> Dodaj wizytę</button>
+              <div class="quick-busy-note" id="quickBusyNote"></div>
+            </form>
+          </div>
+          <div class="card today-card">
+            <div class="panel-head">
+              <h2>Dzisiejszy grafik</h2>
+              <div class="dashboard-date-control" aria-label="Wybrany dzień">
+                <button type="button" id="dashboardPrevDay" aria-label="Poprzedni dzień pracy">&lt;</button>
+                <span id="dashboardDateLabel"></span>
+                <button type="button" id="dashboardNextDay" aria-label="Następny dzień pracy">&gt;</button>
+              </div>
+            </div>
+            <div class="timeline" id="dashboardToday"></div>
+            <section class="dashboard-inquiries" aria-labelledby="dashboardInquiriesTitle">
+              <h3 id="dashboardInquiriesTitle">Zgłoszenia ze strony</h3>
+              <p class="dashboard-inquiries-intro">Najnowsze rezerwacje i zapytania klientek, niezależnie od wybranego dnia grafiku.</p>
+              <div class="dashboard-inquiry-list" id="dashboardInquiries" aria-live="polite"></div>
+              <button class="btn secondary" data-go="onlineBookings" type="button">Zobacz wszystkie zgłoszenia</button>
+            </section>
+          </div>
+          <div class="card free-slots-card">
+            <div class="panel-head">
+              <h2>Najbliższe wolne terminy</h2>
+              <span class="status-pill">Auto</span>
+            </div>
+            <div class="slot-list" id="dashboardSuggestedSlots"></div>
+            <button class="btn secondary slot-more-link" data-go="availability">Pokaż więcej terminów</button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="view" id="onlineBookings">
+      <div class="actions" style="margin-bottom:18px">
+        <button class="btn" id="refreshOnlineBookings">Odśwież zgłoszenia</button>
+      </div>
+      <div class="list" id="onlineBookingList"></div>
+    </section>
+
+    <section class="view" id="availability">
+      <div class="card slot-manager">
+        <h2>Dostępne terminy</h2>
+        <p class="slot-help">Wybierz dzień w kalendarzu, dodaj wolny blok i usuwaj stare terminy jednym kliknięciem.</p>
+        <div class="slot-layout">
+          <div>
+            <div class="slot-calendar">
+              <div class="slot-calendar-head">
+                <button type="button" id="slotPrevMonth" aria-label="Poprzedni miesiąc">&lt;</button>
+                <b id="slotMonthLabel"></b>
+                <button type="button" id="slotNextMonth" aria-label="Następny miesiąc">&gt;</button>
+              </div>
+              <div class="slot-calendar-week">
+                <span>Pon</span><span>Wt</span><span>Śr</span><span>Czw</span><span>Pt</span><span>Sob</span><span>Nd</span>
+              </div>
+              <div class="slot-calendar-grid" id="slotCalendarGrid"></div>
+            </div>
+            <div class="slot-day-panel">
+              <h3 id="slotSelectedDayTitle">Dzisiejszy dzień</h3>
+              <div class="meta" id="slotSelectedDayMeta">Kliknij dzień, żeby zobaczyć terminy.</div>
+            </div>
+            <div class="suggested-panel">
+              <h3>Automatyczne propozycje</h3>
+              <p class="meta">Panel sam szuka wolnych okienek według Twoich godzin pracy. Kliknij termin, żeby wrzucić go na stronę dla klientek.</p>
+              <div class="suggested-controls">
+                <div>
+                  <label>Jakiego terminu szukasz?</label>
+                  <select id="suggestedDuration">
+                    <option value="15">Konsultacja 15 min</option>
+                    <option value="60">Ściąganie włosów 1h</option>
+                    <option value="180" selected>Założenie / korekta / kolor 3h</option>
+                    <option value="300">Usługa + koloryzacja 5h</option>
+                  </select>
+                </div>
+                <div>
+                  <label>Opis na stronie</label>
+                  <input id="suggestedNote" value="wolny termin">
+                </div>
+              </div>
+              <div class="slot-list" id="suggestedSlotList"></div>
+            </div>
+          </div>
+          <div>
+            <form id="slotForm" class="form-row">
+              <div>
+                <label>Data</label>
+                <input type="date" name="date" required>
+              </div>
+              <div>
+                <label>Godzina</label>
+                <input type="time" name="time" required>
+              </div>
+              <div>
+                <label>Czas wizyty</label>
+                <select name="duration" required>
+                  <option value="15">15 min - konsultacja</option>
+                  <option value="180">3h - założenie / korekta / koloryzacja / pielęgnacja</option>
+                  <option value="300">5h - usługa + koloryzacja</option>
+                  <option value="60">1h - ściąganie włosów</option>
+                  <option value="240">4h - dłuższa korekta</option>
+                </select>
+              </div>
+              <div>
+                <label>Opis</label>
+                <input name="note" placeholder="np. wolny termin">
+              </div>
+              <div class="slot-presets">
+                <button class="btn soft" type="button" data-slot-preset="consultation">Konsultacja</button>
+                <button class="btn soft" type="button" data-slot-preset="install">Założenie / korekta</button>
+                <button class="btn soft" type="button" data-slot-preset="color">Koloryzacja</button>
+                <button class="btn soft" type="button" data-slot-preset="remove">Ściąganie</button>
+              </div>
+              <button class="btn" type="submit">Dodaj termin</button>
+            </form>
+            <div class="slot-list" id="slotList"></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="view" id="clients">
+      <div class="actions" style="margin-bottom:18px">
+        <button class="btn" data-action="new-client">Dodaj klientkę</button>
+      </div>
+      <div class="list" id="clientList"></div>
+    </section>
+
+    <section class="view" id="clientCard">
+      <div id="clientCardContent"></div>
+    </section>
+
+    <section class="view" id="consultations"><div class="list" id="consultationList"></div></section>
+    <section class="view" id="visits">
+      <div class="card" style="margin-bottom:18px">
+        <h2>Dopisz stary przychód</h2>
+        <p class="meta">Wpisz datę wizyty i kwotę. Klientkę możesz wybrać, ale możesz też zostawić bez klientki.</p>
+        <form id="pastRevenueForm" class="form-row">
+          <div>
+            <label>Data wizyty</label>
+            <input type="date" name="date" required>
+          </div>
+          <div>
+            <label>Kwota</label>
+            <input name="amount" inputmode="decimal" placeholder="np. 650" required>
+          </div>
+          <div>
+            <label>Klientka opcjonalnie</label>
+            <select name="clientId">
+              <option value="">Bez klientki</option>
+            </select>
+          </div>
+          <button class="btn" type="submit">Dodaj kwotę</button>
+        </form>
+      </div>
+      <div class="list" id="visitList"></div>
+      <h2 style="margin:26px 0 14px">Dopisane stare przychody</h2>
+      <div class="list" id="pastRevenueList"></div>
+    </section>
+    <section class="view" id="colors"><div class="list" id="colorList"></div></section>
+    <section class="view" id="photos"><div class="list" id="photoList"></div></section>
+    <section class="view" id="contracts"><div class="list" id="contractList"></div></section>
+    <section class="view" id="training"><div class="list" id="trainingList"></div></section>
+    <section class="view" id="settings">
+      <div class="card">
+        <h2>Użytkownicy / ustawienia</h2>
+        <p class="meta">Dostęp wymaga zatwierdzonego konta administratora, aktywnej sesji i MFA. Uprawnienia są sprawdzane w bazie.</p>
+        <div class="grid cols-2">
+          <div class="record"><b>Sandra</b><br>admin - pełny dostęp</div>
+          <div class="record"><b>MFA</b><br>Wymagane przy każdym nowym logowaniu</div>
+        </div>
+      </div>
+    </section>
+  </main>
+</section>
+
+<div class="modal" id="modal"><div class="modal-card" id="modalCard"></div></div>
+
+<script src="/admin-assets/supabase.js" defer></script>
+<script src="/admin-assets/config.js" defer></script>
+<script src="/admin-assets/panel.js" defer></script>
+
+</body>
+</html>

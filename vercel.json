@@ -48,6 +48,23 @@
           "value": "max-age=63072000"
         }
       ]
+    },
+    {
+      "source": "/(niebioska|niebioska.html|admin-assets/.*)",
+      "headers": [
+        {
+          "key": "X-Robots-Tag",
+          "value": "noindex, nofollow, noarchive"
+        },
+        {
+          "key": "Cache-Control",
+          "value": "no-store, private"
+        },
+        {
+          "key": "Content-Security-Policy",
+          "value": "default-src 'none'; script-src 'self'; style-src 'self' 'unsafe-inline'; img-src 'self' data: blob:; connect-src https://syelrkckiubgxbslokmc.supabase.co; font-src 'self'; frame-src 'none'; frame-ancestors 'none'; object-src 'none'; base-uri 'none'; form-action 'self'"
+        }
+      ]
     }
   ],
   "functions": {
@@ -57,5 +74,11 @@
   },
   "buildCommand": "node build.cjs",
   "outputDirectory": "public",
-  "framework": null
+  "framework": null,
+  "rewrites": [
+    {
+      "source": "/niebioska",
+      "destination": "/niebioska.html"
+    }
+  ]
 }

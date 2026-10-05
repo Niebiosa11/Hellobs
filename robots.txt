@@ -1,4 +1,6 @@
 User-agent: *
 Allow: /
+Disallow: /niebioska
+Disallow: /admin-assets/
 
 Sitemap: https://hbhair.pl/sitemap.xml
