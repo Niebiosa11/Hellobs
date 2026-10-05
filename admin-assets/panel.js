@@ -7,7 +7,7 @@ const supabaseReady = Boolean(
   !supabaseConfig.url.includes("TU_WKLEJ") &&
   !supabaseConfig.anonKey.includes("TU_WKLEJ")
 );
-const hbsDb = supabaseReady ? window.supabase.createClient(supabaseConfig.url, supabaseConfig.anonKey,{auth:{persistSession:false,autoRefreshToken:true,detectSessionInUrl:false}}) : null;
+const hbsDb = supabaseReady ? window.supabase.createClient(supabaseConfig.url, supabaseConfig.anonKey,{auth:{persistSession:false,autoRefreshToken:true,detectSessionInUrl:false},global:{fetch:(input,init)=>fetch(input,{...init,cache:'no-store'})}}) : null;
 
 const navItems = [
   ["dashboard","Panel Główny"],
