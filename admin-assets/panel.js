@@ -1,3 +1,4 @@
+const panelFileUrls=new Set();
 const supabaseConfig = window.HBS_SUPABASE || {};
 const supabaseReady = Boolean(
   window.supabase &&
@@ -346,6 +347,7 @@ function resetPanel(message='Zaloguj się do panelu.'){
  const hadSession=!!session; authGeneration++; session=null; saveBlocked=true; state=seed(); onlineBookings=[];availabilitySlots=[];
  onlineBookingsLoaded=false;availabilitySlotsLoaded=false;activeClientId=null;consult={step:0,answers:{},notes:[],clientInfo:[],addons:[]};
  consultationPhotoUrls.forEach(p=>URL.revokeObjectURL(p.url));consultationPhotoUrls.clear();
+ panelFileUrls.forEach(url=>URL.revokeObjectURL(url));panelFileUrls.clear();
  $('#app').classList.remove('active');$('#login').style.display='';closeModal();
  $all('.list,.view .empty,#dashboardInquiries,#userBox').forEach(n=>n.replaceChildren());
  if(hadSession){$('#app').replaceChildren();location.reload();return;}
@@ -395,14 +397,14 @@ $('#loginBtn').addEventListener('click',async()=>{
  if(error)$('#authStatus').textContent='Nie udało się zalogować. Sprawdź dane lub spróbuj później.';
  else await afterPassword();button.disabled=false;
 });
-$('#logoutBtn').addEventListener('click',async()=>{resetPanel('Wylogowano.');await hbsDb?.auth.signOut();location.reload();});
+$('#logoutBtn').addEventListener('click',async()=>{$('#app').classList.remove('active');await hbsDb?.auth.signOut();resetPanel('Wylogowano.');});
 hbsDb?.auth.onAuthStateChange((event,current)=>{if(event==='SIGNED_OUT'||(!current&&event!=='INITIAL_SESSION'))resetPanel('Sesja zakończona. Zaloguj się ponownie.');});
 $('#exportDraft').addEventListener('click',()=>{
  if(!isAdmin()||!confirm('Kopia zawiera prywatne dane. Zapisz ją wyłącznie w bezpiecznym miejscu na swoim urządzeniu.'))return;
  const url=URL.createObjectURL(new Blob([JSON.stringify(state)],{type:'application/json'}));const a=document.createElement('a');a.href=url;a.download='HBS-prywatna-kopia-robocza.json';a.click();setTimeout(()=>URL.revokeObjectURL(url),1000);
 });
 let lastActivity=Date.now();['pointerdown','keydown'].forEach(e=>document.addEventListener(e,()=>lastActivity=Date.now(),{passive:true}));
-setInterval(async()=>{if(!session)return;if(Date.now()-lastActivity>15*60*1000){resetPanel('Sesja zakończona po okresie bezczynności.');await hbsDb.auth.signOut();return;}
+setInterval(async()=>{if(!session)return;if(Date.now()-lastActivity>15*60*1000){$('#app').classList.remove('active');await hbsDb.auth.signOut();resetPanel('Sesja zakończona po okresie bezczynności.');return;}
  const {data,error}=await hbsDb.rpc('hbs_panel_identity');if(error||!data?.authorized)resetPanel('Sesja wygasła. Zaloguj się ponownie.');},30000);
 resetPanel();
 async function migrateKartoteka(){
@@ -600,13 +602,13 @@ function formatRecord(item){
   return Object.entries(item).filter(([k]) => k !== "id" && !k.startsWith("_")).map(([k,v]) => {
     const value = Array.isArray(v) ? v.join(", ") : v === true ? "Tak" : v === false ? "Nie" : v;
     return `<b>${esc(label(k))}:</b> ${esc(value)}`;
-  }).join("<br>");
+  }).join("<br>")+attachmentMarkup(item._attachments);
 }
 function formatVisitRecord(clientId, item){
   const services = Array.isArray(item.services) ? item.services : [];
   const colorDetails = item.colorDetails || {};
   const hasColor = services.includes("Koloryzacja") && Object.values(colorDetails).some(Boolean);
-  return `<div class="visit-card">
+  return `${attachmentMarkup(item._attachments)}<div class="visit-card">
     <div class="visit-head">
       <div>
         <h3>${esc(item.date || "Wizyta")}</h3>
@@ -1468,16 +1470,17 @@ function openClientForm(){
     <label>Notatki prywatne</label><textarea name="privateNotes"></textarea>
     <button class="btn">Zapisz klientkę</button>
   </form>`);
-  $("#clientForm").addEventListener("submit", e => {
+  $("#clientForm").addEventListener("submit", async e => {
     e.preventDefault();
     if(!phoneValid(e.target, "client")){
       alert("Sprawdź numer telefonu - liczba cyfr musi pasować do wybranego kraju.");
       return;
     }
     const f = new FormData(e.target);
+    const uploaded=await preparePanelAttachments(e.target);if(!uploaded)return;
     const photos = fileNames(e.target.elements.photos);
     const contractPhoto = fileNames(e.target.elements.contractPhoto);
-    state.clients.push({id:"c"+Date.now(), name:f.get("name"), address:f.get("address"), phone:phoneValue(e.target, "client"), instagram:f.get("instagram"), firstVisit:f.get("firstVisit"), method:f.get("method"), grams:f.get("grams"), length:f.get("length"), color:f.get("color"), lastVisit:"", lastPrice:"", techNotes:f.get("techNotes"), privateNotes:f.get("privateNotes"), consultations:[], visits:[], colors:[], photos:photos?[{id:"p"+Date.now(), category:"Startowe", photo:photos, date:today()}]:[], contracts:contractPhoto?[{id:"u"+Date.now(), signedDate:f.get("firstVisit"), contractPhoto, note:"Umowa startowa"}]:[]});
+    state.clients.push({id:"c"+Date.now(), name:f.get("name"), address:f.get("address"), phone:phoneValue(e.target, "client"), instagram:f.get("instagram"), firstVisit:f.get("firstVisit"), method:f.get("method"), grams:f.get("grams"), length:f.get("length"), color:f.get("color"), lastVisit:"", lastPrice:"", techNotes:f.get("techNotes"), privateNotes:f.get("privateNotes"), consultations:[], visits:[], colors:[], photos:photos?[{id:"p"+Date.now(), category:"Startowe", photo:photos, _attachments:uploaded.photos, date:today()}]:[], contracts:contractPhoto?[{id:"u"+Date.now(), signedDate:f.get("firstVisit"), contractPhoto, _attachments:uploaded.contractPhoto, note:"Umowa startowa"}]:[]});
     save(); closeModal(); showView("clients");
   });
 }
@@ -1702,6 +1705,7 @@ function openVisitForm(clientId, presetInstall=false, visitId=""){
       alert("Sprawdź numer telefonu - liczba cyfr musi pasować do wybranego kraju.");
       return;
     }
+    const uploaded=await preparePanelAttachments(e.target);if(!uploaded)return;
     let c = isNewInstallClient ? null : state.clients.find(x => x.id === f.get("clientId"));
     if(isNewInstallClient){
       c = {
@@ -1770,6 +1774,7 @@ function openVisitForm(clientId, presetInstall=false, visitId=""){
       specialHair:Boolean(f.get("specialHair")),
       afterPhoto:newAfterPhoto || editedVisit?.afterPhoto || "",
       connectionPhoto:newConnectionPhoto || editedVisit?.connectionPhoto || "",
+      _attachments:[...(editedVisit?._attachments||[]),...(uploaded.afterPhoto||[]),...(uploaded.connectionPhoto||[])],
       colorDetails:nextColorDetails,
       colorRecordId,
       note:f.get("note"),
@@ -1839,12 +1844,12 @@ function openColorForm(clientId){
 function openPhotoForm(clientId){
   modal(`<div class="modal-head"><h2>Dodaj zdjęcia</h2><button class="btn secondary" data-close-modal>Zamknij</button></div>
   <form id="photoForm"><label>Klientka</label><select name="clientId">${clientOptions(clientId)}</select><label>Kategoria</label><select name="category"><option>Przed</option><option>Po</option><option>Łączenia</option><option>Inne</option></select><label>Wgraj zdjęcia</label><input type="file" name="photo" accept="image/*" multiple><label>Przypisz do wizyty / notatka</label><input name="note"><button class="btn">Zapisz zdjęcie</button></form>`);
-  $("#photoForm").addEventListener("submit", e => { e.preventDefault(); const f=new FormData(e.target), c=state.clients.find(x=>x.id===f.get("clientId")); c.photos ||= []; c.photos.unshift({id:"p"+Date.now(), date:today(), category:f.get("category"), photo:fileNames(e.target.elements.photo), note:f.get("note")}); save(); closeModal(); activeClientId=c.id; activeClientTab="photos"; showView("clientCard"); });
+  $("#photoForm").addEventListener("submit", async e => { e.preventDefault(); const uploaded=await preparePanelAttachments(e.target);if(!uploaded||!uploaded.photo?.length)return; const f=new FormData(e.target), c=state.clients.find(x=>x.id===f.get("clientId")); c.photos ||= []; c.photos.unshift({id:"p"+Date.now(), date:today(), category:f.get("category"), photo:fileNames(e.target.elements.photo), _attachments:uploaded.photo, note:f.get("note")}); save(); closeModal(); activeClientId=c.id; activeClientTab="photos"; showView("clientCard"); });
 }
 function openContractForm(clientId){
   modal(`<div class="modal-head"><h2>Dodaj umowę</h2><button class="btn secondary" data-close-modal>Zamknij</button></div>
   <form id="contractForm"><label>Klientka</label><select name="clientId">${clientOptions(clientId)}</select><label>Data podpisania</label><input type="date" name="signedDate" value="${today()}"><label>Wgraj zdjęcie umowy</label><input type="file" name="contractPhoto" accept="image/*,.pdf"><label>Notatka</label><textarea name="note"></textarea><button class="btn">Zapisz umowę</button></form>`);
-  $("#contractForm").addEventListener("submit", e => { e.preventDefault(); const f=new FormData(e.target), c=state.clients.find(x=>x.id===f.get("clientId")); c.contracts ||= []; c.contracts.unshift({id:"u"+Date.now(), signedDate:f.get("signedDate"), contractPhoto:fileNames(e.target.elements.contractPhoto), note:f.get("note")}); save(); closeModal(); activeClientId=c.id; activeClientTab="contracts"; showView("clientCard"); });
+  $("#contractForm").addEventListener("submit", async e => { e.preventDefault(); const uploaded=await preparePanelAttachments(e.target);if(!uploaded||!uploaded.contractPhoto?.length)return; const f=new FormData(e.target), c=state.clients.find(x=>x.id===f.get("clientId")); c.contracts ||= []; c.contracts.unshift({id:"u"+Date.now(), signedDate:f.get("signedDate"), contractPhoto:fileNames(e.target.elements.contractPhoto), _attachments:uploaded.contractPhoto, note:f.get("note")}); save(); closeModal(); activeClientId=c.id; activeClientTab="contracts"; showView("clientCard"); });
 }
 function regulationText(){
   return `REGULAMIN ŚWIADCZENIA USŁUG FRYZJERSKICH W SALONACH HELLO BEAUTY STUDIO PROWADZONYCH PRZEZ SANDRĘ KUK
@@ -2731,3 +2736,59 @@ function renderConsultSummary(){
 }
 
 document.addEventListener("click",e=>{if(e.target.closest("[data-close-modal]"))closeModal();});
+
+
+function attachmentMarkup(files=[]){
+ return files.map(f=>`<div data-panel-file="${esc(f.path)}" data-panel-file-name="${esc(f.name)}" data-panel-file-type="${esc(f.type)}">Ładowanie załącznika…</div>`).join('');
+}
+async function loadPanelFiles(){
+ const generation=authGeneration;
+ for(const node of document.querySelectorAll('[data-panel-file]:not([data-loading])')){
+  node.dataset.loading='1';
+  const path=node.dataset.panelFile;
+  if(!/^admin\/[0-9a-f-]{36}\.(jpg|png|webp|pdf)$/.test(path)){node.textContent='Załącznik niedostępny.';continue;}
+  try{
+   const {data,error}=await hbsDb.storage.from('hbs-panel-files').download(path);
+   if(error||!data)throw Error();
+   if(generation!==authGeneration||!isAdmin()||!node.isConnected)continue;
+   const url=URL.createObjectURL(data);panelFileUrls.add(url);
+   const link=document.createElement('a');link.href=url;link.download=node.dataset.panelFileName;link.textContent='Pobierz załącznik';
+   node.replaceChildren(link);
+   if(node.dataset.panelFileType.startsWith('image/')){const img=document.createElement('img');img.src=url;img.alt='Prywatne zdjęcie z kartoteki';img.style.cssText='display:block;max-width:100%;max-height:360px;object-fit:contain';node.prepend(img);}
+  }catch{node.textContent='Nie udało się pobrać załącznika. Otwórz kartę ponownie.';}
+ }
+}
+async function uploadPanelFiles(input){
+ const files=Array.from(input?.files||[]), generation=authGeneration;
+ if(files.length>10)throw Error('Dodaj maksymalnie 10 plików jednocześnie.');
+ // Validate every file before starting uploads. Original names are metadata only.
+ const verified=[];
+ for(const file of files){
+  if(!file.size||file.size>10*1024*1024)throw Error('Każdy plik musi mieć do 10 MB.');
+  const b=new Uint8Array(await file.slice(0,12).arrayBuffer());let ext,type;
+  if(b[0]===255&&b[1]===216&&b[2]===255){ext='jpg';type='image/jpeg';}
+  else if([137,80,78,71,13,10,26,10].every((v,i)=>b[i]===v)){ext='png';type='image/png';}
+  else if(String.fromCharCode(...b.slice(0,4))==='RIFF'&&String.fromCharCode(...b.slice(8,12))==='WEBP'){ext='webp';type='image/webp';}
+  else if(String.fromCharCode(...b.slice(0,5))==='%PDF-'&&input.name==='contractPhoto'){ext='pdf';type='application/pdf';}
+  else throw Error('Dozwolone są JPG, PNG i WebP, a dla umowy również PDF.');
+  verified.push({file,ext,type});
+ }
+ const result=[];
+ for(const {file,ext,type} of verified){
+  if(!isAdmin()||saveBlocked||generation!==authGeneration)throw Error('Sesja zakończona. Zaloguj się ponownie.');
+  const path=`admin/${crypto.randomUUID()}.${ext}`;
+  const {error}=await hbsDb.storage.from('hbs-panel-files').upload(path,file,{contentType:type,upsert:false});
+  if(error)throw Error('Nie udało się przesłać pliku. Nie zapisano wpisu.');
+  if(generation!==authGeneration||!isAdmin())throw Error('Sesja zakończona. Nie zapisano wpisu.');
+  result.push({path,name:file.name,type,size:file.size});
+ }
+ return result;
+}
+async function preparePanelAttachments(form){
+ const button=form.querySelector('button[type="submit"],button:not([type])');
+ if(button)button.disabled=true;
+ try{const out={};for(const input of form.querySelectorAll('input[type="file"]'))out[input.name]=await uploadPanelFiles(input);return out;}
+ catch(error){alert(error.message);return null;}
+ finally{if(button)button.disabled=false;}
+}
+new MutationObserver(()=>{if(isAdmin())loadPanelFiles();}).observe(document.querySelector('#app'),{subtree:true,childList:true});
